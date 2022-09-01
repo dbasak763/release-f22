@@ -22,5 +22,6 @@ namespace cs225 {
             void illinify();
             void scale(double factor);
             void scale(unsigned w, unsigned h);
+        private:
     };
 }

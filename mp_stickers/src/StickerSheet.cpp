@@ -1,3 +1,4 @@
+
 #include <StickerSheet.h>
 
 StickerSheet::StickerSheet(const Image& picture, unsigned max) {
@@ -37,3 +38,4 @@ Image* StickerSheet::getSticker(unsigned index) {
 Image StickerSheet::render() const {
 
 }
+
