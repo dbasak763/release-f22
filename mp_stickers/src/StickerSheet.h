@@ -4,6 +4,8 @@
  */
 #pragma once
 
+#include <image.h>
+
 class StickerSheet {
     public:
         StickerSheet(const Image& picture, unsigned max);
