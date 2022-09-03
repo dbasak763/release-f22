@@ -12,10 +12,9 @@ using namespace cs225;
 
 /**
  * Creates a new output image.
-
  * @param w width of the image
  * @param h height of the image
-
+ 
  * @return a pointer to the newly-created image
  */
 PNG* setupOutput(unsigned w, unsigned h) {
@@ -25,7 +24,6 @@ PNG* setupOutput(unsigned w, unsigned h) {
 
 /**
  * Used to customize the color of the sketchified image.
-
  * @return a pointer to the color to use when sketchifying
  */
 HSLAPixel* myFavoriteColor() {
