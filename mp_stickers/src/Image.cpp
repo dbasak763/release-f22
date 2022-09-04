@@ -129,7 +129,39 @@ void cs225::Image::illinify() {
 }
 
 void cs225::Image::scale(double factor) {
-    resize(width() * factor, height() * factor);
+    unsigned oldWidth = width();
+    unsigned oldHeight = height();
+    unsigned newWidth = width() * factor;
+    unsigned newHeight = height() * factor;
+
+    //HSLAPixel * oldImageData = _copy(imageData_);
+    PNG * oldImage = new PNG(oldWidth, oldHeight);
+
+    for (unsigned x = 0; x < oldWidth; x++) {
+      for (unsigned y = 0; y < oldHeight; y++) {
+         oldImage->getPixel(x, y) = getPixel(x, y);
+      }
+    }
+
+    resize(newWidth,newHeight);
+
+    //HSLAPixel * newImageData = new HSLAPixel[newWidth * newHeight];
+
+    //PNG * newImage = new PNG(newWidth, newHeight);
+
+    for (unsigned x = 0; x < newWidth; x++) {
+      for (unsigned y = 0; y < newHeight; y++) {
+         HSLAPixel & newPixel = this->getPixel(x, y);
+         HSLAPixel & oldPixel = oldImage->getPixel(x * oldWidth / newWidth, y * oldHeight / newHeight);
+         newPixel = oldPixel;
+      }
+    }
+
+    delete oldImage;
+    //this = newImage;
+
+    //_copy(newImage);
+
     //have to scale contents as well, not just resize them
 }
 
