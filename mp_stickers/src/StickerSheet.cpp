@@ -21,9 +21,13 @@ cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
     points.clear();
     basePicture = new Image(other.basePicture);
     stickers_ = new Image*[other.mx];
+    unsigned layer = 0;
     for (unsigned index = 0; index < other.mx; index++) {
         stickers_[index] = other.stickers_[index];
-        points.push_back(make_pair(other.stickers_.points.first, other.stickers_.points.second));
+        if (stickers_[index] != NULL) {
+            points.push_back(make_pair(other.stickers_.points[layer].first, other.stickers_.points[layer].second));
+            layer++;
+        }
     }
     mx = other.mx;
 }
@@ -100,14 +104,40 @@ cs225::Image* cs225::StickerSheet::getSticker(unsigned index) {
 
 cs225::Image cs225::StickerSheet::render() const {
 //Renders the whole StickerSheet on one Image and returns that Image.
-    Image* newImage = new Image(basePicture);
+    unsigned maxWidth = 0.0;
+    unsigned maxHeight = 0.0;
+    for (unsigned i = 0; i < mx; i++) {
+        if (stickers_[i] == NULL) continue;
+        Image* image_ = stickers_[i];
+        maxWidth = std::max(maxWidth, image_.width());
+        maxHeight = std::max(maxHeight, image_.height());
+    }
+    
+    Image* newImage = new Image(maxWidth, maxHeight);
+    
+    for (x = 0; x < basePicture.width(); x++) {
+        for (y = 0; y < basePicture.height(); y++) {
+            HSLAPixel & newPixel = basePicture->getPixel(x, y);
+            HSLAPixel & oldPixel = newImage->getPixel(x, y);
+            oldPixel = newPixel;
+        }
+    }
 //The base picture is drawn first and then each sticker is drawn in order starting with layer zero (0), then layer one (1), and so on.
+    unsigned layer = 0;
     for (unsigned i = 0; i < mx; i++) {
         if (stickers_[i] == NULL) {
             continue;
         }
         //else draw the sticker to the newImage
-        
+        Image* image_ = stickers_[i];
+        for (x = 0; x < image_.width(); x++) {
+            for (y = 0; y < image_.height(); y++) {
+                HSLAPixel & newPixel = image_->getPixel(x, y);
+                HSLAPixel & oldPixel = newImage->getPixel(points[layer].first + x, points[layer].second + y);
+                oldPixel = newPixel;
+            }
+        }
+        layer++;
     }
 //If a pixel's alpha channel in a sticker is zero (0), no pixel is drawn for that sticker at that pixel. If the alpha channel is non-zero, a pixel is drawn. (Alpha blending is awesome, but not required.)
     return *newImage;
