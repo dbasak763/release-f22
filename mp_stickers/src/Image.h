@@ -4,9 +4,9 @@
  */
 
 #pragma once
-
+#include <cs225/PNG.h>
 namespace cs225 {
-    class Image extends PNG
+    class Image : public PNG
     {
         public:
             void lighten();

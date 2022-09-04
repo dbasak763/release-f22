@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() {
-  Image alma;
+  cs225::Image alma;
 
   std::cout << "Using Image::lighten to create `lighten.png`..." << std::endl;
   alma.readFromFile("../alma.png");

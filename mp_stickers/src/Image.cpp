@@ -97,7 +97,9 @@ void cs225::Image::rotateColor(double degrees) {
     for (unsigned x = 0; x < width(); x++) {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
-         pixelAtLocation.h = (pixelAtLocation.h + degrees) % 360.0;
+         double sum = pixelAtLocation.h + degrees;
+         double decimal = sum - (int)(sum);
+         pixelAtLocation.h = (int)(sum) % 360 + decimal;
       }
     }
 //Rotating in a positive direction increases the degree of the hue. This function ensures that the hue remains in the range [0, 360].

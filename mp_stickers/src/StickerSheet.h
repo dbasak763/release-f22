@@ -4,9 +4,10 @@
  */
 #pragma once
 
-#include <image.h>
+#include <Image.h>
 
-class StickerSheet {
+namespace cs225 {
+    class StickerSheet {
     public:
         StickerSheet(const Image& picture, unsigned max);
         ~StickerSheet();
@@ -18,7 +19,13 @@ class StickerSheet {
         void removeSticker(unsigned index);
         Image* getSticker(unsigned index);
         Image render() const;
-    private:
-};
+    private:  
+        Image** stickers_;
+        unsigned sz = 0;
+        Image* basePicture;
+
+    };
+}
+
 
 
