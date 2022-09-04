@@ -25,5 +25,10 @@ int main() {
   alma.illinify();
   alma.writeToFile("../illinify.png");
 
+  std::cout << "Using Image::scale to create `scale3x.png`..." << std::endl;
+  alma.readFromFile("../alma.png");
+  alma.scale(300, 150);
+  alma.writeToFile("../scale3x.png");
+
   return 0;
 }

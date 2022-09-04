@@ -166,15 +166,17 @@ void cs225::Image::scale(double factor) {
 }
 
 void cs225::Image::scale(unsigned w, unsigned h) {
-    //Calculate ratios of new width to original width, and new height to original height
-    unsigned r_width = w / width();
-    unsigned r_height = h / height();
+    
     unsigned oldWidth = width();
     unsigned oldHeight = height();
-    unsigned newWidth;
-    unsigned newHeight;
+    unsigned newWidth = w;
+    unsigned newHeight = h;
 
-     PNG * oldImage = new PNG(oldWidth, oldHeight);
+    double factor = std::min(newWidth / (double)oldWidth, newHeight / (double)oldHeight);
+    newWidth = oldWidth * factor;
+    newHeight = oldHeight * factor;
+    //HSLAPixel * oldImageData = _copy(imageData_);
+    PNG * oldImage = new PNG(oldWidth, oldHeight);
 
     for (unsigned x = 0; x < oldWidth; x++) {
       for (unsigned y = 0; y < oldHeight; y++) {
@@ -182,19 +184,15 @@ void cs225::Image::scale(unsigned w, unsigned h) {
       }
     }
 
-    if (r_width < r_height) { //scale so that new width is matched, new height maintains scale ratio
-        resize(w, oldHeight * r_width);
-        newWidth = w;
-        newHeight = oldHeight * r_width;
-    } else {
-        resize(oldWidth * r_height, h);
-        newWidth = oldWidth * r_height;
-        newHeight = h;
-    }
+    resize(newWidth, newHeight);
+
+    //HSLAPixel * newImageData = new HSLAPixel[newWidth * newHeight];
+
+    //PNG * newImage = new PNG(newWidth, newHeight);
 
     for (unsigned x = 0; x < newWidth; x++) {
       for (unsigned y = 0; y < newHeight; y++) {
-         HSLAPixel & newPixel = getPixel(x, y);
+         HSLAPixel & newPixel = this->getPixel(x, y);
          HSLAPixel & oldPixel = oldImage->getPixel(x * oldWidth / newWidth, y * oldHeight / newHeight);
          newPixel = oldPixel;
       }
