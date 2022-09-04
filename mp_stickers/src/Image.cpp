@@ -169,11 +169,38 @@ void cs225::Image::scale(unsigned w, unsigned h) {
     //Calculate ratios of new width to original width, and new height to original height
     unsigned r_width = w / width();
     unsigned r_height = h / height();
+    unsigned oldWidth = width();
+    unsigned oldHeight = height();
+    unsigned newWidth;
+    unsigned newHeight;
+
+     PNG * oldImage = new PNG(oldWidth, oldHeight);
+
+    for (unsigned x = 0; x < oldWidth; x++) {
+      for (unsigned y = 0; y < oldHeight; y++) {
+         oldImage->getPixel(x, y) = getPixel(x, y);
+      }
+    }
 
     if (r_width < r_height) { //scale so that new width is matched, new height maintains scale ratio
-        resize(w, height() * r_width);
+        resize(w, oldHeight * r_width);
+        newWidth = w;
+        newHeight = oldHeight * r_width;
     } else {
-        resize(width() * r_height, h);
+        resize(oldWidth * r_height, h);
+        newWidth = oldWidth * r_height;
+        newHeight = h;
     }
+
+    for (unsigned x = 0; x < newWidth; x++) {
+      for (unsigned y = 0; y < newHeight; y++) {
+         HSLAPixel & newPixel = getPixel(x, y);
+         HSLAPixel & oldPixel = oldImage->getPixel(x * oldWidth / newWidth, y * oldHeight / newHeight);
+         newPixel = oldPixel;
+      }
+    }
+
+    delete oldImage;
+
 }
 
