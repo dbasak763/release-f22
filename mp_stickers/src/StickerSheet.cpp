@@ -109,8 +109,8 @@ cs225::Image cs225::StickerSheet::render() const {
     for (unsigned i = 0; i < mx; i++) {
         if (stickers_[i] == NULL) continue;
         Image* image_ = stickers_[i];
-        maxWidth = std::max(maxWidth, image_.width());
-        maxHeight = std::max(maxHeight, image_.height());
+        maxWidth = std::max(maxWidth, image_->width());
+        maxHeight = std::max(maxHeight, image_->height());
     }
     
     Image* newImage = new Image(maxWidth, maxHeight);
@@ -130,8 +130,8 @@ cs225::Image cs225::StickerSheet::render() const {
         }
         //else draw the sticker to the newImage
         Image* image_ = stickers_[i];
-        for (x = 0; x < image_.width(); x++) {
-            for (y = 0; y < image_.height(); y++) {
+        for (x = 0; x < image_->width(); x++) {
+            for (y = 0; y < image_->height(); y++) {
                 HSLAPixel & newPixel = image_->getPixel(x, y);
                 HSLAPixel & oldPixel = newImage->getPixel(points[layer].first + x, points[layer].second + y);
                 oldPixel = newPixel;

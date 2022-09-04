@@ -410,8 +410,39 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/utility \
+  /usr/include/c++/11/bits/stl_relops.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
+  /usr/include/c++/11/debug/vector \
+  /usr/include/c++/11/debug/safe_sequence.h \
+  /usr/include/c++/11/debug/safe_base.h \
+  /usr/include/c++/11/ext/concurrence.h \
+  /usr/include/c++/11/debug/safe_sequence.tcc \
+  /usr/include/c++/11/debug/safe_container.h \
+  /usr/include/c++/11/debug/safe_iterator.h \
+  /usr/include/c++/11/debug/safe_iterator.tcc
 
+
+/usr/include/c++/11/debug/safe_iterator.tcc:
+
+/usr/include/c++/11/debug/safe_sequence.tcc:
+
+/usr/include/c++/11/debug/safe_sequence.h:
+
+/usr/include/c++/11/debug/vector:
+
+/usr/include/c++/11/bits/stl_bvector.h:
+
+/usr/include/c++/11/bits/stl_uninitialized.h:
+
+/usr/include/c++/11/vector:
+
+/usr/include/c++/11/bits/stl_relops.h:
 
 /usr/include/c++/11/tr1/legendre_function.tcc:
 
@@ -453,6 +484,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 /usr/include/c++/11/bits/locale_facets.h:
 
+/usr/include/c++/11/debug/safe_container.h:
+
 /usr/include/c++/11/bits/basic_ios.h:
 
 /usr/include/c++/11/tr1/bessel_function.tcc:
@@ -462,6 +495,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 /usr/include/c++/11/stdexcept:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/error_constants.h:
+
+/usr/include/c++/11/bits/stl_vector.h:
 
 /usr/include/c++/11/system_error:
 
@@ -487,6 +522,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 ../lib/cs225/HSLAPixel.h:
 
+/usr/include/c++/11/debug/safe_base.h:
+
 /usr/include/c++/11/bits/basic_string.tcc:
 
 /usr/include/c++/11/bits/charconv.h:
@@ -504,6 +541,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 /usr/include/wctype.h:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/usr/include/c++/11/utility:
 
 /usr/include/errno.h:
 
@@ -544,6 +583,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 /usr/include/c++/11/bits/cxxabi_init_exception.h:
 
 /usr/include/wchar.h:
+
+/usr/include/c++/11/bits/vector.tcc:
 
 ../lib/cs225/PNG.h:
 
@@ -618,6 +659,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
 ../src/Image.cpp:
+
+/usr/include/c++/11/debug/safe_iterator.h:
 
 /usr/include/c++/11/tr1/modified_bessel_func.tcc:
 
@@ -796,6 +839,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/c++/11/bits/basic_string.h:
+
+/usr/include/c++/11/ext/concurrence.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
 

@@ -6,6 +6,7 @@
 
 #include <Image.h>
 #include <utility>
+#include <vector>
 
 namespace cs225 {
     class StickerSheet {
@@ -24,7 +25,7 @@ namespace cs225 {
         Image** stickers_;
         unsigned mx = 0;
         Image* basePicture;
-        vector<pair<unsigned, unsigned>> points;
+        std::vector<std::pair<unsigned, unsigned>> points;
 
     };
 }
