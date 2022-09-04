@@ -6,6 +6,7 @@ void cs225::Image::lighten() {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.l += 0.1;
+         if (pixelAtLocation.l > 1.0) pixelAtLocation.l = 1.0;
       }
     }
 //This function ensures that the luminance remains in the range [0, 1].
@@ -16,6 +17,7 @@ void cs225::Image::lighten(double amount) {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.l += amount;
+         if (pixelAtLocation.l > 1.0) pixelAtLocation.l = 1.0;
       }
     }
 //This function ensures that the luminance remains in the range [0, 1].
@@ -26,6 +28,7 @@ void cs225::Image::darken() {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.l -= 0.1;
+         if (pixelAtLocation.l < 0.0) pixelAtLocation.l = 0.0;
       }
     }
 //This function ensures that the luminance remains in the range [0, 1].
@@ -36,6 +39,7 @@ void cs225::Image::darken(double amount) {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.l -= amount;
+         if (pixelAtLocation.l < 0.0) pixelAtLocation.l = 0.0;
       }
     }
 //This function ensures that the luminance remains in the range [0, 1].
@@ -46,6 +50,7 @@ void cs225::Image::saturate() {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.s += 0.1;
+         if (pixelAtLocation.s > 1.0) pixelAtLocation.s = 1.0;
       }
     }
 //This function ensures that the saturation remains in the range [0, 1].
@@ -56,6 +61,7 @@ void cs225::Image::saturate(double amount) {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.s += amount;
+         if (pixelAtLocation.s > 1.0) pixelAtLocation.s = 1.0;
       }
     }
 //This function ensures that the saturation remains in the range [0, 1].
@@ -66,6 +72,7 @@ void cs225::Image::desaturate() {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.s -= 0.1;
+         if (pixelAtLocation.s < 0.0) pixelAtLocation.s = 0.0;
       }
     }
 //This function ensures that the saturation remains in the range [0, 1].
@@ -77,6 +84,7 @@ void cs225::Image::desaturate(double amount) {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          pixelAtLocation.s -= amount;
+         if (pixelAtLocation.s < 0.0) pixelAtLocation.s = 0.0;
       }
     }
 //This function ensures that the saturation remains in the range [0, 1].
@@ -122,6 +130,7 @@ void cs225::Image::illinify() {
 
 void cs225::Image::scale(double factor) {
     resize(width() * factor, height() * factor);
+    //have to scale contents as well, not just resize them
 }
 
 void cs225::Image::scale(unsigned w, unsigned h) {
