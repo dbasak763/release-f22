@@ -108,12 +108,8 @@ void cs225::Image::rotateColor(double degrees) {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          double sum = pixelAtLocation.h + degrees;
-         if (sum > 0) {
-            decimal = sum - (int)(sum);
-         } else {
-            decimal = (int)(sum + 1) - sum;
-         }
-         pixelAtLocation.h = (int)(sum) % 360 + decimal;
+         pixelAtLocation.h = std::fmod(sum, 360);
+         if (pixelAtLocation.h < 0.0) pixelAtLocation.h += 360;
       }
     }
 //Rotating in a positive direction increases the degree of the hue. This function ensures that the hue remains in the range [0, 360].

@@ -19,13 +19,13 @@ cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
     delete[] stickers_;
     delete basePicture;
     points.clear();
-    basePicture = new Image(other.basePicture);
+    basePicture = other.basePicture;
     stickers_ = new Image*[other.mx];
     unsigned layer = 0;
     for (unsigned index = 0; index < other.mx; index++) {
         stickers_[index] = other.stickers_[index];
         if (stickers_[index] != NULL) {
-            points.push_back(make_pair(other.stickers_.points[layer].first, other.stickers_.points[layer].second));
+            points.push_back(std::make_pair(other.points[layer].first, other.points[layer].second));
             layer++;
         }
     }
@@ -36,10 +36,16 @@ const cs225::StickerSheet& cs225::StickerSheet::operator=(const StickerSheet &ot
 //The assignment operator for the StickerSheet class.
     delete[] stickers_;
     delete basePicture;
+    points.clear();
     basePicture = other.basePicture;
     stickers_ = new Image*[other.mx];
+    unsigned layer = 0;
     for (unsigned index = 0; index < other.mx; index++) {
         stickers_[index] = other.stickers_[index];
+        if (stickers_[index] != NULL) {
+            points.push_back(std::make_pair(other.points[layer].first, other.points[layer].second));
+            layer++;
+        }
     }
     mx = other.mx;
     return *this;
@@ -59,16 +65,14 @@ void cs225::StickerSheet::changeMaxStickers(unsigned max) {
 
 int cs225::StickerSheet::addSticker(Image &sticker, unsigned x, unsigned y) {
 //Adds a sticker to the StickerSheet, so that the top-left of the sticker's Image is at (x, y) on the StickerSheet.
-    bool occupied = false;
-    points.push_back(make_pair(x, y));
-    for (unsigned i = 0; !occupied && (i < mx); i++) {
+    points.push_back(std::make_pair(x, y));
+    for (unsigned i = 0; i < mx; i++) {
         if (stickers_[i] == NULL) {
-            stickers_[i] = sticker;
+            stickers_[i] = &sticker;
             return i;
-            occupied = true;
         }
     }
-    if (!occupied) return -1;
+    return -1;
 //The sticker must be added to the lowest possible layer available.
 }
 
@@ -113,10 +117,11 @@ cs225::Image cs225::StickerSheet::render() const {
         maxHeight = std::max(maxHeight, image_->height());
     }
     
-    Image* newImage = new Image(maxWidth, maxHeight);
+    Image* newImage = new Image();
+    newImage->resize(maxWidth, maxHeight);
     
-    for (x = 0; x < basePicture.width(); x++) {
-        for (y = 0; y < basePicture.height(); y++) {
+    for (unsigned x = 0; x < basePicture->width(); x++) {
+        for (unsigned y = 0; y < basePicture->height(); y++) {
             HSLAPixel & newPixel = basePicture->getPixel(x, y);
             HSLAPixel & oldPixel = newImage->getPixel(x, y);
             oldPixel = newPixel;
@@ -130,8 +135,8 @@ cs225::Image cs225::StickerSheet::render() const {
         }
         //else draw the sticker to the newImage
         Image* image_ = stickers_[i];
-        for (x = 0; x < image_->width(); x++) {
-            for (y = 0; y < image_->height(); y++) {
+        for (unsigned x = 0; x < image_->width(); x++) {
+            for (unsigned y = 0; y < image_->height(); y++) {
                 HSLAPixel & newPixel = image_->getPixel(x, y);
                 HSLAPixel & oldPixel = newImage->getPixel(points[layer].first + x, points[layer].second + y);
                 oldPixel = newPixel;
