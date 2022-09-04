@@ -5,6 +5,7 @@
 #pragma once
 
 #include <Image.h>
+#include <utility>
 
 namespace cs225 {
     class StickerSheet {
@@ -21,8 +22,9 @@ namespace cs225 {
         Image render() const;
     private:  
         Image** stickers_;
-        unsigned sz = 0;
+        unsigned mx = 0;
         Image* basePicture;
+        vector<pair<unsigned, unsigned>> points;
 
     };
 }
