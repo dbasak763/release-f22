@@ -191,7 +191,33 @@ src/CMakeFiles/src.dir/Image.cpp.o: ../src/Image.cpp \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
   /usr/include/c++/11/sstream \
-  /usr/include/c++/11/bits/sstream.tcc
+  /usr/include/c++/11/bits/sstream.tcc \
+  /usr/include/c++/11/math.h \
+  /usr/include/c++/11/cmath \
+  /usr/include/math.h \
+  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
+  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
+  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
+  /usr/include/c++/11/bits/specfun.h \
+  /usr/include/c++/11/limits \
+  /usr/include/c++/11/tr1/gamma.tcc \
+  /usr/include/c++/11/tr1/special_function_util.h \
+  /usr/include/c++/11/tr1/bessel_function.tcc \
+  /usr/include/c++/11/tr1/beta_function.tcc \
+  /usr/include/c++/11/tr1/ell_integral.tcc \
+  /usr/include/c++/11/tr1/exp_integral.tcc \
+  /usr/include/c++/11/tr1/hypergeometric.tcc \
+  /usr/include/c++/11/tr1/legendre_function.tcc \
+  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
+  /usr/include/c++/11/tr1/poly_hermite.tcc \
+  /usr/include/c++/11/tr1/poly_laguerre.tcc \
+  /usr/include/c++/11/tr1/riemann_zeta.tcc
 
 src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
   ../src/StickerSheet.h \
@@ -387,6 +413,26 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
   /usr/include/c++/11/bits/sstream.tcc
 
 
+/usr/include/c++/11/tr1/legendre_function.tcc:
+
+/usr/include/c++/11/limits:
+
+/usr/include/c++/11/bits/specfun.h:
+
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
+/usr/include/math.h:
+
 ../src/StickerSheet.h:
 
 /usr/include/c++/11/sstream:
@@ -403,9 +449,13 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 /usr/include/c++/11/cwctype:
 
+/usr/include/c++/11/tr1/poly_hermite.tcc:
+
 /usr/include/c++/11/bits/locale_facets.h:
 
 /usr/include/c++/11/bits/basic_ios.h:
+
+/usr/include/c++/11/tr1/bessel_function.tcc:
 
 /usr/include/c++/11/bits/streambuf.tcc:
 
@@ -415,9 +465,15 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 /usr/include/c++/11/system_error:
 
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
 /usr/include/c++/11/bits/locale_classes.tcc:
 
+/usr/include/c++/11/tr1/gamma.tcc:
+
 /usr/include/c++/11/bits/locale_classes.h:
+
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/c++/11/bits/ios_base.h:
 
@@ -427,13 +483,19 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 /usr/include/c++/11/ostream:
 
+/usr/include/c++/11/tr1/beta_function.tcc:
+
 ../lib/cs225/HSLAPixel.h:
 
 /usr/include/c++/11/bits/basic_string.tcc:
 
 /usr/include/c++/11/bits/charconv.h:
 
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/c++/11/tr1/ell_integral.tcc:
 
 /usr/include/asm-generic/errno.h:
 
@@ -460,6 +522,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 /usr/include/endian.h:
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
+
+/usr/include/c++/11/math.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -531,11 +595,15 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 /usr/include/ctype.h:
 
+/usr/include/c++/11/tr1/poly_laguerre.tcc:
+
 /usr/include/c++/11/cstdlib:
 
 /usr/include/c++/11/bits/stl_iterator_base_types.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+
+/usr/include/c++/11/tr1/riemann_zeta.tcc:
 
 /usr/include/c++/11/debug/macros.h:
 
@@ -551,11 +619,15 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 ../src/Image.cpp:
 
+/usr/include/c++/11/tr1/modified_bessel_func.tcc:
+
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h:
 
 /usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/c++/11/tr1/special_function_util.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
@@ -703,9 +775,13 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
+/usr/include/c++/11/cmath:
+
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
 ../src/StickerSheet.cpp:
+
+/usr/include/c++/11/tr1/hypergeometric.tcc:
 
 /usr/include/c++/11/bits/localefwd.h:
 
@@ -768,6 +844,8 @@ src/CMakeFiles/src.dir/StickerSheet.cpp.o: ../src/StickerSheet.cpp \
 /usr/include/c++/11/bits/cxxabi_forced.h:
 
 /usr/include/c++/11/ext/alloc_traits.h:
+
+/usr/include/c++/11/tr1/exp_integral.tcc:
 
 /usr/include/c++/11/bits/stl_construct.h:
 

@@ -1,4 +1,5 @@
 #include <Image.h>
+#include <math.h> 
 
 void cs225::Image::lighten() {
 //Lighten an Image by increasing the luminance of every pixel by 0.1.
@@ -102,11 +103,16 @@ void cs225::Image::grayscale() {
 
 void cs225::Image::rotateColor(double degrees) {
 //Rotates the color wheel by degrees.
+    double decimal = 0.0;
     for (unsigned x = 0; x < width(); x++) {
       for (unsigned y = 0; y < height(); y++) {
          HSLAPixel & pixelAtLocation = this->getPixel(x, y);
          double sum = pixelAtLocation.h + degrees;
-         double decimal = sum - (int)(sum);
+         if (sum > 0) {
+            decimal = sum - (int)(sum);
+         } else {
+            decimal = (int)(sum + 1) - sum;
+         }
          pixelAtLocation.h = (int)(sum) % 360 + decimal;
       }
     }

@@ -10,6 +10,11 @@ int main() {
   alma.lighten(0.2);
   alma.writeToFile("../lighten.png");
 
+  std::cout << "Using Image::lighten to create `rotateColor.png`..." << std::endl;
+  alma.readFromFile("../alma.png");
+  alma.rotateColor(130.18);
+  alma.writeToFile("../rotateColor.png");
+
   std::cout << "Using Image::saturate to create `saturate.png`..." << std::endl;
   alma.readFromFile("../alma.png");
   alma.saturate(0.2);
