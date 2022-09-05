@@ -165,14 +165,15 @@ cs225::Image cs225::StickerSheet::render() const {
     maxWidth = std::max(maxWidth, basePicture->width());
     maxHeight = std::max(maxHeight, basePicture->height());
     //std::cout << "Hi" << std::endl;
-    Image* newImage = new Image();
-    newImage->resize(maxWidth, maxHeight);
+
+    Image newImage;
+    newImage.resize(maxWidth, maxHeight);
     //std::cout << maxWidth << " " << maxHeight << std::endl;
     
     for (unsigned x = 0; x < basePicture->width(); x++) {
         for (unsigned y = 0; y < basePicture->height(); y++) {
             HSLAPixel & oldPixel = basePicture->getPixel(x, y);
-            HSLAPixel & newPixel = newImage->getPixel(x, y);
+            HSLAPixel & newPixel = newImage.getPixel(x, y);
             if (oldPixel.a != 0.0) newPixel = oldPixel;
         }
     }
@@ -190,7 +191,7 @@ cs225::Image cs225::StickerSheet::render() const {
             for (unsigned x = 0; x < image_->width(); x++) {
                 for (unsigned y = 0; y < image_->height(); y++) {
                     HSLAPixel & oldPixel = image_->getPixel(x, y);
-                    HSLAPixel & newPixel = newImage->getPixel(points[layer].first + x, points[layer].second + y);
+                    HSLAPixel & newPixel = newImage.getPixel(points[layer].first + x, points[layer].second + y);
                     if (oldPixel.a != 0.0) newPixel = oldPixel;
                 }
             }
@@ -200,7 +201,7 @@ cs225::Image cs225::StickerSheet::render() const {
 //If a pixel's alpha channel in a sticker is zero (0), no pixel is drawn for that sticker at that pixel. If the alpha channel is non-zero, a pixel is drawn. (Alpha blending is awesome, but not required.)
     //std::cout << "Hifdasfdsafdsasdf" << std::endl;
 
-    return *newImage;
+    return newImage;
 //The returned Image always includes the full contents of the picture and all stickers. This means that the size of the result image may be larger than the base picture if some stickers go beyond the edge of the picture.
 }
 
