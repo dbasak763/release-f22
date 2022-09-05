@@ -127,7 +127,7 @@ void cs225::StickerSheet::removeSticker(unsigned index) {
     stickers_[index] = NULL;
     unsigned bottomLayers = 0;
     for (unsigned i = 0; i < index; i++) {
-        if (stickers_[index] != NULL) {
+        if (stickers_[i] != NULL) {
             bottomLayers++;
         }
     }
