@@ -107,7 +107,7 @@ bool cs225::StickerSheet::translate(unsigned index, unsigned x, unsigned y) {
     if (index < 0 || index >= mx) return false;
     if (stickers_[index] == NULL) return false;
     unsigned layer = 0;
-    for (unsigned i = 0; i <= index; i++) {
+    for (unsigned i = 0; i < index; i++) {
         if (stickers_[i] != NULL) {
             layer++;
         }
@@ -125,7 +125,13 @@ void cs225::StickerSheet::removeSticker(unsigned index) {
     
     if (index < 0 || index >= mx) return;
     stickers_[index] = NULL;
-    points.pop_back();
+    unsigned bottomLayers = 0;
+    for (unsigned i = 0; i < index; i++) {
+        if (stickers_[index] != NULL) {
+            bottomLayers++;
+        }
+    }
+    points.erase(points.begin() + bottomLayers);
 //Make sure that the other stickers don't change order.
 }
 
