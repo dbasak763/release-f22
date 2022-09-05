@@ -18,7 +18,7 @@ cs225::StickerSheet::~StickerSheet() {
 }
 cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
 //The copy constructor makes this StickerSheet an independent copy of the source.
-    delete[] stickers_;
+    //delete[] stickers_;
     points.clear();
     delete basePicture;
     basePicture = NULL;
@@ -38,7 +38,7 @@ cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
 
 const cs225::StickerSheet& cs225::StickerSheet::operator=(const StickerSheet &other) {
 //The assignment operator for the StickerSheet class.
-    delete[] stickers_;
+    //delete[] stickers_;
     points.clear();
     delete basePicture;
     basePicture = NULL;
