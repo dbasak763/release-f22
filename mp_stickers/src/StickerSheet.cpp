@@ -19,9 +19,10 @@ cs225::StickerSheet::~StickerSheet() {
 cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
 //The copy constructor makes this StickerSheet an independent copy of the source.
     delete[] stickers_;
-    delete basePicture;
     points.clear();
-    basePicture = other.basePicture;
+    delete basePicture;
+    basePicture = NULL;
+    basePicture = new Image(*other.basePicture);
     stickers_ = new Image*[other.mx];
     for (unsigned i = 0; i < other.mx; i++) stickers_[i] = NULL;
     unsigned layer = 0;
@@ -38,9 +39,10 @@ cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
 const cs225::StickerSheet& cs225::StickerSheet::operator=(const StickerSheet &other) {
 //The assignment operator for the StickerSheet class.
     delete[] stickers_;
-    delete basePicture;
     points.clear();
-    basePicture = other.basePicture;
+    delete basePicture;
+    basePicture = NULL;
+    basePicture = new Image(*other.basePicture);
     stickers_ = new Image*[other.mx];
     for (unsigned i = 0; i < other.mx; i++) stickers_[i] = NULL;
     unsigned layer = 0;
