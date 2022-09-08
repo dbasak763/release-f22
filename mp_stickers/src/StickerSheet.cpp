@@ -3,7 +3,7 @@
 
 cs225::StickerSheet::StickerSheet(const Image& picture, unsigned max) {
 //Initializes this StickerSheet with a deep copy of the base picture 
-    basePicture = new Image(picture);
+    basePicture = picture;
     stickers_ = new Image* [max];
     for (unsigned i = 0; i < max; i++) stickers_[i] = NULL;
     mx = max;
@@ -13,16 +13,16 @@ cs225::StickerSheet::StickerSheet(const Image& picture, unsigned max) {
 cs225::StickerSheet::~StickerSheet() {
 //Frees all space that was dynamically allocated by this StickerSheet.
     delete[] stickers_;
-    delete basePicture;
+    //delete basePicture;
     points.clear();
 }
 cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
 //The copy constructor makes this StickerSheet an independent copy of the source.
-    //delete[] stickers_;
+    delete[] stickers_;
     points.clear();
-    delete basePicture;
-    basePicture = NULL;
-    basePicture = new Image(*other.basePicture);
+    //delete basePicture;
+    //basePicture = NULL;
+    basePicture = other.basePicture;
     stickers_ = new Image*[other.mx];
     for (unsigned i = 0; i < other.mx; i++) stickers_[i] = NULL;
     unsigned layer = 0;
@@ -40,9 +40,9 @@ const cs225::StickerSheet& cs225::StickerSheet::operator=(const StickerSheet &ot
 //The assignment operator for the StickerSheet class.
     //delete[] stickers_;
     points.clear();
-    delete basePicture;
-    basePicture = NULL;
-    basePicture = new Image(*other.basePicture);
+    //delete basePicture;
+    //basePicture = NULL;
+    basePicture = other.basePicture;
     stickers_ = new Image*[other.mx];
     for (unsigned i = 0; i < other.mx; i++) stickers_[i] = NULL;
     unsigned layer = 0;
@@ -162,19 +162,18 @@ cs225::Image cs225::StickerSheet::render() const {
         }
        
     }
-    maxWidth = std::max(maxWidth, basePicture->width());
-    maxHeight = std::max(maxHeight, basePicture->height());
+    maxWidth = std::max(maxWidth, basePicture.width());
+    maxHeight = std::max(maxHeight, basePicture.height());
     //std::cout << "Hi" << std::endl;
 
     Image newImage;
     newImage.resize(maxWidth, maxHeight);
     //std::cout << maxWidth << " " << maxHeight << std::endl;
     
-    for (unsigned x = 0; x < basePicture->width(); x++) {
-        for (unsigned y = 0; y < basePicture->height(); y++) {
-            HSLAPixel & oldPixel = basePicture->getPixel(x, y);
+    for (unsigned x = 0; x < basePicture.width(); x++) {
+        for (unsigned y = 0; y < basePicture.height(); y++) {
             HSLAPixel & newPixel = newImage.getPixel(x, y);
-            if (oldPixel.a != 0.0) newPixel = oldPixel;
+            if (basePicture.getPixel(x, y).a != 0.0) newPixel = basePicture.getPixel(x, y);
         }
     }
     

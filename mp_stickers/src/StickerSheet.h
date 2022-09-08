@@ -24,7 +24,7 @@ namespace cs225 {
     private:  
         Image** stickers_;
         unsigned mx = 0;
-        Image* basePicture;
+        Image basePicture;
         std::vector<std::pair<unsigned, unsigned>> points;
 
     };
