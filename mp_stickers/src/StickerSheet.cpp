@@ -4,6 +4,7 @@
 cs225::StickerSheet::StickerSheet(const Image& picture, unsigned max) {
 //Initializes this StickerSheet with a deep copy of the base picture 
     basePicture = picture;
+    stickers_ = NULL;
     stickers_ = new Image* [max];
     for (unsigned i = 0; i < max; i++) stickers_[i] = NULL;
     mx = max;
@@ -19,6 +20,7 @@ cs225::StickerSheet::~StickerSheet() {
 cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
 //The copy constructor makes this StickerSheet an independent copy of the source.
     delete[] stickers_;
+    stickers_ = NULL;
     points.clear();
     //delete basePicture;
     //basePicture = NULL;
@@ -38,7 +40,8 @@ cs225::StickerSheet::StickerSheet(const StickerSheet &other) {
 
 const cs225::StickerSheet& cs225::StickerSheet::operator=(const StickerSheet &other) {
 //The assignment operator for the StickerSheet class.
-    //delete[] stickers_;
+    delete[] stickers_;
+    stickers_ = NULL;
     points.clear();
     //delete basePicture;
     //basePicture = NULL;
@@ -67,8 +70,9 @@ void cs225::StickerSheet::changeMaxStickers(unsigned max) {
         for (unsigned i = mx; i < max; i++) {
             newstickers_[i] = NULL;
         }
-        delete[] stickers_;
         stickers_ = newstickers_;
+        delete[] newstickers_;
+        newstickers_ = NULL;
         mx = max;
     } else if (max < mx) { //logic is seg-faulting
         Image** newstickers_ = new Image*[max];
@@ -82,8 +86,9 @@ void cs225::StickerSheet::changeMaxStickers(unsigned max) {
             }
         }
         for (unsigned topLayer = 1; topLayer <= discardedLayers; topLayer++) points.pop_back();
-        delete[] stickers_;
         stickers_ = newstickers_;
+        delete[] newstickers_;
+        newstickers_ = NULL;
         mx = max;
     }
     
@@ -96,7 +101,7 @@ int cs225::StickerSheet::addSticker(Image &sticker, unsigned x, unsigned y) {
     for (unsigned i = 0; i < mx; i++) {
         if (stickers_[i] == NULL) {
             stickers_[i] = &sticker;
-            std::cout << stickers_[i]->width() << " " << stickers_[i]->height() << std::endl;
+            //std::cout << stickers_[i]->width() << " " << stickers_[i]->height() << std::endl;
             return i;
         }
     }
