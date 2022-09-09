@@ -22,11 +22,15 @@ int main()
     std::cout << std::endl;
 
     fileio::init();
-    Allocator theAllocator("../students.txt", "../rooms.txt");
-    theAllocator.allocate();
+    std::cout << "Hi" << std::endl;
+    Allocator theAllocator("../students.txt", "../rooms.txt"); //seg fault occurs here
+    std::cout << "Hi" << std::endl;
+    theAllocator.allocate(); //Invalid write of size 8
+    std::cout << "Hi" << std::endl;
     theAllocator.printRooms();
+    std::cout << "Hi" << std::endl;
     fileio::halt();
 
-    std::cout << std::endl;
+    std::cout << "Hi" << std::endl;    
     return 0;
 }

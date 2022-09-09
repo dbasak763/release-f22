@@ -13,9 +13,24 @@
 
 Allocator::Allocator(const std::string& studentFile, const std::string& roomFile)
 {
+    std::cout << "Hi1" << std::endl;
     createLetterGroups();
+    std::cout << "Hi2" << std::endl;
     loadStudents(studentFile);
-    loadRooms(roomFile);
+    std::cout << "Hi3" << std::endl;
+    loadRooms(roomFile); //seg fault occurs here
+    std::cout << "Hi4" << std::endl;
+}
+
+Allocator::~Allocator() { 
+    if (alpha != NULL) {
+        delete[] alpha;
+        alpha = NULL;
+    }
+    if (rooms != NULL) {
+        delete[] rooms;
+        rooms = NULL;
+    }
 }
 
 void Allocator::createLetterGroups()
@@ -40,18 +55,18 @@ void Allocator::loadStudents(const std::string& file)
     }
 }
 
-void Allocator::loadRooms(const std::string& file)
+void Allocator::loadRooms(const std::string& file) //seg fault occurs here
 {
     // Read in rooms
     fileio::loadRooms(file);
+    roomCount = fileio::getNumRooms();
     rooms = new Room[roomCount];
-
     totalCapacity = 0;
     int i = 0;
     while (fileio::areMoreRooms()) {
-        i++; 
         rooms[i] = fileio::nextRoom();
         totalCapacity += rooms[i].capacity;
+        i++; 
     }
 }
 
