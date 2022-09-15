@@ -81,7 +81,7 @@ bool isBalanced(queue<char> input)
         localStack.pop();
         if (c == '[') numLeftSquareBrackets++;
         if (c == ']') numRightSquareBrackets++;
-        if (numLeftSquareBrackets < numRightSquareBrackets) return false;
+        if (numLeftSquareBrackets > numRightSquareBrackets) return false;
     }
     return (numLeftSquareBrackets == numRightSquareBrackets);
 }
