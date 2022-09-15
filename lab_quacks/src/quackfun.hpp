@@ -31,13 +31,14 @@ T sum(stack<T>& s)
 {
 
     // Your code here
-    if (s.isEmpty()) {
+    if (s.empty()) {
         return T();
     }
     T popped = s.top();
-    T sum = popped + sum(s.pop());
+    s.pop();
+    T a = popped + sum(s);
     s.push(popped);
-    return sum;
+    return a;
     //return T(); // stub return value (0 for primitive types). Change this!
                 // Note: T() is the default value for objects, and 0 for
                 // primitive types
@@ -65,7 +66,7 @@ bool isBalanced(queue<char> input)
 
     // @TODO: Make less optimistic
     if (input.empty()) return true;
-    stack<char> localStack;
+    std::stack<char> localStack;
     while(!input.empty()) {
         char c = input.front();
         input.pop();
@@ -75,8 +76,9 @@ bool isBalanced(queue<char> input)
     int numRightSquareBrackets = 0;
     //leftsquarebrackets >= rightsquarebrackets throughout the while loop
     //at very end of while loop they must be equal
-    while (localStack.isEmpty()) {
+    while (!localStack.empty()) {
         char c = localStack.top();
+        localStack.pop();
         if (c == '[') numLeftSquareBrackets++;
         if (c == ']') numRightSquareBrackets++;
         if (numLeftSquareBrackets < numRightSquareBrackets) return false;
@@ -103,41 +105,10 @@ template <typename T>
 void scramble(queue<T>& q)
 {
     stack<T> s;
-    queue<T> q2, q3;
+    //Optional: queue<T> q2;
 
     // Your code here
-    int window = 1;
-    int window_index = 0;
-    while (!q.empty()) {
-        T front = q.front();
-        q2.push(front);
-        q.pop();
-        window_index++;
-        if (window_index == window) {
-            bool reverse = 1 - window % 2;
-            if (!reverse) {
-                while (!q2.empty()) {
-                    s.push(q2.front);
-                    q2.pop();
-                }
-            } else {
-                while (!q2.empty()) {
-                    q3.push(q2.front);
-                    q2.pop();
-                }
-                while (!q3.empty()) {
-                    s.push(q3.front);
-                    q3.pop();
-                }
-            }
-            window++;
-            window_index = 0;
-        }
-    }
-    while(!s.isEmpty()) {
-        T popped = s.top();
-        q.push(popped);
-        s.pop();
-    }
+    
 }
 
+};
