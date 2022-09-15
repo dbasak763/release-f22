@@ -81,6 +81,8 @@ int main()
     cout << endl;
     cout << "Expected:        0 2 1 3 4 5 9 8 7 6 10 11 12 13 14 16 15 " << endl << endl;
 
+    return 0;
+
 }
 
 template <typename T>
