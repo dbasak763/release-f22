@@ -104,11 +104,51 @@ bool isBalanced(queue<char> input)
 template <typename T>
 void scramble(queue<T>& q)
 {
-    stack<T> s;
-    //Optional: queue<T> q2;
+    stack<T> s, s2;
+    queue<T> q2;
 
     // Your code here
-    
+    int window = 1;
+    int window_index = 0;
+    while (!q.empty()) {
+        T front = q.front();
+        q2.push(front);
+        q.pop();
+        window_index++;
+        if (window_index == window || q.empty()) {
+            bool reverse = 1 - window % 2;
+            if (!reverse) {
+                while (!q2.empty()) {
+                    s.push(q2.front());
+                    //std::cout << q2.front() << std::endl;
+                    q2.pop();
+                }
+            } else {
+                while (!q2.empty()) {
+                    s2.push(q2.front());
+                    //std::cout << q2.front() << std::endl;
+                    q2.pop();
+                }
+                while (!s2.empty()) {
+                    s.push(s2.top());
+                    //std::cout << s2.top() << std::endl;
+                    s2.pop();
+                }
+            }
+            window++;
+            window_index = 0;
+        }
+    }
+    while(!s.empty()) {
+        T popped = s.top();
+        s2.push(popped);
+        s.pop();
+    }
+    while(!s2.empty()) {
+        T popped = s2.top();
+        q.push(popped);
+        s2.pop();
+    }
 }
 
 };
