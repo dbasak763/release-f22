@@ -2,7 +2,7 @@
  * @file list.cpp
  * Doubly Linked List (MP 2).
  */
-
+#include <iostream>
 template <class T>
 List<T>::List() { 
   // @TODO: graded in MP2.1
@@ -69,6 +69,7 @@ void List<T>::insertFront(T const & ndata) {
      newNode -> next = head_;
      newNode -> prev = NULL;
      head_ -> prev = newNode;
+     head_ = newNode;
   }
   
   length_++;
@@ -93,6 +94,7 @@ void List<T>::insertBack(const T & ndata) {
      newNode -> prev = tail_;
      newNode -> next = NULL;
      tail_ -> next = newNode;
+     tail_ = newNode;
   }
 
   length_++;
@@ -143,22 +145,28 @@ typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) {
   * You may NOT allocate ANY new ListNodes!
   */
 template <typename T>
-void List<T>::tripleRotate() {
+void List<T>::tripleRotate() { //not working properly
   // @todo Graded in MP2.1
-  Node* currNode = head_;
+  ListNode* currNode = head_;
   while ((currNode != NULL) && (currNode -> next != NULL) && (currNode -> next -> next != NULL)) {
-     Node* temp = currNode;
-     if (currNode == head_) {
+     ListNode* temp = currNode;
+     //std::cout << temp -> data << std::endl; 
+     if (temp == head_) {
         temp -> next -> prev = NULL;
+        head_ = temp -> next;
      } else {
         temp -> next -> prev = temp -> prev;
+        temp -> prev -> next = temp -> next;
      }
      temp = temp -> next -> next;
-     Node* nextCurrNode = temp -> next;
+     ListNode* nextCurrNode = temp -> next;
+
      temp -> next = currNode;
      currNode -> prev = temp;
      currNode -> next = nextCurrNode;
+     if (nextCurrNode != NULL) nextCurrNode -> prev = currNode;
      currNode = nextCurrNode;
+     //break;
   }
 }
 
