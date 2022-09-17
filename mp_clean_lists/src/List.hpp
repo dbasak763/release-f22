@@ -118,11 +118,11 @@ void List<T>::insertBack(const T & ndata) {
  * @return The starting node of the sequence that was split off.
  */
 template <typename T>
-typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) {
+typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) { // not working properly
   /// @todo Graded in MP2.1
   ListNode * curr = start;
 
-  for (int i = 0; i < splitPoint || curr != NULL; i++) {
+  for (int i = 0; i < splitPoint && curr != NULL; i++) {
     curr = curr->next;
   }
 
@@ -130,7 +130,7 @@ typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) {
       if(curr->prev != NULL) curr->prev->next = NULL;
       curr->prev = NULL;
   }
-
+  //tail_ = curr -> prev;
   return curr;
 }
 
@@ -145,12 +145,11 @@ typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) {
   * You may NOT allocate ANY new ListNodes!
   */
 template <typename T>
-void List<T>::tripleRotate() { //not working properly
+void List<T>::tripleRotate() { 
   // @todo Graded in MP2.1
   ListNode* currNode = head_;
   while ((currNode != NULL) && (currNode -> next != NULL) && (currNode -> next -> next != NULL)) {
      ListNode* temp = currNode;
-     //std::cout << temp -> data << std::endl; 
      if (temp == head_) {
         temp -> next -> prev = NULL;
         head_ = temp -> next;
@@ -166,7 +165,6 @@ void List<T>::tripleRotate() { //not working properly
      currNode -> next = nextCurrNode;
      if (nextCurrNode != NULL) nextCurrNode -> prev = currNode;
      currNode = nextCurrNode;
-     //break;
   }
 }
 
