@@ -1,6 +1,6 @@
 /**
  * @file list.h
- * Doubly Linked List (MP 3).
+ * Doubly Linked List (MP 2).
  */
 #pragma once
 #include <iterator>
