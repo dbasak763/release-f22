@@ -236,8 +236,16 @@ CMakeFiles/main.dir/entry/main.cpp.o: ../entry/main.cpp \
   /usr/include/c++/11/pstl/execution_defs.h \
   ../src/List-ListIterator.hpp \
   ../src/List.hpp \
-  ../src/List-given.hpp
+  ../src/List-given.hpp \
+  ../lib/cs225/PNG.h \
+  ../lib/cs225/HSLAPixel.h \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc
 
+
+/usr/include/c++/11/sstream:
+
+../lib/cs225/HSLAPixel.h:
 
 ../src/List-given.hpp:
 
@@ -246,6 +254,8 @@ CMakeFiles/main.dir/entry/main.cpp.o: ../entry/main.cpp \
 /usr/include/c++/11/debug/safe_sequence.h:
 
 /usr/include/c++/11/debug/vector:
+
+../lib/cs225/PNG.h:
 
 /usr/include/c++/11/bits/vector.tcc:
 
@@ -660,6 +670,8 @@ CMakeFiles/main.dir/entry/main.cpp.o: ../entry/main.cpp \
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/c++/11/bits/sstream.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 

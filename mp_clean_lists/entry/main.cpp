@@ -4,21 +4,21 @@
 #include <string>
 #include <vector>
 
+#include "tests/tests_helper.h"
+#include "cs225/PNG.h"
+#include "cs225/HSLAPixel.h"
+
+using namespace cs225;
 
 int main() {
-    List<int> list;
+  PNG in;        in.readFromFile("../tests/alma.png");
+  PNG expected;  expected.readFromFile("../tests/expected-reverseN_1.png");
 
-    list.insertBack(1);
-    list.insertBack(2);
-    list.insertBack(3);
-    list.insertBack(4);
+  List<HSLAPixel> list = imageToList(in);
+  list.reverseNth(in.height() * 20);
 
-    std::cout << list << std::endl;
+  PNG out = listToImage(list, in.width(), in.height());
+  out.writeToFile("actual-reverseN_1.png");
 
-    List<int> slist = list.split(2); //seg fault, not working properly
-
-    std::cout << list << std::endl;
-    std::cout << slist << std::endl;
-
-    return 0;
+  return 0;
 }
