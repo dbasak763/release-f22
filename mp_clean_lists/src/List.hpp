@@ -237,11 +237,19 @@ void List<T>::reverseNth(int n) {
   for (int i = 1; (i < n) && (rightPoint != NULL); i++) {
      rightPoint = rightPoint -> next;
   }
-  
+  T* arr = new T[n - 1];
   while (rightPoint != NULL) {
     std::cout << leftPoint -> data << " " << rightPoint -> data << std::endl;
     //if (leftPoint -> prev != NULL) reverse(leftPoint, rightPoint); //not correct for first iteration
-    reverse(leftPoint, rightPoint);
+    if (leftPoint == head_) {
+      ListNode* curr = leftPoint;
+      for (int i = 0; i < n - 1; i++) {
+         arr[i] = (curr -> next) -> data;
+         curr = curr -> next;
+      }
+      
+    }
+    reverse(leftPoint, rightPoint); 
     for (int i = 1; (i <= n) && (rightPoint != NULL); i++) {
       leftPoint = leftPoint -> next;
       rightPoint = rightPoint -> next;
@@ -253,6 +261,10 @@ void List<T>::reverseNth(int n) {
      leftPoint = leftPoint -> prev;
   }
   reverse(leftPoint, tail_);
+  for (int i = 0; i <= n - 2; i++) {
+      insertFront(arr[i]);
+  }
+  delete[] arr;
 }
 
 
