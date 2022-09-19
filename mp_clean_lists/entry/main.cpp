@@ -3,22 +3,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iterator>
 
-#include "tests/tests_helper.h"
 #include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
 
 using namespace cs225;
 
 int main() {
-  PNG in;        in.readFromFile("../tests/alma.png");
-  PNG expected;  expected.readFromFile("../tests/expected-reverseN_1.png");
-
-  List<HSLAPixel> list = imageToList(in);
-  list.reverseNth(in.height() * 20);
-
-  PNG out = listToImage(list, in.width(), in.height());
-  out.writeToFile("actual-reverseN_1.png");
-
+  List<int> list;
+  for (int i = 1; i <= 90; i++) list.insertBack(i);
+  std::cout << list << std::endl;
+  list.reverseNth(17);//not working properly
+  std::cout << list << std::endl;
   return 0;
 }
