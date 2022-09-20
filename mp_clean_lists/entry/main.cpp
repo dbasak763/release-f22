@@ -28,5 +28,7 @@ int main() {
 
   std::cout << list1 << std::endl;
   std::cout << list2 << std::endl;
+
+  std::cout << list1.mergesort(list1, 2) << std::endl;
   return 0;
 }
