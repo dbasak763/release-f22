@@ -27,7 +27,8 @@ typename List<T>::ListIterator List<T>::begin() const {
 template <typename T>
 typename List<T>::ListIterator List<T>::end() const {
   // @TODO: graded in MP2.1
-  return List<T>::ListIterator(tail_->next);
+  //std::cout << tail_ -> data << std::endl;
+  return List<T>::ListIterator(tail_->next, tail_);
 }
 
 
@@ -166,6 +167,12 @@ void List<T>::tripleRotate() {
      if (nextCurrNode != NULL) nextCurrNode -> prev = currNode;
      currNode = nextCurrNode;
   }
+  currNode = head_;
+  while (currNode != NULL && currNode -> next != NULL) {
+    currNode -> next -> prev = currNode;
+    currNode = currNode -> next;
+  } 
+  tail_ = currNode;
 }
 
 
