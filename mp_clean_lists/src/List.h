@@ -232,7 +232,6 @@ class List {
      * You must use these as specified in the spec and may not rename them.
      * You may place more here as you need them.
      */
-
     /**
      * Copies the given list into the current list.
      * @see List-given.hpp

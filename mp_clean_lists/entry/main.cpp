@@ -11,10 +11,22 @@
 using namespace cs225;
 
 int main() {
-  List<int> list;
-  for (int i = 1; i <= 100; i++) list.insertBack(i);
-  std::cout << list << std::endl;
-  list.reverseNth(18);//not working properly
-  std::cout << list << std::endl;
+  List<int> list1;
+
+  list1.insertBack(1);
+  list1.insertBack(3);
+  list1.insertBack(4);
+  list1.insertBack(6);
+
+  List<int> list2;
+
+  list2.insertBack(2);
+  list2.insertBack(4);
+  list2.insertBack(7);
+
+  list1.mergeWith(list2);
+
+  std::cout << list1 << std::endl;
+  std::cout << list2 << std::endl;
   return 0;
 }

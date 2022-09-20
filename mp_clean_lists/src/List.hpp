@@ -195,7 +195,7 @@ void List<T>::reverse(ListNode *& startPoint, ListNode *& endPoint) {
   ListNode* beforeStartPoint = startPoint -> prev; 
   ListNode* afterEndPoint = endPoint -> next; 
   ListNode* currNode = startPoint; 
-  if (startPoint == head_) {
+  if (startPoint == head_ && endPoint != tail_) {
      int counter = 0;
      while (currNode != afterEndPoint) {
        counter++;
@@ -292,9 +292,11 @@ void List<T>::reverseNth(int n) {
  * @param otherList List to be merged into the current list.
  */
 template <typename T>
-void List<T>::mergeWith(List<T> & otherList) {
+void List<T>::mergeWith(List<T> & otherList) { //seg fault occurs
     // set up the current list
-    head_ = merge(head_, otherList.head_);
+    std::cout << "Hi1" << std::endl;
+    head_ = merge(head_, otherList.head_); //seg fault occurs
+    std::cout << "Hi2" << std::endl;
     tail_ = head_;
 
     // make sure there is a node in the new list
@@ -324,7 +326,36 @@ void List<T>::mergeWith(List<T> & otherList) {
 template <typename T>
 typename List<T>::ListNode * List<T>::merge(ListNode * first, ListNode* second) {
   /// @todo Graded in MP2.2
-  return NULL;
+  if (first == NULL) return second;
+  if (second == NULL) return first;
+  
+  ListNode* startNode;
+  startNode = first;
+  if (first -> data < second -> data) {
+     startNode = first;
+     first = first -> next;
+  } else {
+    startNode = second;
+    second = second -> next;
+  }
+  
+  ListNode* currNode = startNode;
+
+  while (first != NULL && second != NULL) {
+     if (first -> data < second -> data) {
+       currNode -> next = first;
+       first = first -> next;
+     } else {
+       currNode -> next = second;
+       second = second -> next;
+     }
+     currNode = currNode -> next;
+  }
+
+  if (first == NULL) currNode -> next = second;
+  else currNode -> next = first;
+  
+  return startNode;
 }
 
 /**
