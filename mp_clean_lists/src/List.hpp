@@ -294,9 +294,9 @@ void List<T>::reverseNth(int n) {
 template <typename T>
 void List<T>::mergeWith(List<T> & otherList) { //seg fault occurs
     // set up the current list
-    std::cout << "Hi1" << std::endl;
+    //std::cout << "Hi1" << std::endl;
     head_ = merge(head_, otherList.head_); //seg fault occurs
-    std::cout << "Hi2" << std::endl;
+    //std::cout << "Hi2" << std::endl;
     tail_ = head_;
 
     // make sure there is a node in the new list

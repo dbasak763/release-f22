@@ -11,24 +11,20 @@
 using namespace cs225;
 
 int main() {
-  List<int> list1;
+   List<unsigned> list;
+   list.insertFront(1);
+   list.insertFront(2);
+   list.insertFront(3);
 
-  list1.insertBack(1);
-  list1.insertBack(3);
-  list1.insertBack(4);
-  list1.insertBack(6);
+   std::cout << list << std::endl;
 
-  List<int> list2;
-
-  list2.insertBack(2);
-  list2.insertBack(4);
-  list2.insertBack(7);
-
-  list1.mergeWith(list2);
-
-  std::cout << list1 << std::endl;
-  std::cout << list2 << std::endl;
-
-  std::cout << list1.mergesort(list1, 2) << std::endl;
-  return 0;
+   List<unsigned>::ListIterator iter = list.begin();
+   iter++;
+   iter++;
+   iter++;
+   std::cout << "Hello" << std::endl;
+   //std::cout << *iter << std::endl;
+   //std::cout << *iter << std::endl;
+   std::cout << *(--iter) << std::endl;
+   return 0;
 }
