@@ -11,24 +11,24 @@
 using namespace cs225;
 
 int main() {
-   List<unsigned> list;
-   
-   for (int i = 1; i <= 10; i++) list.insertFront(i);
-
-   std::cout << list << std::endl;
+   List<char> list;
+   for (int i = 1; i <= 100; i++) {
+      list.insertBack(i);
+   }
 
    list.tripleRotate();
 
    std::cout << list << std::endl;
-
-   List<unsigned>::ListIterator iter = list.end();
-   --iter;
-   std::cout << *iter << std::endl;
-   std::cout << "New Line" << std::endl;
-   for (int i = 1; i <= 10; i++) {
-      //std::cout << "i = " << i << std::endl;
-      std::cout << *iter--;
+   
+   List<char>::ListIterator iter = list.begin();
+   for (int i = 1; i <= 100; i++) {
+      std::cout << *++iter << std::endl;
    }
-   std::cout << std::endl;
+
+   List<char>::ListIterator iter = list.end();
+   for (int i = 1; i <= 100; i++) {
+      std::cout << *--iter << std::endl;
+   }
+   
    return 0;
 }
