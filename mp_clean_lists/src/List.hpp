@@ -148,31 +148,31 @@ typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint) { 
 template <typename T>
 void List<T>::tripleRotate() { 
   // @todo Graded in MP2.1
-  ListNode* currNode = head_;
-  while ((currNode != NULL) && (currNode -> next != NULL) && (currNode -> next -> next != NULL)) {
-     ListNode* temp = currNode;
-     if (temp == head_) {
-        temp -> next -> prev = NULL;
-        head_ = temp -> next;
-     } else {
-        temp -> next -> prev = temp -> prev;
-        temp -> prev -> next = temp -> next;
+  ListNode* curr = head_;
+  //0 or 1 or 2 elements
+  if (curr == NULL || curr -> next == NULL || curr -> next -> next == NULL) return;
+  
+  int mod = (size() % 3);
+  int iterations = size() - mod;
+  if (mod == 0) tail_ = tail_ -> prev -> prev;
+  //std::cout << "iterations: " << iterations << endl;
+  for (int i = 1; i <= iterations; i++) {
+     //std::cout << i << std::endl;
+     if (i == 1) head_ = curr -> next;
+     if (i % 3 == 0) {
+       curr = curr -> next;
+       continue;
      }
-     temp = temp -> next -> next;
-     ListNode* nextCurrNode = temp -> next;
-
-     temp -> next = currNode;
-     currNode -> prev = temp;
-     currNode -> next = nextCurrNode;
-     if (nextCurrNode != NULL) nextCurrNode -> prev = currNode;
-     currNode = nextCurrNode;
+     ListNode* before = curr -> prev;
+     ListNode* after = curr -> next;
+     curr -> next = after -> next;
+     if (after -> next != NULL) after -> next -> prev = curr;
+     if (before != NULL) before -> next = after;
+     after -> prev = before;
+     after -> next = curr;
+     curr -> prev = after;
   }
-  currNode = head_;
-  while (currNode != NULL && currNode -> next != NULL) {
-    currNode -> next -> prev = currNode;
-    currNode = currNode -> next;
-  } 
-  tail_ = currNode;
+
 }
 
 
