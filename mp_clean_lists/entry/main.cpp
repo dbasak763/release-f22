@@ -13,7 +13,7 @@ using namespace cs225;
 int main() {
    List<int> list;
 
-    for (int i = 1; i <= 6; i++)
+    for (int i = 1; i <= 1000; i++)
         list.insertBack(i);
     //std::cout << "Here" << std::endl;
     list.tripleRotate();
