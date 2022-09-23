@@ -5,6 +5,7 @@
  */
 #include "InorderTraversal.h"
 #include <iostream>
+#include <vector>
 
 /**
  * @return The height of the binary tree. Recall that the height of a binary
@@ -79,6 +80,11 @@ void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
 void BinaryTree<T>::mirror()
 {
     //your code here
+    if (root == NULL) return;
+    Node* left_ = (root -> right) -> mirror();
+    Node* right_ = (root -> left) -> mirror();
+    root -> left = left_;
+    root -> right = right_;
 }
 
 
@@ -92,7 +98,16 @@ template <typename T>
 bool BinaryTree<T>::isOrderedIterative() const
 {
     // your code here
-    return false;
+    InorderTraversal<T> iot(root);
+    std::vector<T> vect;
+    for (TreeTraversal<T>::Iterator it = iot.begin(); it != iot.end(); ++it) {
+        vect.push_back((*it)->elem);
+    }
+    for (std::vector<T>::Iterator it = vect.begin(); it != vect.end(); ++it) {
+        if (++it == vect.end()) break;
+        if (*(it) > *(++it)) return false;
+    }
+    return true;
 }
 
 /**
@@ -104,7 +119,15 @@ bool BinaryTree<T>::isOrderedIterative() const
 template <typename T>
 bool BinaryTree<T>::isOrderedRecursive() const
 {
-    // your code here
+    if (root == NULL || (root -> left == NULL && root -> right == NULL)) {
+        return true;
+    }
+    T* root_data = root -> data;
+    T* left_data = root -> left -> data;
+    T* right_data = root -> right -> data;
+    if ((left_data == NULL || left_data <= root_data) && (right_data == NULL || root_data <= right_data)) {
+        return root -> left -> isOrderedRecursive() && root -> right -> isOrderedRecursive();
+    }
     return false;
 }
 
