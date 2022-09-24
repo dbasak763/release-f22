@@ -102,8 +102,16 @@ template <typename T>
 bool BinaryTree<T>::isOrderedIterative() const
 {
     // your code here
-    
-    
+    InorderTraversal<T> iot(root);
+    std::vector<T> vect;
+    for (TreeTraversal<int>::Iterator it = iot.begin(); it != iot.end(); ++it) {
+        //std::cout<<(*it)->elem<<" ";
+        vect.push_back((*it)->elem);
+    }
+    for(unsigned i = 0; i < vect.size() - 1; i++) {
+        if (vect[i] > vect[i + 1]) return false;
+    }
+    return true;
 }
 
 /**

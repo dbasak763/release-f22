@@ -139,15 +139,16 @@ TEST_CASE("test_isOrderedIterative", "[weight=10]"){
     BinaryTree<int> treeLeft(genNonIsOrderedTreeLeft());
 
     REQUIRE(treeLeft.isOrderedIterative() == false);
-
+    std::cout << "-----------------" << std::endl;
     BinaryTree<int> treeRight(genNonIsOrderedTreeRight());
 
     REQUIRE(treeRight.isOrderedIterative() == false);
-
+    std::cout << "-----------------" << std::endl;
     BinaryTree<int> tree2;
     genIsOrderedTree(tree2);
 
     REQUIRE(tree2.isOrderedIterative() == true);
+    std::cout << "-----------------" << std::endl;
 }
 
 TEST_CASE("test_InorderTraversal", "[weight=10]"){
