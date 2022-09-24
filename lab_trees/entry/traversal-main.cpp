@@ -8,6 +8,7 @@ using namespace std;
 
 int main() {
     // For deterministic behavior, use a fixed seed instead of a random device
+    /*
     std::random_device r;
     std::mt19937 rng(r());
     std::cout << "Hi" << std::endl;
@@ -31,5 +32,18 @@ int main() {
         cout<<(*it)->elem<<" ";
     }
     cout<<endl;
+    */
+    BinaryTree<int> treeLeft(genNonIsOrderedTreeLeft());
+
+    std::cout << (treeLeft.isOrderedIterative() == false) << std::endl;
+
+    BinaryTree<int> treeRight(genNonIsOrderedTreeRight());
+
+    std::cout << (treeRight.isOrderedIterative() == false) << std::endl;
+
+    BinaryTree<int> tree2;
+    genIsOrderedTree(tree2);
+
+    std::cout << (tree2.isOrderedIterative() == true) << std::endl;
 
 }

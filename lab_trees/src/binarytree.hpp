@@ -102,16 +102,8 @@ template <typename T>
 bool BinaryTree<T>::isOrderedIterative() const
 {
     // your code here
-    InorderTraversal<T> iot(root);
-    std::vector<T> vect;
-    for (typename TreeTraversal<T>::Iterator it = iot.begin(); it != iot.end(); ++it) {
-        vect.push_back((*it)->elem);
-    }
-    for (typename std::vector<T>::iterator it = vect.begin(); it != vect.end(); ++it) {
-        if (++it == vect.end()) break;
-        if (*(it) > *(++it)) return false;
-    }
-    return true;
+    
+    
 }
 
 /**
@@ -131,10 +123,37 @@ bool BinaryTree<T>::isOrderedRecursive(Node* root) const {
         return true;
     }
     T root_data = root -> elem;
+    bool isLeftSubtreeOrdered = isOrderedRecursive(root -> left);
+    bool isRightSubtreeOrdered = isOrderedRecursive(root -> right);
 
-    if ((root -> left == NULL || root -> left -> elem <= root_data) && (root -> right == NULL || root_data <= root -> right -> elem)) {
-        return isOrderedRecursive(root -> left) && isOrderedRecursive(root -> right);
+    if (root -> left == NULL) {
+        if (getMin(root -> right) >= root_data) {
+            return isRightSubtreeOrdered;
+        }
+    } else if (root -> right == NULL) {
+        if (getMax(root -> left) <= root_data) {
+            return isLeftSubtreeOrdered;
+        }
+    } else {
+        if ((getMax(root -> left) <= root_data) && (getMin(root -> right) >= root_data)) {
+            return isLeftSubtreeOrdered && isRightSubtreeOrdered;
+        }
     }
     return false;
+}
+template <typename T>
+T BinaryTree<T>::getMax(Node* root) const {
+    while (root != NULL && root -> right != NULL) {
+        root = root -> right;
+    }
+    return root -> elem;
+}
+
+template <typename T>
+T BinaryTree<T>::getMin(Node* root) const {
+    while (root != NULL && root -> left != NULL) {
+        root = root -> left;
+    }
+    return root -> elem;
 }
 

@@ -138,6 +138,8 @@ class BinaryTree
          */
         bool isOrderedRecursive() const;
         bool isOrderedRecursive(Node* root) const;
+        T getMax(Node* root) const;
+        T getMin(Node* root) const;
 
         /**
          *  Uses vector to store values of the nodes of a binary tree in order.

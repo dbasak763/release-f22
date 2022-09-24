@@ -32,8 +32,6 @@ class InorderTraversal : public TreeTraversal<T> {
           stack.push(curr);
           curr = curr -> left;
       }
-      //std::cout << "Hi1" << std::endl;
-      
       
     }
 
@@ -74,7 +72,7 @@ class InorderTraversal : public TreeTraversal<T> {
           stack.push(curr);
           curr = curr -> left;
       }
-      //std::cout << "Hi1" << std::endl;
+      return;
     }
 
     /**
