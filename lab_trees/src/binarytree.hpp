@@ -80,13 +80,17 @@ void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
 void BinaryTree<T>::mirror()
 {
     //your code here
-    if (root == NULL) return;
-    Node* left_ = (root -> right) -> mirror();
-    Node* right_ = (root -> left) -> mirror();
-    root -> left = left_;
-    root -> right = right_;
+    mirror(root);
 }
-
+    template <typename T>
+void BinaryTree<T>::mirror(Node*& root) {
+    if (root == NULL) return;
+    Node* temp = root -> left;
+    root -> left = root -> right;
+    root -> right = temp;
+    mirror(root -> left);
+    mirror(root -> right);
+}
 
 /**
  * isOrdered() function iterative version
@@ -100,10 +104,10 @@ bool BinaryTree<T>::isOrderedIterative() const
     // your code here
     InorderTraversal<T> iot(root);
     std::vector<T> vect;
-    for (TreeTraversal<T>::Iterator it = iot.begin(); it != iot.end(); ++it) {
+    for (typename TreeTraversal<T>::Iterator it = iot.begin(); it != iot.end(); ++it) {
         vect.push_back((*it)->elem);
     }
-    for (std::vector<T>::Iterator it = vect.begin(); it != vect.end(); ++it) {
+    for (typename std::vector<T>::iterator it = vect.begin(); it != vect.end(); ++it) {
         if (++it == vect.end()) break;
         if (*(it) > *(++it)) return false;
     }
@@ -119,14 +123,17 @@ bool BinaryTree<T>::isOrderedIterative() const
 template <typename T>
 bool BinaryTree<T>::isOrderedRecursive() const
 {
+    return isOrderedRecursive(root);
+}
+template <typename T>
+bool BinaryTree<T>::isOrderedRecursive(Node* root) const {
     if (root == NULL || (root -> left == NULL && root -> right == NULL)) {
         return true;
     }
-    T* root_data = root -> data;
-    T* left_data = root -> left -> data;
-    T* right_data = root -> right -> data;
-    if ((left_data == NULL || left_data <= root_data) && (right_data == NULL || root_data <= right_data)) {
-        return root -> left -> isOrderedRecursive() && root -> right -> isOrderedRecursive();
+    T root_data = root -> elem;
+
+    if ((root -> left == NULL || root -> left -> elem <= root_data) && (root -> right == NULL || root_data <= root -> right -> elem)) {
+        return isOrderedRecursive(root -> left) && isOrderedRecursive(root -> right);
     }
     return false;
 }

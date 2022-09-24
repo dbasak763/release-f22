@@ -10,7 +10,7 @@ int main() {
     // For deterministic behavior, use a fixed seed instead of a random device
     std::random_device r;
     std::mt19937 rng(r());
-
+    std::cout << "Hi" << std::endl;
     BinaryTree<int> myTree;
     for (int i = 1; i <= 10; i++)
         myTree.insertRandom(i, rng);
@@ -23,7 +23,8 @@ int main() {
         cout<<(*it)->elem<<" ";
     }
     cout<<endl;
-
+    std::cout << "Hi" << std::endl;
+    //problem with inordertraversal
     InorderTraversal<int> iot(myTree.getRoot());
     cout<<"Inorder Traversal:  ";
     for (TreeTraversal<int>::Iterator it = iot.begin(); it != iot.end(); ++it) {
