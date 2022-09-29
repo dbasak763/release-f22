@@ -40,7 +40,10 @@ public:
   private:
     /** @todo [Part 1] */
     /** add private members here if neccesary*/
-
+    ImageTraversal * traversal;
+    Point start;
+    Point end;
+    Point current;
   };
 
   /**

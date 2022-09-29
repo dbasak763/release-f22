@@ -35,4 +35,13 @@ public:
 private:
 	/** @todo [Part 1] */
 	/** add private members here*/
+  PNG & png;
+  unsigned int width_;
+  unsigned int height_;
+  Point & startPoint;
+  double tolerance;
+  std::list<Point> visitedPoints;
+  ImageTraversal::Iterator current;
+  ImageTraversal::Iterator startIterator;
+  std::stack<Point> ImageTraversal;
 };

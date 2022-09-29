@@ -22,52 +22,95 @@
  * it will not be included in this DFS
  */
 DFS::DFS(const PNG & png, const Point & start, double tolerance) {  
-  /** @todo [Part 1] */
+  png = png;
+  startPoint = start;
+  tolerance = tolerance;
+  width_ = png.width();
+  height_ = png.height();
+  
+  *current = start;
+  *startIterator = start;
+  visitedPoints.insert(*current);
+  add(*current);
+
+  Point left = new Point(start.x, start.y - 1);
+  Point right = new Point(start.x, start.y + 1);
+  Point up = new Point(start.x - 1, start.y);
+  Point down = new Point(start.x + 1, start.y);
+
+  add(right);
+  add(down);
+  add(left);
+  add(up);
+
+  while (!empty()) {
+    Point point = pop();
+    if (!empty()) {
+      *current = point;
+      visitedPoints.insert(*current);
+      Point left = new Point(*current.x, *current.y - 1);
+      Point right = new Point(*current.x, *current.y + 1);
+      Point up = new Point(*current.x - 1, *current.y);
+      Point down = new Point(*current.x + 1, *current.y);
+      
+      add(right);
+      add(down);
+      add(left);
+      add(up);
+    }
+
+  }
+
 }
 
 /**
  * Returns an iterator for the traversal starting at the first point.
  */
 ImageTraversal::Iterator DFS::begin() {
-  /** @todo [Part 1] */
-  return ImageTraversal::Iterator();
+  return ImageTraversal::Iterator(startIterator);
 }
 
 /**
  * Returns an iterator for the traversal one past the end of the traversal.
  */
 ImageTraversal::Iterator DFS::end() {
-  /** @todo [Part 1] */
-  return ImageTraversal::Iterator();
+  return ImageTraversal::Iterator(NULL);
 }
 
 /**
  * Adds a Point for the traversal to visit at some point in the future.
  */
 void DFS::add(const Point & point) {
-  /** @todo [Part 1] */
+  
+  if (point.x >= 0 && point.x < height_ 
+  && point.y >= 0 && point.y < width_) {
+    double diff = calculateDelta(png.getPixel(startPoint.x, startPoint.y), png.getPixel(point.x, point.y));
+    if (diff <= tolerance) {
+      ImageTraversal.push(point);
+    }
+  }
+  return;
 }
 
 /**
  * Removes and returns the current Point in the traversal.
  */
 Point DFS::pop() {
-  /** @todo [Part 1] */
-  return Point(0, 0);
+  Point toBeRemoved = ImageTraversal.top();
+  ImageTraversal.pop();
+  return toBeRemoved;
 }
 
 /**
  * Returns the current Point in the traversal.
  */
 Point DFS::peek() const {
-  /** @todo [Part 1] */
-  return Point(0, 0);
+  return ImageTraversal.top();
 }
 
 /**
  * Returns true if the traversal is empty.
  */
 bool DFS::empty() const {
-  /** @todo [Part 1] */
-  return true;
+  return (ImageTraversal.empty());
 }
