@@ -36,6 +36,7 @@ public:
 
     /** @todo [Part 1] */
     /** add member functions if neccesary*/
+    double getDelta(const HSLAPixel & p1, const HSLAPixel & p2);  
 
   private:
     /** @todo [Part 1] */

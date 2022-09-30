@@ -28,6 +28,10 @@ double ImageTraversal::calculateDelta(const HSLAPixel & p1, const HSLAPixel & p2
   return sqrt( (h*h) + (s*s) + (l*l) );
 }
 
+double ImageTraversal::getDelta(const HSLAPixel & p1, const HSLAPixel & p2) {
+  return calculateDelta(p1, p2);
+}
+
 /**
  * Default iterator constructor.
  */
