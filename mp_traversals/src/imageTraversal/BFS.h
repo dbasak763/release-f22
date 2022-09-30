@@ -36,7 +36,7 @@ public:
 private:
   /** @todo [Part 1] */
   /** add private members here*/
-  const PNG & png;
+  //const PNG & png;
   unsigned int width_;
   unsigned int height_;
   const Point & startPoint;

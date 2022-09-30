@@ -29,7 +29,7 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
   *current = start;
   startIterator = current;
  
-  ImageTraversal.push(*current);
+  add(*current);
 
   while (!empty()) {
     Point point = pop();
@@ -55,7 +55,7 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(left.x, left.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
-        ImageTraversal.push(left);
+        add(left);
       } 
     }
 
@@ -64,7 +64,7 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(right.x, right.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
-        ImageTraversal.push(right);
+        add(right);
       } 
     }
 
@@ -73,7 +73,7 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(up.x, up.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
-        ImageTraversal.push(up);
+        add(up);
       } 
     }
 
@@ -82,10 +82,12 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(down.x, down.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
-        ImageTraversal.push(down);
+        add(down);
       } 
     }
   }
+
+  add(start);
 
 }
 

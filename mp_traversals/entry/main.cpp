@@ -35,21 +35,16 @@ int main() {
 
   PNG png(40, 40);
   Point startPoint(20, 20);
-  DFS dfs(png, startPoint, 0.2);
+  std::cout << "Hi" << std::endl;
+  BFS bfs(png, startPoint, 0.2); //stuck for a while
+  std::cout << "Hi" << std::endl;
+  bfs.add( Point(2, 2) );
+  bfs.add( Point(2, 3) );
+  bfs.add( Point(2, 4) );
 
-  dfs.add( Point(2, 2) );
-  dfs.add( Point(2, 3) );
-  dfs.add( Point(2, 4) );
+  //REQUIRE( bfs.peek() == Point(20, 20) );
 
-  //REQUIRE( dfs.pop() == Point(2, 4) );
-  //REQUIRE( dfs.pop() == Point(2, 3) );
-  //REQUIRE( dfs.pop() == Point(2, 2) );
-  //REQUIRE( dfs.pop() == Point(20, 20) );
-
-  std::cout << dfs.pop() << std::endl;
-  std::cout << dfs.pop() << std::endl;
-  std::cout << dfs.pop() << std::endl;
-  std::cout << dfs.pop() << std::endl;
+  //std::cout << bfs.peek() << std::endl;
 
   return 0;
 }
