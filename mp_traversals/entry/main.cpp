@@ -33,18 +33,26 @@ int main() {
   animation.write("myFloodFill.gif");
   */
 
-  PNG png(40, 40);
-  Point startPoint(20, 20);
+  PNG png(4, 4);
+  /*
+  HSLAPixel blackPixel(180, 1, 0);
+  
+  for (unsigned i = 0; i < 4; i++) {
+    png.getPixel(i, 0) = blackPixel;
+    png.getPixel(0, i) = blackPixel;
+    png.getPixel(i, 3) = blackPixel;
+    png.getPixel(3, i) = blackPixel;
+  }
+  */
+  Point startPoint(1, 1);
   std::cout << "Hi" << std::endl;
-  BFS bfs(png, startPoint, 0.2); //stuck for a while
+  DFS dfs(png, startPoint, 0.2);
   std::cout << "Hi" << std::endl;
-  bfs.add( Point(2, 2) );
-  bfs.add( Point(2, 3) );
-  bfs.add( Point(2, 4) );
+  //REQUIRE( *(dfs.begin()) == startPoint );
+  std::cout << (*(dfs.begin()) == startPoint) << std::endl;
 
-  //REQUIRE( bfs.peek() == Point(20, 20) );
-
-  std::cout << bfs.peek() << std::endl;
+  std::cout << *(dfs.begin()) << std::endl;
+  std::cout << startPoint << std::endl;
 
   return 0;
 }
