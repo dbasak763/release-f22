@@ -27,10 +27,10 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
   height_ = png.height();
 
   *current = start;
-  startIterator = current;
+  *startIterator = start;
  
   add(*current);
-  
+
   while (!empty()) {
     Point point = pop();
     *current = point;
@@ -88,7 +88,6 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
   }
 
   add(start);
-
 }
 
 /**

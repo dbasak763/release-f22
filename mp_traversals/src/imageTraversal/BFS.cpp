@@ -29,13 +29,14 @@ BFS::BFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
 
   *current = start;
   startIterator = current;
- 
+
+  visitedPoints.push_back(start);
   add(*current);
 
   while (!empty()) {
     Point point = pop();
     *current = point;
-    visitedPoints.push_back(point);
+    
     Point left = Point(point.x, point.y - 1);
     Point right = Point(point.x, point.y + 1);
     Point up = Point(point.x - 1, point.y);
@@ -56,6 +57,7 @@ BFS::BFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(left.x, left.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
+        visitedPoints.push_back(left);
         add(left);
       } 
     }
@@ -65,6 +67,7 @@ BFS::BFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(right.x, right.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
+        visitedPoints.push_back(right);
         add(right);
       } 
     }
@@ -74,6 +77,7 @@ BFS::BFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(up.x, up.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
+        visitedPoints.push_back(up);
         add(up);
       } 
     }
@@ -83,6 +87,7 @@ BFS::BFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
       HSLAPixel p2 = png.getPixel(down.x, down.y);
       double diff = getDelta(p1, p2);
       if (diff <= tol) {
+        visitedPoints.push_back(down);
         add(down);
       } 
     }
