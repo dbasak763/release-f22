@@ -31,7 +31,7 @@ BFS::BFS(const PNG & png, const Point & start, double tolerance) : png(png), sta
   startIterator = current;
   visitedPoints.push_back(start);
 
-  add(start);
+  add(*current);
 
   while (!empty()) {
     Point point = pop();
@@ -50,6 +50,22 @@ BFS::BFS(const PNG & png, const Point & start, double tolerance) : png(png), sta
     
 
   }
+}
+
+/**
+ * Adds a Point for the traversal to visit at some point in the future.
+ */
+void BFS::add(const Point & point) {
+  bool found = (std::find(visitedPoints.begin(), visitedPoints.end(), point) != visitedPoints.end());
+  if (!found && point.x >= 0 && point.x < height_ && point.y >= 0 && point.y < width_) {
+    HSLAPixel p1 = png.getPixel(startPoint.x, startPoint.y);
+    HSLAPixel p2 = png.getPixel(point.x, point.y);
+    double diff = getDelta(p1, p2);
+    if (diff <= tol) {
+      ImageTraversal.push(point);
+    } 
+  }
+  return;
 }
 
 double BFS::getDelta(const HSLAPixel & p1, const HSLAPixel & p2) {
@@ -76,21 +92,6 @@ ImageTraversal::Iterator BFS::begin() {
  */
 ImageTraversal::Iterator BFS::end() {
   return ImageTraversal::Iterator();
-}
-
-/**
- * Adds a Point for the traversal to visit at some point in the future.
- */
-void BFS::add(const Point & point) {
-  bool found = (std::find(visitedPoints.begin(), visitedPoints.end(), point) != visitedPoints.end());
-  if (!found && point.x >= 0 && point.x < height_ 
-  && point.y >= 0 && point.y < width_) {
-    double diff = getDelta(png.getPixel(startPoint.x, startPoint.y), png.getPixel(point.x, point.y));
-    if (diff <= tol) {
-      ImageTraversal.push(point);
-    }
-  }
-  return;
 }
 
 /**

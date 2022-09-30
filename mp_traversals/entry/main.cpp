@@ -41,7 +41,15 @@ int main() {
   dfs.add( Point(2, 3) );
   dfs.add( Point(2, 4) );
 
-  std::cout << dfs.peek() << std::endl;
+  //REQUIRE( dfs.pop() == Point(2, 4) );
+  //REQUIRE( dfs.pop() == Point(2, 3) );
+  //REQUIRE( dfs.pop() == Point(2, 2) );
+  //REQUIRE( dfs.pop() == Point(20, 20) );
+
+  std::cout << dfs.pop() << std::endl;
+  std::cout << dfs.pop() << std::endl;
+  std::cout << dfs.pop() << std::endl;
+  std::cout << dfs.pop() << std::endl;
 
   return 0;
 }
