@@ -27,8 +27,10 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
   height_ = png.height();
 
   *current = start;
-  *startIterator = start;
- 
+  std::cout << start << std::endl;
+  startIterator = *startPoint;
+  std::cout << "Within function, startIterator: " << *startIterator << std::endl;
+  
   add(*current);
 
   while (!empty()) {
@@ -114,6 +116,7 @@ double DFS::getDelta(const HSLAPixel & p1, const HSLAPixel & p2) {
  * Returns an iterator for the traversal starting at the first point.
  */
 ImageTraversal::Iterator DFS::begin() {
+  std::cout << "begin() is called, startIterator: " << *startIterator << std::endl;
   return ImageTraversal::Iterator(startIterator);
 }
 
