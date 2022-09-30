@@ -42,8 +42,9 @@ PNG getTestPNG() {
 TEST_CASE("DFS iterator starts at the start point", "[weight=2][part=1]") {
   PNG png = getTestPNG();
   Point startPoint(1, 1);
-  
+  std::cout << "Hi" << std::endl;
   DFS dfs(png, startPoint, 0.2);
+  std::cout << "Hi" << std::endl;
   REQUIRE( *(dfs.begin()) == startPoint );
 }
 

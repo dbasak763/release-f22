@@ -28,34 +28,23 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : png(png), sta
   
   *current = start;
   startIterator = current;
-  visitedPoints.push_back(*current);
-  add(*current);
 
-  Point* left = new Point(start.x, start.y - 1);
-  Point* right = new Point(start.x, start.y + 1);
-  Point* up = new Point(start.x - 1, start.y);
-  Point* down = new Point(start.x + 1, start.y);
-
-  add(*right);
-  add(*down);
-  add(*left);
-  add(*up);
+  add(start);
 
   while (!empty()) {
     Point point = pop();
-    if (!empty()) {
-      *current = point;
-      visitedPoints.push_back(*current);
-      left = new Point(point.x, point.y - 1);
-      right = new Point(point.x, point.y + 1);
-      up = new Point(point.x - 1, point.y);
-      down = new Point(point.x + 1, point.y);
+    *current = point;
+    visitedPoints.push_back(point);
+    Point left = Point(point.x, point.y - 1);
+    Point right = Point(point.x, point.y + 1);
+    Point up = Point(point.x - 1, point.y);
+    Point down = Point(point.x + 1, point.y);
       
-      add(*right);
-      add(*down);
-      add(*left);
-      add(*up);
-    }
+    add(right);
+    add(down);
+    add(left);
+    add(up);
+    
 
   }
 
@@ -91,12 +80,13 @@ ImageTraversal::Iterator DFS::end() {
  * Adds a Point for the traversal to visit at some point in the future.
  */
 void DFS::add(const Point & point) {
-  
-  if (point.x >= 0 && point.x < height_ 
+  bool found = (std::find(visitedPoints.begin(), visitedPoints.end(), point) != visitedPoints.end());
+  if (!found && point.x >= 0 && point.x < height_ 
   && point.y >= 0 && point.y < width_) {
     double diff = getDelta(png.getPixel(startPoint.x, startPoint.y), png.getPixel(point.x, point.y));
     if (diff <= tol) {
       ImageTraversal.push(point);
+      size++;
     }
   }
   return;
@@ -109,6 +99,7 @@ Point DFS::pop() {
   Point toBeRemoved = ImageTraversal.top();
   ImageTraversal.pop();
   return toBeRemoved;
+  size--;
 }
 
 /**

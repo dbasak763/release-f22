@@ -8,6 +8,7 @@
 #include <cmath>
 #include <list>
 #include <stack>
+#include <algorithm>
 
 #include "cs225/PNG.h"
 #include "../Point.h"
@@ -44,4 +45,5 @@ private:
   ImageTraversal::Iterator current;
   ImageTraversal::Iterator startIterator;
   std::stack<Point> ImageTraversal;
+  int size = 0;
 };

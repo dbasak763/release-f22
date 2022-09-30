@@ -1,4 +1,10 @@
+#include <catch2/catch_test_macros.hpp>
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
 
+#include "cs225/HSLAPixel.h"
 #include "cs225/PNG.h"
 #include "FloodFilledImage.h"
 #include "Animation.h"
@@ -27,6 +33,16 @@ int main() {
   animation.write("myFloodFill.gif");
   */
 
+  PNG png(40, 40);
+  Point startPoint(20, 20);
+  DFS dfs(png, startPoint, 0.2);
+
+  dfs.add( Point(2, 2) );
+  dfs.add( Point(2, 3) );
+  dfs.add( Point(2, 4) );
+
+  std::cout << dfs.peek() << std::endl;
 
   return 0;
 }
+
