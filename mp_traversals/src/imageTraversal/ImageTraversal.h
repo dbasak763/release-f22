@@ -35,8 +35,7 @@ public:
     bool operator!=(const Iterator &other);
 
     /** @todo [Part 1] */
-    /** add member functions if neccesary*/
-    double getDelta(const HSLAPixel & p1, const HSLAPixel & p2);  
+    /** add member functions if neccesary*/ 
 
   private:
     /** @todo [Part 1] */

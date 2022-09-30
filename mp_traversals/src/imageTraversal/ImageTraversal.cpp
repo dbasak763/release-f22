@@ -28,10 +28,6 @@ double ImageTraversal::calculateDelta(const HSLAPixel & p1, const HSLAPixel & p2
   return sqrt( (h*h) + (s*s) + (l*l) );
 }
 
-double ImageTraversal::getDelta(const HSLAPixel & p1, const HSLAPixel & p2) {
-  return calculateDelta(p1, p2);
-}
-
 /**
  * Default iterator constructor.
  */
@@ -45,7 +41,7 @@ ImageTraversal::Iterator::Iterator() {
  * Advances the traversal of the image.
  */
 ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
-  if (!traversal.empty()) {
+  if (!traversal -> empty()) {
      current = traversal -> pop();
      traversal -> add(current);
      current = traversal -> peek();
