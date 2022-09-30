@@ -30,7 +30,7 @@ DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(st
   startIterator = current;
  
   add(*current);
-
+  
   while (!empty()) {
     Point point = pop();
     *current = point;

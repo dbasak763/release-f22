@@ -44,7 +44,7 @@ int main() {
 
   //REQUIRE( bfs.peek() == Point(20, 20) );
 
-  //std::cout << bfs.peek() << std::endl;
+  std::cout << bfs.peek() << std::endl;
 
   return 0;
 }
