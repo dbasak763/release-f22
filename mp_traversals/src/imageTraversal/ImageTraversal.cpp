@@ -32,6 +32,11 @@ ImageTraversal::Iterator::Iterator(ImageTraversal* trav, Point startPoint) {
    traversal = trav;
    start = startPoint;
    current = traversal -> peek();
+   for (int i = 0; i < 500; i++) {
+     for (int j = 0; j < 500; j++) {
+       visited[i][j] = 0;
+     }
+   }
 }
 
 /**
@@ -47,30 +52,35 @@ ImageTraversal::Iterator::Iterator() {
  * Advances the traversal of the image.
  */
 ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
-    Point point = traversal->pop();
-    visitedPoints.push_back(point);
+    if (!traversal->empty()) {
+        Point point = traversal->pop();
+        visited[point.x][point.y] = 1;
+        while(!traversal->empty() && visited[traversal->peek().x][traversal->peek().y]) {
+          traversal->pop();
+        }
+        std::cout << "Popped " << point << std::endl;
+        Point up = Point(point.x, point.y - 1);
+        Point down = Point(point.x, point.y + 1);
+        Point left = Point(point.x - 1, point.y);
+        Point right = Point(point.x + 1, point.y);
 
-    Point up = Point(point.x, point.y - 1);
-    Point down = Point(point.x, point.y + 1);
-    Point left = Point(point.x - 1, point.y);
-    Point right = Point(point.x + 1, point.y);
+        bool found_left = visited[left.x][left.y];
+        bool found_right = visited[right.x][right.y];
+        bool found_up = visited[up.x][up.y];
+        bool found_down = visited[down.x][down.y];
 
-    bool found_left = (std::find(visitedPoints.begin(), visitedPoints.end(), left) != visitedPoints.end());
-    bool found_right = (std::find(visitedPoints.begin(), visitedPoints.end(), right) != visitedPoints.end());
-    bool found_up = (std::find(visitedPoints.begin(), visitedPoints.end(), up) != visitedPoints.end());
-    bool found_down = (std::find(visitedPoints.begin(), visitedPoints.end(), down) != visitedPoints.end());
-
-    bool within_bounds_left = (left.x >= 0 && left.x < traversal->height_ && left.y >= 0 && left.y < traversal->width_);
-    bool within_bounds_right = (right.x >= 0 && right.x < traversal->height_ && right.y >= 0 && right.y < traversal->width_);
-    bool within_bounds_up = (up.x >= 0 && up.x < traversal->height_ && up.y >= 0 && up.y < traversal->width_);
-    bool within_bounds_down = (down.x >= 0 && down.x < traversal->height_ && down.y >= 0 && down.y < traversal->width_); 
+        bool within_bounds_left = (left.x >= 0 && left.x < traversal->width_ && left.y >= 0 && left.y < traversal->height_);
+        bool within_bounds_right = (right.x >= 0 && right.x < traversal->width_ && right.y >= 0 && right.y < traversal->height_);
+        bool within_bounds_up = (up.x >= 0 && up.x < traversal->width_ && up.y >= 0 && up.y < traversal->height_);
+    bool within_bounds_down = (down.x >= 0 && down.x < traversal->width_ && down.y >= 0 && down.y < traversal->height_); 
 
     if (within_bounds_right && !found_right) {
       HSLAPixel p1 = traversal->png_.getPixel(traversal->startPoint.x, traversal->startPoint.y);
       HSLAPixel p2 = traversal->png_.getPixel(right.x, right.y);
       double diff = calculateDelta(p1, p2);
-      if (diff <= traversal->tol) {
+      if (diff < traversal->tol) {
         traversal->add(right);
+        std::cout << "Added point on right of " << point << ": " << right << std::endl;
       } 
     }
 
@@ -78,8 +88,9 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       HSLAPixel p1 = traversal->png_.getPixel(traversal->startPoint.x, traversal->startPoint.y);
       HSLAPixel p2 = traversal->png_.getPixel(down.x, down.y);
       double diff = calculateDelta(p1, p2);
-      if (diff <= traversal->tol) {
+      if (diff < traversal->tol) {
         traversal->add(down);
+        std::cout << "Added point on down of " << point << ": " << down << std::endl;
       } 
     }
 
@@ -87,8 +98,9 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       HSLAPixel p1 = traversal->png_.getPixel(traversal->startPoint.x, traversal->startPoint.y);
       HSLAPixel p2 = traversal->png_.getPixel(left.x, left.y);
       double diff = calculateDelta(p1, p2);
-      if (diff <= traversal->tol) {
+      if (diff < traversal->tol) {
         traversal->add(left);
+        std::cout << "Added point on left of " << point << ": " << left << std::endl;
       } 
     }
 
@@ -96,12 +108,15 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       HSLAPixel p1 = traversal->png_.getPixel(traversal->startPoint.x, traversal->startPoint.y);
       HSLAPixel p2 = traversal->png_.getPixel(up.x, up.y);
       double diff = calculateDelta(p1, p2);
-      if (diff <= traversal->tol) {
+      if (diff < traversal->tol) {
         traversal->add(up);
+        std::cout << "Added point on up of " << point << ": " << up << std::endl;
       } 
     }
 
-  current = traversal->peek();
+    if (!traversal->empty()) current = traversal->peek();
+    }
+    
   return *this;
 }
 
@@ -143,7 +158,19 @@ bool ImageTraversal::Iterator::operator!=(const ImageTraversal::Iterator &other)
     return (traversal != other.traversal);
   } else return true;
   */
-  return !(traversal != other.traversal && current == other.current);
+  //std::cout << "Hi" << std::endl;
+  if (traversal == other.traversal) {
+    return !(current.x == other.current.x && current.y == other.current.y);
+  }
+  if (traversal != other.traversal) {
+    if (other.traversal == NULL) {
+       //std::cout << "Hi" << std::endl;
+       return !traversal -> empty();
+    } else {
+       return !(current.x == other.current.x && current.y == other.current.y);
+    }
+  }
+  return false;
 
 }
 

@@ -46,7 +46,7 @@ public:
     Point start;
     //Point end;
     Point current;
-    std::vector<Point> visitedPoints;
+    bool visited[500][500];
 
   };
 
