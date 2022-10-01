@@ -27,6 +27,13 @@ double ImageTraversal::calculateDelta(const HSLAPixel & p1, const HSLAPixel & p2
 
   return sqrt( (h*h) + (s*s) + (l*l) );
 }
+//Non-default iterator constructor
+ImageTraversal::Iterator::Iterator(ImageTraversal* trav, Point startPoint) {
+   traversal = trav;
+   start = startPoint;
+   current = traversal -> peek();
+   
+}
 
 /**
  * Default iterator constructor.
@@ -41,11 +48,62 @@ ImageTraversal::Iterator::Iterator() {
  * Advances the traversal of the image.
  */
 ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
-  if (!traversal -> empty()) {
-     current = traversal -> pop();
-     traversal -> add(current);
-     current = traversal -> peek();
-  }
+    Point point = pop();
+    
+    Point left = Point(point.x, point.y - 1);
+    Point right = Point(point.x, point.y + 1);
+    Point up = Point(point.x - 1, point.y);
+    Point down = Point(point.x + 1, point.y);
+
+    bool found_left = (std::find(visitedPoints.begin(), visitedPoints.end(), left) != visitedPoints.end());
+    bool found_right = (std::find(visitedPoints.begin(), visitedPoints.end(), right) != visitedPoints.end());
+    bool found_up = (std::find(visitedPoints.begin(), visitedPoints.end(), up) != visitedPoints.end());
+    bool found_down = (std::find(visitedPoints.begin(), visitedPoints.end(), down) != visitedPoints.end());
+
+    bool within_bounds_left = (left.x >= 0 && left.x < height_ && left.y >= 0 && left.y < width_);
+    bool within_bounds_right = (right.x >= 0 && right.x < height_ && right.y >= 0 && right.y < width_);
+    bool within_bounds_up = (up.x >= 0 && up.x < height_ && up.y >= 0 && up.y < width_);
+    bool within_bounds_down = (down.x >= 0 && down.x < height_ && down.y >= 0 && down.y < width_); 
+
+    if (within_bounds_left && !found_left) {
+      HSLAPixel p1 = png.getPixel(startPoint.x, startPoint.y);
+      HSLAPixel p2 = png.getPixel(left.x, left.y);
+      double diff = calculateDelta(p1, p2);
+      if (diff <= tol) {
+        visitedPoints.push_back(left);
+        add(left);
+      } 
+    }
+
+    if (within_bounds_right && !found_right) {
+      HSLAPixel p1 = png.getPixel(startPoint.x, startPoint.y);
+      HSLAPixel p2 = png.getPixel(right.x, right.y);
+      double diff = calculateDelta(p1, p2);
+      if (diff <= tol) {
+        visitedPoints.push_back(right);
+        add(right);
+      } 
+    }
+
+    if (within_bounds_up && !found_up) {
+      HSLAPixel p1 = png.getPixel(startPoint.x, startPoint.y);
+      HSLAPixel p2 = png.getPixel(up.x, up.y);
+      double diff = calculateDelta(p1, p2);
+      if (diff <= tol) {
+        visitedPoints.push_back(up);
+        add(up);
+      } 
+    }
+
+    if (within_bounds_down && !found_down) {
+      HSLAPixel p1 = png.getPixel(startPoint.x, startPoint.y);
+      HSLAPixel p2 = png.getPixel(down.x, down.y);
+      double diff = calculateDelta(p1, p2);
+      if (diff <= tol) {
+        visitedPoints.push_back(down);
+        add(down);
+      } 
+    }
   return *this;
 }
 

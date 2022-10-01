@@ -113,9 +113,9 @@ void exampleBuildFromList()
 void exampleAllBuild()
 {
     std::vector<std::pair<std::string, int>> inList = file_to_listPair("../tests/data/file4.txt");
-
+    std::cout << "Hi" << std::endl;
     std::vector<int> out = allBuild(inList);
-
+    std::cout << "Hi" << std::endl;
     for(unsigned i = 0; i < out.size(); i++){
         cout << out[i] << endl;
     }

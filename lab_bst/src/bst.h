@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <sstream>
 #include <string>
 #include "utils.h"
@@ -153,6 +154,8 @@ class BST
      */
     void remove(Node*& node, const K& key);
 
+    struct BST<K, V>::Node* & removeR(Node*& node, const K& key);
+
     /**
      * Finds a value (by key) in the BST tree.
      * @param node The node to search from (current subroot)
@@ -161,6 +164,7 @@ class BST
      */
     struct BST<K, V>::Node* &  find(Node*& node, const K& key);
 
+    struct BST<K, V>::Node* &  maxNode(Node*& node);
     /**
     * Private helper function for the public height function.
     * @param subRoot
@@ -179,6 +183,9 @@ class BST
      * Helper function for #operator= and BST(const BST &).
      * @param subRoot The current node in the recursion
      */
+
+    void swapR(Node*& subtree, Node*& first, Node*& second);
+
     Node* copy(const Node* subRoot);
 
     /**

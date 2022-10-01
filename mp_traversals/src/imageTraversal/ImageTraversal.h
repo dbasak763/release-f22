@@ -4,6 +4,7 @@
 #pragma once
 
 #include <iterator>
+#include <vector>
 #include "cs225/HSLAPixel.h"
 #include "cs225/PNG.h"
 #include "../Point.h"
@@ -28,8 +29,8 @@ public:
    */
   class Iterator : std::iterator<std::forward_iterator_tag, Point> {
   public:
+    Iterator(ImageTraversal* trav, Point startPoint);
     Iterator();
-
     Iterator & operator++();
     Point operator*();
     bool operator!=(const Iterator &other);
@@ -44,6 +45,8 @@ public:
     Point start;
     Point end;
     Point current;
+    std::vector<Point> visitedPoints;
+
   };
 
   /**

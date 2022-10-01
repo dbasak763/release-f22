@@ -41,7 +41,7 @@ private:
   unsigned int height_;
   const Point & startPoint;
   double tol;
-  std::list<Point> visitedPoints;
+  std::vector<Point> visitedPoints;
   ImageTraversal::Iterator current;
   ImageTraversal::Iterator startIterator;
   std::queue<Point> ImageTraversal;
