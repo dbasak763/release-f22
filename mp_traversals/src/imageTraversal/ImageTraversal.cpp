@@ -32,7 +32,6 @@ ImageTraversal::Iterator::Iterator(ImageTraversal* trav, Point startPoint) {
    traversal = trav;
    start = startPoint;
    current = traversal -> peek();
-   
 }
 
 /**
@@ -102,7 +101,7 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       } 
     }
 
-    
+  current = traversal->peek();
   return *this;
 }
 

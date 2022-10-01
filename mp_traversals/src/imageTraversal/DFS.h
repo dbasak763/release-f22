@@ -38,6 +38,6 @@ private:
 	/** add private members here*/
   //const PNG & png;
 
-  std::vector<Point> visitedPoints;
+  //std::vector<Point> visitedPoints;
   std::stack<Point> stack;
 };
