@@ -64,15 +64,21 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
         Point left = Point(point.x - 1, point.y);
         Point right = Point(point.x + 1, point.y);
 
-        bool found_left = visited[left.x][left.y];
-        bool found_right = visited[right.x][right.y];
-        bool found_up = visited[up.x][up.y];
-        bool found_down = visited[down.x][down.y];
-
         bool within_bounds_left = (left.x >= 0 && left.x < traversal->width_ && left.y >= 0 && left.y < traversal->height_);
         bool within_bounds_right = (right.x >= 0 && right.x < traversal->width_ && right.y >= 0 && right.y < traversal->height_);
         bool within_bounds_up = (up.x >= 0 && up.x < traversal->width_ && up.y >= 0 && up.y < traversal->height_);
-    bool within_bounds_down = (down.x >= 0 && down.x < traversal->width_ && down.y >= 0 && down.y < traversal->height_); 
+        bool within_bounds_down = (down.x >= 0 && down.x < traversal->width_ && down.y >= 0 && down.y < traversal->height_);
+
+        bool found_left = false;
+        bool found_right = false;
+        bool found_up = false;
+        bool found_down = false;
+
+        if (within_bounds_left) found_left = visited[left.x][left.y];
+        if (within_bounds_right) found_right = visited[right.x][right.y];
+        if (within_bounds_up)  found_up = visited[up.x][up.y];
+        if (within_bounds_down) found_down = visited[down.x][down.y];
+ 
 
     if (within_bounds_right && !found_right) {
       HSLAPixel p1 = traversal->png_.getPixel(traversal->startPoint.x, traversal->startPoint.y);

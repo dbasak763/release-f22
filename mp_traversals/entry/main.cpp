@@ -52,13 +52,12 @@ int main() {
     png.getPixel(3, i) = blackPixel;
   }
 
-  Point startPoint(1, 1);
+  Point startPoint(0, 0);
   
   DFS t(png, startPoint, 0.2);
   unsigned count = 0;
-  //std::cout << t << std::endl;
-  for (const Point & p : t) { //what does this syntax even mean?
-    //std::cout << p << std::endl;
+  std::cout << "Hi" << std::endl;
+  for (const Point & p : t) { 
     count++; 
   }
   std::cout << count << std::endl; //should be 4
