@@ -5,6 +5,7 @@
 
 #include <iterator>
 #include <vector>
+#include <algorithm>
 #include "cs225/HSLAPixel.h"
 #include "cs225/PNG.h"
 #include "../Point.h"
@@ -43,7 +44,7 @@ public:
     /** add private members here if neccesary*/
     ImageTraversal * traversal;
     Point start;
-    Point end;
+    //Point end;
     Point current;
     std::vector<Point> visitedPoints;
 
@@ -84,4 +85,13 @@ public:
 
 private:
   static double calculateDelta(const HSLAPixel & p1, const HSLAPixel & p2);  
+  
+
+protected:
+  PNG png_;
+  unsigned int width_;
+  unsigned int height_;
+  Point startPoint;
+  double tol;
 };
+

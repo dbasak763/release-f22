@@ -435,9 +435,6 @@ src/CMakeFiles/src.dir/FloodFilledImage.cpp.o: ../src/FloodFilledImage.cpp \
   ../src/imageTraversal/ImageTraversal.h \
   /usr/include/c++/11/iterator \
   /usr/include/c++/11/bits/stream_iterator.h \
-  ../src/Point.h \
-  ../src/Point.h \
-  ../src/Animation.h \
   /usr/include/c++/11/vector \
   /usr/include/c++/11/bits/stl_uninitialized.h \
   /usr/include/c++/11/bits/stl_vector.h \
@@ -446,6 +443,37 @@ src/CMakeFiles/src.dir/FloodFilledImage.cpp.o: ../src/FloodFilledImage.cpp \
   /usr/include/c++/11/debug/vector \
   /usr/include/c++/11/utility \
   /usr/include/c++/11/bits/stl_relops.h \
+  /usr/include/c++/11/algorithm \
+  /usr/include/c++/11/bits/stl_algo.h \
+  /usr/include/c++/11/bits/algorithmfwd.h \
+  /usr/include/c++/11/bits/stl_heap.h \
+  /usr/include/c++/11/bits/stl_tempbuf.h \
+  /usr/include/c++/11/bits/uniform_int_dist.h \
+  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/11/functional \
+  /usr/include/c++/11/tuple \
+  /usr/include/c++/11/array \
+  /usr/include/c++/11/bits/uses_allocator.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/bits/refwrap.h \
+  /usr/include/c++/11/bits/std_function.h \
+  /usr/include/c++/11/unordered_map \
+  /usr/include/c++/11/bits/hashtable.h \
+  /usr/include/c++/11/bits/hashtable_policy.h \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/node_handle.h \
+  /usr/include/c++/11/bits/unordered_map.h \
+  /usr/include/c++/11/bits/erase_if.h \
+  /usr/include/c++/11/debug/unordered_map \
+  /usr/include/c++/11/debug/safe_unordered_container.h \
+  /usr/include/c++/11/debug/safe_unordered_base.h \
+  /usr/include/c++/11/debug/safe_unordered_container.tcc \
+  /usr/include/c++/11/debug/safe_local_iterator.h \
+  /usr/include/c++/11/debug/safe_local_iterator.tcc \
+  /usr/include/c++/11/pstl/execution_defs.h \
+  ../src/Point.h \
+  ../src/Point.h \
+  ../src/Animation.h \
   ../src/FloodFilledImage.h
 
 src/CMakeFiles/src.dir/Point.cpp.o: ../src/Point.cpp \
@@ -1877,7 +1905,6 @@ src/CMakeFiles/src.dir/imageTraversal/BFS.cpp.o: ../src/imageTraversal/BFS.cpp \
   /usr/include/c++/11/bits/sstream.tcc \
   ../src/Point.h \
   ../src/imageTraversal/ImageTraversal.h \
-  ../src/imageTraversal/BFS.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -1903,7 +1930,8 @@ src/CMakeFiles/src.dir/imageTraversal/BFS.cpp.o: ../src/imageTraversal/BFS.cpp \
   /usr/include/c++/11/debug/safe_unordered_container.tcc \
   /usr/include/c++/11/debug/safe_local_iterator.h \
   /usr/include/c++/11/debug/safe_local_iterator.tcc \
-  /usr/include/c++/11/pstl/execution_defs.h
+  /usr/include/c++/11/pstl/execution_defs.h \
+  ../src/imageTraversal/BFS.h
 
 src/CMakeFiles/src.dir/imageTraversal/DFS.cpp.o: ../src/imageTraversal/DFS.cpp \
   /usr/include/c++/11/iterator \
@@ -2155,7 +2183,6 @@ src/CMakeFiles/src.dir/imageTraversal/DFS.cpp.o: ../src/imageTraversal/DFS.cpp \
   /usr/include/c++/11/bits/sstream.tcc \
   ../src/Point.h \
   ../src/imageTraversal/ImageTraversal.h \
-  ../src/imageTraversal/DFS.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/bits/stl_algo.h \
   /usr/include/c++/11/bits/algorithmfwd.h \
@@ -2181,7 +2208,8 @@ src/CMakeFiles/src.dir/imageTraversal/DFS.cpp.o: ../src/imageTraversal/DFS.cpp \
   /usr/include/c++/11/debug/safe_unordered_container.tcc \
   /usr/include/c++/11/debug/safe_local_iterator.h \
   /usr/include/c++/11/debug/safe_local_iterator.tcc \
-  /usr/include/c++/11/pstl/execution_defs.h
+  /usr/include/c++/11/pstl/execution_defs.h \
+  ../src/imageTraversal/DFS.h
 
 src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversal/ImageTraversal.cpp \
   /usr/include/c++/11/cmath \
@@ -2401,7 +2429,51 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
   /usr/include/c++/11/bits/sstream.tcc \
   ../lib/cs225/PNG.h \
   ../src/Point.h \
-  ../src/imageTraversal/ImageTraversal.h
+  ../src/imageTraversal/ImageTraversal.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
+  /usr/include/c++/11/debug/vector \
+  /usr/include/c++/11/utility \
+  /usr/include/c++/11/bits/stl_relops.h \
+  /usr/include/c++/11/debug/safe_sequence.h \
+  /usr/include/c++/11/debug/safe_base.h \
+  /usr/include/c++/11/ext/concurrence.h \
+  /usr/include/c++/11/debug/safe_sequence.tcc \
+  /usr/include/c++/11/debug/safe_container.h \
+  /usr/include/c++/11/debug/safe_iterator.h \
+  /usr/include/c++/11/debug/safe_iterator.tcc \
+  /usr/include/c++/11/algorithm \
+  /usr/include/c++/11/bits/stl_algo.h \
+  /usr/include/c++/11/bits/algorithmfwd.h \
+  /usr/include/c++/11/bits/stl_heap.h \
+  /usr/include/c++/11/bits/stl_tempbuf.h \
+  /usr/include/c++/11/bits/uniform_int_dist.h \
+  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
+  /usr/include/c++/11/functional \
+  /usr/include/c++/11/tuple \
+  /usr/include/c++/11/array \
+  /usr/include/c++/11/bits/uses_allocator.h \
+  /usr/include/c++/11/bits/invoke.h \
+  /usr/include/c++/11/bits/refwrap.h \
+  /usr/include/c++/11/bits/std_function.h \
+  /usr/include/c++/11/unordered_map \
+  /usr/include/c++/11/ext/aligned_buffer.h \
+  /usr/include/c++/11/bits/hashtable.h \
+  /usr/include/c++/11/bits/hashtable_policy.h \
+  /usr/include/c++/11/bits/enable_special_members.h \
+  /usr/include/c++/11/bits/node_handle.h \
+  /usr/include/c++/11/bits/unordered_map.h \
+  /usr/include/c++/11/bits/erase_if.h \
+  /usr/include/c++/11/debug/unordered_map \
+  /usr/include/c++/11/debug/safe_unordered_container.h \
+  /usr/include/c++/11/debug/safe_unordered_base.h \
+  /usr/include/c++/11/debug/safe_unordered_container.tcc \
+  /usr/include/c++/11/debug/safe_local_iterator.h \
+  /usr/include/c++/11/debug/safe_local_iterator.tcc \
+  /usr/include/c++/11/pstl/execution_defs.h
 
 
 ../src/imageTraversal/ImageTraversal.cpp:
@@ -2410,39 +2482,11 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 ../src/imageTraversal/DFS.cpp:
 
-/usr/include/c++/11/debug/safe_local_iterator.tcc:
-
-/usr/include/c++/11/debug/safe_unordered_container.h:
-
-/usr/include/c++/11/debug/unordered_map:
-
-/usr/include/c++/11/bits/unordered_map.h:
-
-/usr/include/c++/11/bits/hashtable.h:
-
-/usr/include/c++/11/unordered_map:
-
-/usr/include/c++/11/bits/invoke.h:
-
-/usr/include/c++/11/tuple:
-
-/usr/include/c++/11/bits/std_function.h:
-
-/usr/include/c++/11/bits/stl_tempbuf.h:
-
-/usr/include/c++/11/pstl/execution_defs.h:
-
-/usr/include/c++/11/bits/algorithmfwd.h:
-
-/usr/include/c++/11/algorithm:
-
 ../src/imageTraversal/BFS.h:
 
 /usr/include/c++/11/bits/stl_stack.h:
 
 /usr/include/c++/11/stack:
-
-/usr/include/c++/11/bits/uses_allocator.h:
 
 /usr/include/c++/11/debug/deque:
 
@@ -2478,9 +2522,39 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/c++/11/tr1/ell_integral.tcc:
 
-/usr/include/c++/11/array:
+/usr/include/c++/11/tr1/bessel_function.tcc:
 
-/usr/include/c++/11/tr1/beta_function.tcc:
+/usr/include/c++/11/tr1/special_function_util.h:
+
+/usr/include/c++/11/limits:
+
+/usr/include/c++/11/bits/specfun.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
+
+/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+
+../src/colorPicker/GradientColorPicker.cpp:
+
+../src/Point.cpp:
+
+../src/FloodFilledImage.h:
+
+../src/Point.h:
+
+/usr/include/c++/11/debug/safe_local_iterator.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
+
+/usr/include/c++/11/debug/safe_unordered_container.tcc:
+
+/usr/include/c++/11/debug/safe_unordered_container.h:
+
+/usr/include/c++/11/debug/unordered_map:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
@@ -2488,11 +2562,9 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/x86_64-linux-gnu/bits/struct_stat.h:
 
+/usr/include/c++/11/algorithm:
+
 /usr/include/c++/11/debug/functions.h:
-
-/usr/include/c++/11/bits/enable_special_members.h:
-
-/usr/include/c++/11/bits/basic_ios.tcc:
 
 /usr/include/c++/11/debug/stl_iterator.h:
 
@@ -2518,6 +2590,8 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 ../src/FloodFilledImage.cpp:
 
+/usr/include/c++/11/tuple:
+
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
 /usr/include/c++/11/bits/move.h:
@@ -2525,6 +2599,10 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 /usr/include/c++/11/bits/hash_bytes.h:
 
 /usr/include/c++/11/bits/string_view.tcc:
+
+/usr/include/math.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
 
 ../src/colorPicker/SolidColorPicker.h:
 
@@ -2538,6 +2616,12 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
+/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/c++/11/iostream:
+
+/usr/include/c++/11/bits/node_handle.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
@@ -2550,11 +2634,19 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/lib/llvm-14/lib/clang/14.0.0/include/stdarg.h:
 
+/usr/include/c++/11/tr1/beta_function.tcc:
+
+/usr/include/c++/11/array:
+
 /usr/include/wchar.h:
 
 /usr/include/c++/11/bits/cxxabi_init_exception.h:
 
 /usr/include/c++/11/bits/nested_exception.h:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
+
+/usr/include/c++/11/bits/postypes.h:
 
 /usr/include/c++/11/debug/safe_local_iterator.h:
 
@@ -2564,23 +2656,13 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
-/usr/include/c++/11/tr1/special_function_util.h:
-
 /usr/include/c++/11/bits/stl_function.h:
 
 /usr/include/c++/11/bits/memoryfwd.h:
 
 /usr/include/c++/11/bits/stringfwd.h:
 
-/usr/include/c++/11/bits/hashtable_policy.h:
-
-/usr/include/x86_64-linux-gnu/bits/statx-generic.h:
-
 /usr/include/x86_64-linux-gnu/asm/posix_types.h:
-
-/usr/include/c++/11/bits/refwrap.h:
-
-/usr/include/linux/stddef.h:
 
 /usr/include/c++/11/bits/exception_defines.h:
 
@@ -2593,8 +2675,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/linux/posix_types.h:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
 /usr/include/c++/11/backward/binders.h:
 
@@ -2642,17 +2722,13 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 ../src/Animation.cpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/math.h:
-
-/usr/include/c++/11/bits/stl_algo.h:
-
-/usr/include/asm-generic/int-ll64.h:
-
 /usr/include/c++/11/clocale:
 
 /usr/include/c++/11/bits/ostream.tcc:
+
+/usr/include/c++/11/tr1/gamma.tcc:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
 /usr/include/x86_64-linux-gnu/sys/stat.h:
 
@@ -2667,6 +2743,14 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 /usr/include/c++/11/type_traits:
 
 /usr/include/x86_64-linux-gnu/sys/single_threaded.h:
+
+/usr/include/c++/11/cmath:
+
+/usr/include/c++/11/bits/allocator.h:
+
+/usr/include/c++/11/bits/stl_tempbuf.h:
+
+/usr/include/c++/11/bits/std_function.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
 
@@ -2722,8 +2806,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-../src/FloodFilledImage.h:
-
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
@@ -2764,10 +2846,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
 
-/usr/include/c++/11/bits/stl_heap.h:
-
-/usr/include/c++/11/bits/std_abs.h:
-
 /usr/include/c++/11/bits/stl_queue.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
@@ -2800,10 +2878,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/c++/11/bits/locale_classes.h:
 
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/usr/include/c++/11/tr1/gamma.tcc:
-
 /usr/include/c++/11/bits/stl_algobase.h:
 
 /usr/include/x86_64-linux-gnu/bits/statx.h:
@@ -2814,6 +2888,8 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/c++/11/cctype:
 
+/usr/include/c++/11/unordered_map:
+
 /usr/include/ctype.h:
 
 ../src/imageTraversal/ImageTraversal.h:
@@ -2822,15 +2898,13 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/c++/11/bits/ios_base.h:
 
-/usr/include/c++/11/debug/safe_unordered_container.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr-default.h:
 
 /usr/include/c++/11/ext/concurrence.h:
+
+/usr/include/c++/11/bits/unordered_map.h:
 
 /usr/include/x86_64-linux-gnu/asm/posix_types_64.h:
 
@@ -2841,6 +2915,8 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/usr/include/c++/11/bits/invoke.h:
 
 /usr/include/time.h:
 
@@ -2864,10 +2940,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
-/usr/include/c++/11/bits/allocator.h:
-
-/usr/include/c++/11/cmath:
-
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/c++/11/bits/ostream_insert.h:
@@ -2888,9 +2960,13 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/c++/11/bits/alloc_traits.h:
 
-../src/Point.cpp:
-
 /usr/include/c++/11/bits/stl_construct.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/c++/11/string_view:
 
 /usr/include/c++/11/bits/functional_hash.h:
 
@@ -2918,8 +2994,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
 /usr/include/c++/11/bits/charconv.h:
 
 /usr/include/c++/11/bits/basic_string.tcc:
@@ -2927,12 +3001,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 /usr/include/c++/11/debug/safe_base.h:
 
 /usr/include/c++/11/bits/locale_classes.tcc:
-
-/usr/include/c++/11/bits/node_handle.h:
-
-/usr/include/c++/11/iostream:
-
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
 
 /usr/include/c++/11/bits/stl_vector.h:
 
@@ -2947,8 +3015,6 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 /usr/include/c++/11/stdexcept:
 
 /usr/include/c++/11/bits/streambuf.tcc:
-
-/usr/include/c++/11/tr1/bessel_function.tcc:
 
 /usr/include/c++/11/bits/uniform_int_dist.h:
 
@@ -3006,32 +3072,38 @@ src/CMakeFiles/src.dir/imageTraversal/ImageTraversal.cpp.o: ../src/imageTraversa
 
 /usr/include/c++/11/debug/safe_iterator.tcc:
 
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/c++/11/bits/stl_list.h:
+
 ../lib/cs225/HSLAPixel.h:
 
 ../src/colorPicker/ColorPicker.h:
 
-../src/Point.h:
+/usr/include/asm-generic/int-ll64.h:
 
-../src/colorPicker/GradientColorPicker.cpp:
+/usr/include/c++/11/bits/stl_algo.h:
 
-/usr/include/x86_64-linux-gnu/bits/math-vector.h:
+/usr/include/c++/11/pstl/execution_defs.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+/usr/include/c++/11/bits/algorithmfwd.h:
 
-/usr/include/c++/11/string_view:
+/usr/include/c++/11/bits/std_abs.h:
 
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+/usr/include/c++/11/bits/stl_heap.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+/usr/include/c++/11/bits/uses_allocator.h:
 
-/usr/include/c++/11/bits/postypes.h:
+/usr/include/linux/stddef.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
+/usr/include/c++/11/bits/refwrap.h:
 
-/usr/include/c++/11/bits/stl_list.h:
+/usr/include/c++/11/bits/hashtable.h:
 
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+/usr/include/x86_64-linux-gnu/bits/statx-generic.h:
 
-/usr/include/c++/11/bits/specfun.h:
+/usr/include/c++/11/bits/hashtable_policy.h:
 
-/usr/include/c++/11/limits:
+/usr/include/c++/11/bits/basic_ios.tcc:
+
+/usr/include/c++/11/bits/enable_special_members.h:

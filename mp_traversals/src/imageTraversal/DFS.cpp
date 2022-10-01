@@ -21,28 +21,21 @@
  * @param tolerance If the current point is too different (difference larger than tolerance) with the start point,
  * it will not be included in this DFS
  */
-DFS::DFS(const PNG & png, const Point & start, double tolerance) : startPoint(start) {  
+DFS::DFS(const PNG & png, const Point & start, double tolerance) {  
+  startPoint = start;
   tol = tolerance;
+  png_ = png;
   width_ = png.width();
   height_ = png.height();
 
-  current = begin();
-  startIterator = current;
-  
-  add(*current);
-
-  while (!empty()) {
-    current++;
-  }
-
-  add(start);
+  add(startPoint);
 }
 
 /**
  * Adds a Point for the traversal to visit at some point in the future.
  */
 void DFS::add(const Point & point) {
-  ImageTraversal.push(point);
+  stack.push(point);
   return;
 }
 
@@ -77,8 +70,8 @@ ImageTraversal::Iterator DFS::end() {
  * Removes and returns the current Point in the traversal.
  */
 Point DFS::pop() {
-  Point toBeRemoved = ImageTraversal.top();
-  ImageTraversal.pop();
+  Point toBeRemoved = stack.top();
+  stack.pop();
   return toBeRemoved;
 }
 
@@ -86,12 +79,12 @@ Point DFS::pop() {
  * Returns the current Point in the traversal.
  */
 Point DFS::peek() const {
-  return ImageTraversal.top();
+  return stack.top();
 }
 
 /**
  * Returns true if the traversal is empty.
  */
 bool DFS::empty() const {
-  return (ImageTraversal.empty());
+  return (stack.empty());
 }

@@ -37,13 +37,7 @@ private:
 	/** @todo [Part 1] */
 	/** add private members here*/
   //const PNG & png;
-  unsigned int width_;
-  unsigned int height_;
-  const Point & startPoint;
-  double tol;
 
   std::vector<Point> visitedPoints;
-  ImageTraversal::Iterator current;
-  ImageTraversal::Iterator startIterator;
-  std::stack<Point> ImageTraversal;
+  std::stack<Point> stack;
 };

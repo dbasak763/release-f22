@@ -22,29 +22,21 @@ using namespace cs225;
  * @param tolerance If the current point is too different (difference larger than tolerance) with the start point,
  * it will not be included in this BFS
  */
-BFS::BFS(const PNG & png, const Point & start, double tolerance) : startPoint(start) {  
+BFS::BFS(const PNG & png, const Point & start, double tolerance) {  
+  startPoint = start;
   tol = tolerance;
+  png_ = png;
   width_ = png.width();
   height_ = png.height();
 
-  current = begin();
-  startIterator = begin();
-
-  visitedPoints.push_back(start);
-  add(*current);
-
-  while (!empty()) {
-    current++;
-  }
-
-  add(start);
+  add(startPoint);
 }
 
 /**
  * Adds a Point for the traversal to visit at some point in the future.
  */
 void BFS::add(const Point & point) {
-  ImageTraversal.push(point);
+  queue.push(point);
   return;
 }
 
@@ -78,8 +70,8 @@ ImageTraversal::Iterator BFS::end() {
  * Removes and returns the current Point in the traversal.
  */
 Point BFS::pop() {
-  Point toBeRemoved = ImageTraversal.front();
-  ImageTraversal.pop();
+  Point toBeRemoved = queue.front();
+  queue.pop();
   return toBeRemoved;
 }
 
@@ -87,12 +79,12 @@ Point BFS::pop() {
  * Returns the current Point in the traversal.
  */
 Point BFS::peek() const {
-  return ImageTraversal.front();
+  return queue.front();
 }
 
 /**
  * Returns true if the traversal is empty.
  */
 bool BFS::empty() const {
-  return ImageTraversal.empty();
+  return queue.empty();
 }
