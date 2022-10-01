@@ -32,8 +32,6 @@ int main() {
   lastFrame.writeToFile("myFloodFill.png");
   animation.write("myFloodFill.gif");
   */
-
-  PNG png(4, 4);
   /*
   HSLAPixel blackPixel(180, 1, 0);
   
@@ -44,16 +42,25 @@ int main() {
     png.getPixel(3, i) = blackPixel;
   }
   */
-  Point startPoint(1, 1);
-  std::cout << "Hi" << std::endl;
-  DFS dfs(png, startPoint, 0.2);
-  std::cout << "Hi" << std::endl;
-  //REQUIRE( *(dfs.begin()) == startPoint );
-  std::cout << (*(dfs.begin()) == startPoint) << std::endl;
+  PNG png(4, 4);
+  HSLAPixel blackPixel(180, 1, 0);
+  
+  for (unsigned i = 0; i < 4; i++) {
+    png.getPixel(i, 0) = blackPixel;
+    png.getPixel(0, i) = blackPixel;
+    png.getPixel(i, 3) = blackPixel;
+    png.getPixel(3, i) = blackPixel;
+  }
 
-  std::cout << *(dfs.begin()) << std::endl;
-  std::cout << startPoint << std::endl;
-
+  Point startPoint(0, 0);
+  
+  DFS t(png, startPoint, 0.2);
+  unsigned count = 0;
+  for (const Point & p : t) { 
+    std::cout << p << std::endl;
+    count++; 
+  }
+  std::cout << count << std::endl; //should be 4
   return 0;
 }
 
