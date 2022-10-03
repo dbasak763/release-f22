@@ -52,8 +52,8 @@ int main() {
   animation.write("../i-rainbow-dfs.gif");
   //INFO("Files written to i-rainbow-dfs-* for debugging.");
   
-  if ( secondFrame == expected2 ) std::cout << "True" << std::endl;
-  if ( lastFrame == expected ) std::cout << "True" << std::endl;
+  if ( secondFrame == expected2 ) std::cout << "True Hi1" << std::endl;
+  if ( lastFrame == expected ) std::cout << "True Hi2" << std::endl;
 
   return 0;
 }

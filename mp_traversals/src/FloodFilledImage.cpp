@@ -53,37 +53,25 @@ void FloodFilledImage::addFloodFill(ImageTraversal & traversal, ColorPicker & co
 Animation FloodFilledImage::animate(unsigned frameInterval) const {
   Animation animation;
   int pixelCount = 0;
-  /*
-  while (!operations_.empty()) {
-     ImageTraversal* traversal = operations_.front().first;
-     ColorPicker* colorPicker = operations_.front().second;
-     
-     for (const Point & p : *traversal) { 
-        if (pixelCount % frameInterval == 0) {
-          animation.addFrame(png_);
-        }
-        pixelCount++;
-        HSLAPixel hsla1 = colorPicker->getColor(p.x, p.y);
-        HSLAPixel hsla2 = png_.getPixel(p.x, p.y);
-        hsla2 = hsla1;
-     }
-     
-     operations_.pop_front();
-  }
-  */
+  PNG pngcopy_ = PNG(png_);
   for (auto it = operations_.begin(); it != operations_.end(); it++) {
     ImageTraversal& traversal = *it->first;
     ColorPicker& colorPicker = *it->second;
     for (const Point & p : traversal) { 
         if (pixelCount % frameInterval == 0) {
-          animation.addFrame(png_);
+          animation.addFrame(pngcopy_);
         }
         pixelCount++;
+        //std::cout << "PNG getPixel value: " << pngcopy_.getPixel(p.x, p.y) << std::endl;
+        //std::cout << "colorPicker getColor value at pixel: " << colorPicker.getColor(p.x, p.y) << std::endl;
         HSLAPixel hsla1 = colorPicker.getColor(p.x, p.y);
-        HSLAPixel hsla2 = png_.getPixel(p.x, p.y);
+        HSLAPixel& hsla2 = pngcopy_.getPixel(p.x, p.y);
         hsla2 = hsla1;
+        //std::cout << "HSLA1: " << hsla1 << " : " << "HSLA2: " << hsla2 << std::endl;
+        //std::cout << pngcopy_.getPixel(p.x, p.y) << std::endl;
      }
   }
   //operations_.clear();
+  animation.addFrame(pngcopy_);
   return animation;
 }
