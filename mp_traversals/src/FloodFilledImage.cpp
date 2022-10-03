@@ -28,7 +28,7 @@ FloodFilledImage::FloodFilledImage(const PNG & png) {
  * @param colorPicker ColorPicker used for this FloodFill operation.
  */
 void FloodFilledImage::addFloodFill(ImageTraversal & traversal, ColorPicker & colorPicker) {
-  operations_.push_back(std::make_pair(traversal, colorPicker));
+  operations_.push_back(std::make_pair(&traversal, &colorPicker));
 }
 
 /**
@@ -53,21 +53,37 @@ void FloodFilledImage::addFloodFill(ImageTraversal & traversal, ColorPicker & co
 Animation FloodFilledImage::animate(unsigned frameInterval) const {
   Animation animation;
   int pixelCount = 0;
-
+  /*
   while (!operations_.empty()) {
+     ImageTraversal* traversal = operations_.front().first;
+     ColorPicker* colorPicker = operations_.front().second;
      
-     ImageTraversal* traversal = operations_.front()->first;
-     ColorPicker* colorPicker = operations_.front()->second;
-     for (const Point & p : traversal) { 
+     for (const Point & p : *traversal) { 
         if (pixelCount % frameInterval == 0) {
           animation.addFrame(png_);
         }
         pixelCount++;
         HSLAPixel hsla1 = colorPicker->getColor(p.x, p.y);
-        HSLAPixel hsla2 = png_->getPixel(p.x, p.y);
+        HSLAPixel hsla2 = png_.getPixel(p.x, p.y);
         hsla2 = hsla1;
      }
+     
      operations_.pop_front();
   }
+  */
+  for (auto it = operations_.begin(); it != operations_.end(); it++) {
+    ImageTraversal& traversal = *it->first;
+    ColorPicker& colorPicker = *it->second;
+    for (const Point & p : traversal) { 
+        if (pixelCount % frameInterval == 0) {
+          animation.addFrame(png_);
+        }
+        pixelCount++;
+        HSLAPixel hsla1 = colorPicker.getColor(p.x, p.y);
+        HSLAPixel hsla2 = png_.getPixel(p.x, p.y);
+        hsla2 = hsla1;
+     }
+  }
+  //operations_.clear();
   return animation;
 }

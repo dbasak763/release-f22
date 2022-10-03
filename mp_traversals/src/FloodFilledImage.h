@@ -32,6 +32,5 @@ private:
 	/** @todo [Part 2] */
 	/** add private members here*/
   PNG png_;
-  std::list<std::pair<*ImageTraversal, *ColorPicker>> operations_;
-
+  std::list<std::pair<ImageTraversal*, ColorPicker*>> operations_;
 };

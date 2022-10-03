@@ -32,35 +32,29 @@ int main() {
   lastFrame.writeToFile("myFloodFill.png");
   animation.write("myFloodFill.gif");
   */
-  /*
-  HSLAPixel blackPixel(180, 1, 0);
+  PNG png;       png.readFromFile("../tests/i.png");
+  PNG expected;  expected.readFromFile("../tests/i-rainbow-dfs.png");
+  PNG expected2; expected2.readFromFile("../tests/i-rainbow-dfs-2.png");
   
-  for (unsigned i = 0; i < 4; i++) {
-    png.getPixel(i, 0) = blackPixel;
-    png.getPixel(0, i) = blackPixel;
-    png.getPixel(i, 3) = blackPixel;
-    png.getPixel(3, i) = blackPixel;
-  }
-  */
-  PNG png(4, 4);
-  HSLAPixel blackPixel(180, 1, 0);
-  
-  for (unsigned i = 0; i < 4; i++) {
-    png.getPixel(i, 0) = blackPixel;
-    png.getPixel(0, i) = blackPixel;
-    png.getPixel(i, 3) = blackPixel;
-    png.getPixel(3, i) = blackPixel;
-  }
+  FloodFilledImage image(png);
+  DFS dfs(png, Point(40, 40), 0.05);
+  RainbowColorPicker rainbow(0.05);
+  image.addFloodFill( dfs, rainbow );
 
-  Point startPoint(0, 0);
+  Animation animation = image.animate(1000);
   
-  DFS t(png, startPoint, 0.2);
-  unsigned count = 0;
-  std::cout << "Hi" << std::endl;
-  for (const Point & p : t) { 
-    count++; 
-  }
-  std::cout << count << std::endl; //should be 4
+  if( animation.frameCount() > 2 ) std::cout << "True" << std::endl;
+  PNG secondFrame = animation.getFrame(1);
+  PNG lastFrame = animation.getFrame( animation.frameCount() - 1 );
+
+  secondFrame.writeToFile("../i-rainbow-dfs-2.png");
+  lastFrame.writeToFile("../i-rainbow-dfs.png");
+  animation.write("../i-rainbow-dfs.gif");
+  //INFO("Files written to i-rainbow-dfs-* for debugging.");
+  
+  if ( secondFrame == expected2 ) std::cout << "True" << std::endl;
+  if ( lastFrame == expected ) std::cout << "True" << std::endl;
+
   return 0;
 }
 
