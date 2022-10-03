@@ -58,7 +58,7 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
         while(!traversal->empty() && visited[traversal->peek().x][traversal->peek().y]) {
           traversal->pop();
         }
-        std::cout << "Popped " << point << std::endl;
+        //std::cout << "Popped " << point << std::endl;
         Point up = Point(point.x, point.y - 1);
         Point down = Point(point.x, point.y + 1);
         Point left = Point(point.x - 1, point.y);
@@ -86,7 +86,7 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       double diff = calculateDelta(p1, p2);
       if (diff < traversal->tol) {
         traversal->add(right);
-        std::cout << "Added point on right of " << point << ": " << right << std::endl;
+        //std::cout << "Added point on right of " << point << ": " << right << std::endl;
       } 
     }
 
@@ -96,7 +96,7 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       double diff = calculateDelta(p1, p2);
       if (diff < traversal->tol) {
         traversal->add(down);
-        std::cout << "Added point on down of " << point << ": " << down << std::endl;
+        //std::cout << "Added point on down of " << point << ": " << down << std::endl;
       } 
     }
 
@@ -106,7 +106,7 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       double diff = calculateDelta(p1, p2);
       if (diff < traversal->tol) {
         traversal->add(left);
-        std::cout << "Added point on left of " << point << ": " << left << std::endl;
+        //std::cout << "Added point on left of " << point << ": " << left << std::endl;
       } 
     }
 
@@ -116,7 +116,7 @@ ImageTraversal::Iterator & ImageTraversal::Iterator::operator++() {
       double diff = calculateDelta(p1, p2);
       if (diff < traversal->tol) {
         traversal->add(up);
-        std::cout << "Added point on up of " << point << ": " << up << std::endl;
+        //std::cout << "Added point on up of " << point << ": " << up << std::endl;
       } 
     }
 
