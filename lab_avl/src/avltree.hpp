@@ -34,10 +34,11 @@ void AVLTree<K, V>::rotateLeft(Node*& t)
 
     r->left = t;
     t->right = temp;
-    t = r;
 
     t->height = std::max(heightOrNeg1(t->left), heightOrNeg1(t->right)) + 1;
     r->height = std::max(heightOrNeg1(r->left), heightOrNeg1(r->right)) + 1;
+
+    t = r;
 }
 
 template <class K, class V>
@@ -59,11 +60,11 @@ void AVLTree<K, V>::rotateRight(Node*& t)
 
     l->right = t;
     t->left = temp;
-    t = l;
 
     t->height = std::max(heightOrNeg1(t->left), heightOrNeg1(t->right)) + 1;
     l->height = std::max(heightOrNeg1(l->left), heightOrNeg1(l->right)) + 1;
     
+    t = l;
 }
 template <class K, class V>
 void AVLTree<K, V>::rotateRightLeft(Node*& t)
@@ -148,7 +149,7 @@ void AVLTree<K, V>::remove(Node*& subtree, const K& key)
             }
             swap(subtree, maxNode);
             remove(subtree->left, key);
-            //rebalance(subtree);
+            rebalance(subtree);
         } else {
             /* one-child remove */
             if (subtree->left == NULL) {
@@ -160,6 +161,7 @@ void AVLTree<K, V>::remove(Node*& subtree, const K& key)
                 delete subtree;
                 subtree = temp; 
             }
+            rebalance(subtree);
         }
         // your code here
         
