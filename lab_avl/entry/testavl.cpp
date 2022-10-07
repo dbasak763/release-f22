@@ -43,7 +43,9 @@ void testFind()
 {
     AVLTree<string, string> tree;
     printHeader("Testing Find");
+    std::cout << "Hi" << std::endl;
     tree.insert("C", "C++");
+    std::cout << "Hi" << std::endl;
     tree.insert("free", "delete");
     tree.insert("malloc", "new");
     tree.insert("bool", "void");
@@ -205,9 +207,10 @@ int main(int argc, char** argv)
         if (status < 0)
             return 0;
     }
-
+    std::cout << "Hi" << std::endl;
     // Test AVL Tree
     testFind();
+    std::cout << "Hi" << std::endl;
     testRotateLeft();
     testRotateRight();
     testRotateLeftRight();

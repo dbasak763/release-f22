@@ -34,6 +34,7 @@ TEST_CASE("test_find", "[weight=10][valgrind]") {
     tree.insert("malloc", "new");
     tree.insert("bool", "void");
     tree.insert("Nico", "nii");
+    std::cout << "Hi" << std::endl;
     REQUIRE(tree.find("C").compare("C++") == 0);
     REQUIRE(tree.find("free").compare("delete") == 0);
     REQUIRE(tree.find("malloc").compare("new") == 0);

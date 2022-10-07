@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <sstream>
 #include <string>
 
@@ -150,7 +151,7 @@ class AVLTree
      * Private helper function for the private #remove function.
      *@param node The current node in the recursion
      */
-     
+
 
     /**
      * Finds a value (by key) in the AVL tree.
