@@ -102,8 +102,11 @@ TEST_CASE("test_btree3_small", "[weight=5][valgrind][timeout=8000]") {
         {9, 4},
     };
     BTree< int, int > b(3);
+    std::cout << "Hi" << std::endl;
     do_inserts(data, b);
+    std::cout << "Hi1" << std::endl;
     verify_finds(data, b);
+    std::cout << "Hi2" << std::endl;
     REQUIRE(0 == b.find(-999));
     REQUIRE(b.is_valid(3));
 }

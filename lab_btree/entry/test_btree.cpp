@@ -8,6 +8,7 @@ using namespace std;
 template <class K, class V>
 void do_inserts(vector<pair<K, V>>& data, BTree<K, V>& b)
 {
+    std::cout << "Hi_doinserts" << std::endl;
     for (auto& key_val : data) {
         b.insert(key_val.first, key_val.second);
     }
@@ -123,6 +124,25 @@ const string USAGE =
 
 int main(int argc, char* argv[])
 {
+    std::vector<std::pair<int, int>> data = {
+        {1, 5},
+        {4, 7},
+        {5, 43},
+        {-43, 3},
+        {99, 2},
+        {23, 7},
+        {3, 2},
+        {9, 4},
+    };
+    BTree< int, int > b(3);
+    std::cout << "Hi" << std::endl;
+    do_inserts(data, b);
+    std::cout << "Hi1" << std::endl;
+    verify_finds(data, b); // not compiling
+    std::cout << "Hi2" << std::endl;
+    if(0 == b.find(-999)) std::cout << "Hi1" << std::endl;
+    if(b.is_valid(3)) std::cout << "Hi2" << std::endl;
+    /*
     srand(time(nullptr));
     cout << boolalpha;
     if (argc == 1) {
@@ -145,4 +165,5 @@ int main(int argc, char* argv[])
             return -1;
         }
     }
+    */
 }
