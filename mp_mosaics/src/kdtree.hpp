@@ -160,11 +160,12 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query, int dim, KD
 
   bool RecursedOnLeftSubtree;
 
-  if (query[dim] < currRoot->point[dim]) {
-    nearest = findNearestNeighbor(query, dim, currRoot->left);
+  bool smaller1 = smallerDimVal(query, currRoot->point, dim);
+  if (smaller1) {
+    nearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->left);
     RecursedOnLeftSubtree = true;
   } else {
-    nearest = findNearestNeighbor(query, dim, currRoot->right);
+    nearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->right);
     RecursedOnLeftSubtree = false;
   }
 
@@ -183,9 +184,9 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query, int dim, KD
 
   if (radius >= splitDist) {
      if (RecursedOnLeftSubtree) {
-       tempNearest = findNearestNeighbor(query, dim, currRoot->right);
+       tempNearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->right);
      } else {
-       tempNearest = findNearestNeighbor(query, dim, currRoot->left);
+       tempNearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->left);
      }
      if (shouldReplace(query, nearest, tempNearest)) {
        nearest = tempNearest;
