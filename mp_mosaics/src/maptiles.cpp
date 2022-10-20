@@ -29,9 +29,9 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
      vector<Point<3>> newPoints; //stores average values
 
      for (unsigned i = 0; i < theTiles.size(); i++) {
-        TileImage* tileImg = &theTiles[i];
-        Point<3> pt = convertToXYZ(tileImg->getAverageColor());
-        m[pt] = tileImg;
+        TileImage* tileImage = &theTiles[i];
+        Point<3> pt = convertToXYZ(tileImage->getAverageColor());
+        m[pt] = tileImage;
         newPoints.push_back(pt);
      }
 
@@ -44,6 +44,7 @@ MosaicCanvas* mapTiles(SourceImage const& theSource,
             //do stuff here
             Point<3> nearestNeighbor = kdtree.findNearestNeighbor(p1);
             //more stuff
+            if(m[nearestNeighbor] == NULL) std::cout << "Should throw a flag" << std::endl;
             mosaiccanvas->setTile(row, col, m[nearestNeighbor]);
         }
     }

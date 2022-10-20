@@ -66,6 +66,7 @@ KDTree<Dim>::KDTree(const KDTree<Dim>& other) {
 
 template <int Dim>
 const KDTree<Dim>& KDTree<Dim>::operator=(const KDTree<Dim>& rhs) {
+   deletion(root);
    size = rhs->size;
    assign(root, rhs->root);
 
@@ -147,22 +148,21 @@ void KDTree<Dim>::BuildTree(vector<Point<Dim>>& newPoints, int dim, int left, in
 
 template <int Dim>
 Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query, int dim, KDTreeNode * currRoot) const {
-  if (currRoot == NULL) {
-    return Point<Dim> ();
-  }
   if (currRoot->left == NULL && currRoot->right == NULL) {
     return currRoot->point;
   }
   Point<Dim> nearest, tempNearest;
 
+  nearest = root->point; tempNearest = root->point;
+
   bool RecursedOnLeftSubtree;
 
   bool smaller1 = smallerDimVal(query, currRoot->point, dim);
   if (smaller1) {
-    nearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->left);
+    if (currRoot->left != NULL) nearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->left);
     RecursedOnLeftSubtree = true;
   } else {
-    nearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->right);
+    if (currRoot->right != NULL) nearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->right);
     RecursedOnLeftSubtree = false;
   }
 
@@ -181,9 +181,9 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query, int dim, KD
 
   if (radius >= splitDist) {
      if (RecursedOnLeftSubtree) {
-       tempNearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->right);
+       if (currRoot->right != NULL) tempNearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->right);
      } else {
-       tempNearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->left);
+       if (currRoot->left != NULL) tempNearest = findNearestNeighbor(query, (dim+1)%Dim, currRoot->left);
      }
      if (shouldReplace(query, nearest, tempNearest)) {
        nearest = tempNearest;
@@ -196,7 +196,7 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query, int dim, KD
 
 template <int Dim>
 void KDTree<Dim>::assign(KDTreeNode*& currRoot, KDTreeNode*& otherRoot) {
-  if (currRoot == NULL) return;
+  if (otherRoot == NULL) return;
   currRoot = new KDTreeNode(otherRoot->point);
 
   currRoot->left = assign(currRoot->left, otherRoot->left);
@@ -206,14 +206,14 @@ void KDTree<Dim>::assign(KDTreeNode*& currRoot, KDTreeNode*& otherRoot) {
 template <int Dim>
 void KDTree<Dim>::deletion(KDTreeNode*& currRoot) {
   if (currRoot == NULL) return;
-  KDTreeNode* left_ = currRoot->left;
-  KDTreeNode* right_ = currRoot->right;
+
+  deletion(currRoot->left);
+  deletion(currRoot->right);
 
   delete currRoot;
   currRoot = NULL;
 
-  deletion(left_);
-  deletion(right_);
+  
 
 }
 

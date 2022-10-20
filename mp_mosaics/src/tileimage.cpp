@@ -113,6 +113,7 @@ void TileImage::paste(PNG& canvas, int startX, int startY, int resolution) {
     // check if not resized
     std::cout << "Inside body of paste()" << std::endl;
     std::cout << "hi" << std::endl;
+    std::cout << resized_.width() << std::endl;
     //if (resized_ == PNG()) std::cout << "Resized is NULL" << std::endl;
     if (resized_.width() == 0) {
         std::cout << "Before generateResized" << std::endl;
