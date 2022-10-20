@@ -16,7 +16,7 @@ bool KDTree<Dim>::smallerDimVal(const Point<Dim>& first,
        return (first < second);
      }
     return (first[curDim] < second[curDim]);
-}
+} //works
 
 template <int Dim>
 bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
@@ -34,7 +34,7 @@ bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
        return (potential < currentBest);
      }
      return (dist_To_potential_squared < dist_To_currBest_squared);
-}
+} //works
 
 template <int Dim>
 KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
@@ -49,7 +49,10 @@ KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
       points.push_back(newPoints[i]);
     }
     deletion(root);
-    BuildTree(points, 0, 0, newPoints.size(), root);
+    std::cout << "Before Building Tree" << std::endl;
+    BuildTree(points, 0, 0, newPoints.size() - 1, root); //doesn't work
+    std::cout << "After Building Tree" << std::endl;
+
 }
 
 template <int Dim>
@@ -108,7 +111,9 @@ Point<Dim> KDTree<Dim>::select(vector<Point<Dim>>& list, int left, int right, in
     if (left == right) {
       return list[left];
     }
-    int pivotIndex = partition(list, left, right, k);
+    std::cout << "Before Partition" << std::endl;
+    int pivotIndex = partition(list, left, right, k); //not sure if works properly but compiles
+    std::c`out << "After Partition" << std::endl;
     if (k == pivotIndex) {
       return list[k];
     } else if (k < pivotIndex){
@@ -123,7 +128,9 @@ template <int Dim>
 void KDTree<Dim>::BuildTree(vector<Point<Dim>>& newPoints, int dim, int left, int right, KDTreeNode * currRoot) {
   if (left <= right) {
     int mid = (left + right) / 2;
-    *currRoot = select(newPoints, left, right, mid);
+    std::cout << "Before Select" << std::endl;
+    *currRoot = select(newPoints, left, right, mid); //doesn't work
+    std::cout << "After Select" << std::endl;
 
     BuildTree(newPoints, (dim + 1) % Dim, left, mid - 1, currRoot->left);
     BuildTree(newPoints, (dim + 1) % Dim, mid + 1, right, currRoot->right);
