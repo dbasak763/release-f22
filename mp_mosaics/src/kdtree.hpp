@@ -40,18 +40,20 @@ template <int Dim>
 KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
 {
     size = newPoints.size();
+    root = NULL;
     if (newPoints.empty()) {
-       root = NULL;
        return;
     }
     vector<Point<Dim>> points;
     for (unsigned i = 0; i < newPoints.size(); i++) {
       points.push_back(newPoints[i]);
     }
-    deletion(root);
+    //deletion(root);
     std::cout << "Before Building Tree" << std::endl;
     BuildTree(points, 0, 0, newPoints.size() - 1, root); //doesn't work
     std::cout << "After Building Tree" << std::endl;
+    if (root == NULL) std::cout << "root is NULL after building tree" << std::endl;
+    std::cout << "RootNode: " << root->point << std::endl;
 
 }
 
@@ -103,7 +105,7 @@ int KDTree<Dim>::partition(vector<Point<Dim>>& list, int left, int right, int pi
   }
   swap(list[right], list[storeIndex]);
   return storeIndex;
-}
+} //exactly matching
 
 template <int Dim>
 Point<Dim> KDTree<Dim>::select(vector<Point<Dim>>& list, int left, int right, int k) {
@@ -111,31 +113,31 @@ Point<Dim> KDTree<Dim>::select(vector<Point<Dim>>& list, int left, int right, in
     if (left == right) {
       return list[left];
     }
-    std::cout << "Before Partition" << std::endl;
+    //std::cout << "Before Partition" << std::endl;
     int pivotIndex = partition(list, left, right, k); //not sure if works properly but compiles
-    std::cout << "After Partition" << std::endl;
+    //std::cout << "After Partition" << std::endl;
     if (k == pivotIndex) {
-      std::cout << "Select outputs a point" << std::endl;
+      //std::cout << "Select outputs a point" << std::endl;
       return list[k];
     } else if (k < pivotIndex){
       right = pivotIndex - 1;
     } else {
       left = pivotIndex + 1;
     }
-    std::cout << "End of iteration select" << std::endl;
+    //std::cout << "End of iteration select" << std::endl;
   }
-}
+} //exactly matching
 
 template <int Dim>
-void KDTree<Dim>::BuildTree(vector<Point<Dim>>& newPoints, int dim, int left, int right, KDTreeNode * currRoot) {
+void KDTree<Dim>::BuildTree(vector<Point<Dim>>& newPoints, int dim, int left, int right, KDTreeNode *& currRoot) {
   if (left <= right) {
     int mid = (left + right) / 2;
-    std::cout << "Before Select" << std::endl;
+    //std::cout << "Before Select" << std::endl;
     const Point<Dim> &point = select(newPoints, left, right, mid);
-    std::cout << "Hi" << std::endl;
-    currRoot = new KDTreeNode(point); //error on this line
-    std::cout << "After Select" << std::endl;
-
+    //std::cout << "Hi" << std::endl;
+    currRoot = new KDTreeNode(point); 
+    //std::cout << "After Select" << std::endl;
+    //std::cout << "CurrRoot = " << currRoot->point << std::endl;
     BuildTree(newPoints, (dim + 1) % Dim, left, mid - 1, currRoot->left);
     BuildTree(newPoints, (dim + 1) % Dim, mid + 1, right, currRoot->right);
   }
@@ -206,7 +208,8 @@ void KDTree<Dim>::deletion(KDTreeNode* currRoot) {
   KDTreeNode* left_ = currRoot->left;
   KDTreeNode* right_ = currRoot->right;
 
-  *currRoot = KDTreeNode();
+  delete currRoot;
+  currRoot = NULL;
 
   deletion(left_);
   deletion(right_);

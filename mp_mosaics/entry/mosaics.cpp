@@ -22,7 +22,80 @@ namespace opts
     bool help = false;
 }
 
+template <int Dim>
+void writeKdTreeToFile(const KDTree<Dim>& tree, string fname)
+{
+  ofstream outputFile(fname, ofstream::out);
+  tree.printTree(outputFile, colored_out::DISABLE, -1);
+  outputFile.close();
+}
+
+static inline void rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {
+        return !std::isspace(ch);
+    }).base(), s.end());
+}
+
+bool tree_equals_output(stringstream & s, string filename)
+{
+    ifstream file(filename);
+    string soln_s;
+    string out_s;
+
+    while(getline(file, soln_s))
+    {
+        if(!getline(s, out_s))
+            return false;
+
+        rtrim(soln_s);
+        rtrim(out_s);
+
+        if(out_s != soln_s)
+            return false;
+    }
+    if(getline(s, soln_s))
+        return false;
+
+    return true;
+}
+
+void compareBinaryFiles( string yourFile, string ourFile ) 
+{
+    ifstream ourBinary( ourFile, ios::binary );
+    stringstream ours;
+    ours << ourBinary.rdbuf();
+
+    if(!tree_equals_output(ours, yourFile))
+        std::cout <<  "Your output in \"" + yourFile + "\" does not match our output in \"" + ourFile + "\"";
+}
+
+
+
 int main(int argc, const char** argv) {
+    //int K = 3;
+    //int size = 31;
+    double coords[6][2] = {
+    {-15, 7}, {6, 7}, {-13, -1},
+    {-5, 0}, {14, -3}, {14, 2}
+    };
+    double targetCoords[2] = {-13, 1};
+    double expectedCoords[2] = {-13, -1};
+
+    vector<Point<2>> points;
+    for (int i = 0; i < 6; ++i)
+      points.push_back(Point<2>(coords[i]));
+    Point<2> target(targetCoords);
+    Point<2> expected(expectedCoords);
+
+  KDTree<2> tree(points);
+  int size = 2;
+  int K = 2;
+  std::string fname = "test_result_kdtree_"+to_string(K)+"_"+to_string(size)+".kd";
+  writeKdTreeToFile(tree,fname);
+  compareBinaryFiles(fname, "../tests/expected_kdtree_"+to_string(K)+"_"+to_string(size)+".kd" );
+
+   
+    
     string inFile = "";
     string tileDir = "../uiuc-ig/";
     string numTilesStr = "100";
