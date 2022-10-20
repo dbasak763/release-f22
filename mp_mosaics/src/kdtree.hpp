@@ -113,14 +113,16 @@ Point<Dim> KDTree<Dim>::select(vector<Point<Dim>>& list, int left, int right, in
     }
     std::cout << "Before Partition" << std::endl;
     int pivotIndex = partition(list, left, right, k); //not sure if works properly but compiles
-    std::c`out << "After Partition" << std::endl;
+    std::cout << "After Partition" << std::endl;
     if (k == pivotIndex) {
+      std::cout << "Select outputs a point" << std::endl;
       return list[k];
     } else if (k < pivotIndex){
       right = pivotIndex - 1;
     } else {
       left = pivotIndex + 1;
     }
+    std::cout << "End of iteration select" << std::endl;
   }
 }
 
@@ -129,7 +131,9 @@ void KDTree<Dim>::BuildTree(vector<Point<Dim>>& newPoints, int dim, int left, in
   if (left <= right) {
     int mid = (left + right) / 2;
     std::cout << "Before Select" << std::endl;
-    *currRoot = select(newPoints, left, right, mid); //doesn't work
+    const Point<Dim> &point = select(newPoints, left, right, mid);
+    std::cout << "Hi" << std::endl;
+    currRoot = new KDTreeNode(point); //error on this line
     std::cout << "After Select" << std::endl;
 
     BuildTree(newPoints, (dim + 1) % Dim, left, mid - 1, currRoot->left);
