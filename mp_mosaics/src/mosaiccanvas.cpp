@@ -72,6 +72,8 @@ const TileImage& MosaicCanvas::getTile(int row, int column)
 
 PNG MosaicCanvas::drawMosaic(int pixelsPerTile)
 {
+    std::cout << "Inside drawMosaic function" << std::endl;
+    
     if (pixelsPerTile <= 0) {
         cerr << "ERROR: pixelsPerTile must be > 0" << endl;
         exit(-1);
@@ -83,15 +85,19 @@ PNG MosaicCanvas::drawMosaic(int pixelsPerTile)
     // Create the image
     PNG mosaic(width, height);
 
+    std::cout << "Image mosaic has been created" << std::endl; //works up til this point
+
     // Create list of drawable tiles
     for (int row = 0; row < rows; row++) {
+        std::cout << "Row = " << row << std::endl;
         if (enableOutput) {
             cerr << "\rDrawing Mosaic: resizing tiles ("
                  << (row * columns + /*col*/ 0 + 1) << "/" << (rows * columns)
                  << ")" << string(20, ' ') << "\r";
             cerr.flush();
         }
-        for (int col = 0; col < columns; col++) {
+        for (int col = 0; col < columns; col++) { //somewhere inside loop problem happens
+            std::cout << "Col = " << col << std::endl;
             int startX = divide(width  * col,       getColumns());
             int endX   = divide(width  * (col + 1), getColumns());
             int startY = divide(height * row,       getRows());
@@ -100,16 +106,20 @@ PNG MosaicCanvas::drawMosaic(int pixelsPerTile)
             if (endX - startX != endY - startY)
                 cerr << "Error: resolution not constant: x: " << (endX - startX)
                      << " y: " << (endY - startY) << endl;
-
-            images(row, col).paste(mosaic, startX, startY, endX - startX);
+            std::cout << "Before paste" << std::endl;
+            images(row, col).paste(mosaic, startX, startY, endX - startX); //this line is not working
+            std::cout << "After paste" << std::endl;
         }
     }
+    std::cout << "List of drawable tiles has been created" << std::endl; //not reached
     if (enableOutput) {
         cerr << "\r" << string(60, ' ');
         cerr << "\rDrawing Mosaic: resizing tiles ("
              << (rows * columns) << "/" << (rows * columns) << ")" << endl;
         cerr.flush();
     }
+    
+    std::cout << "About to return from drawMosaic function" << std::endl;
 
     return mosaic;
 }

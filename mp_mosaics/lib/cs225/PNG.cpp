@@ -189,27 +189,33 @@ namespace cs225 {
 
   void PNG::resize(unsigned int newWidth, unsigned int newHeight) {
     // Create a new vector to store the image data for the new (resized) image
+    std::cout << "Inside body of resize()" << std::endl;
     LUVAPixel * newImageData = new LUVAPixel[newWidth * newHeight];
-
+    std::cout << "After creation of vector to store the image data for new image" << std::endl;
     // Copy the current data to the new image data, using the existing pixel
     // for coordinates within the bounds of the old image size
+    if (width_ == 0 && height_ == 0) std::cout << "Width and height parameters are set to 0" << std::endl;
     for (unsigned x = 0; x < newWidth; x++) {
       for (unsigned y = 0; y < newHeight; y++) {
         if (x < width_ && y < height_) {
+          std::cout << "Before oldPixel" << std::endl;
           LUVAPixel & oldPixel = this->getPixel(x, y);
+          std::cout << "After oldPixel" << std::endl;
           LUVAPixel & newPixel = newImageData[ (x + (y * newWidth)) ];
           newPixel = oldPixel;
         }
       }
     }
-
+    std::cout << "After execution of nested for loop" << std::endl;
     // Clear the existing image
+    if (imageData_ == NULL) std::cout << "ImageData is NULL" << std::endl;
     delete[] imageData_;
-
+    std::cout << "After the existing image is cleared" << std::endl;
     // Update the image to reflect the new image size and data
     width_ = newWidth;
     height_ = newHeight;
     imageData_ = newImageData;
+    std::cout << "About to exit body of resize()" << std::endl;
   }
 
   std::ostream & operator << ( std::ostream& os, PNG const& png ) {

@@ -73,8 +73,9 @@ LUVAPixel TileImage::calculateAverageColor() const {
 void TileImage::generateResizedImage(int startX, int startY, int resolution) {
 
     // set the resized_ image to size: resolution x resolution
-    resized_.resize(resolution, resolution);
-
+    std::cout << "Inside body of generateResizedImage()" << std::endl;
+    resized_.resize(resolution, resolution); //line doesn't work
+    std::cout << "Resized" << std::endl;
     // If possible, avoid floating point comparisons. This helps ensure that
     // students' photomosaic's are diff-able with solutions
     if (getResolution() % resolution == 0) {
@@ -104,20 +105,28 @@ void TileImage::generateResizedImage(int startX, int startY, int resolution) {
             }
         }
     }
+    std::cout << "About to exit body of generateResizedImage()" << std::endl;
     
 }    
 
 void TileImage::paste(PNG& canvas, int startX, int startY, int resolution) {
     // check if not resized
+    std::cout << "Inside body of paste()" << std::endl;
+    std::cout << "hi" << std::endl;
+    //if (resized_ == PNG()) std::cout << "Resized is NULL" << std::endl;
     if (resized_.width() == 0) {
-        generateResizedImage(startX, startY, resolution);
+        std::cout << "Before generateResized" << std::endl;
+        generateResizedImage(startX, startY, resolution); //line not working
+        std::cout << "After generateResized" << std::endl;
     }
-
+    std::cout << "Before nested for loop" << std::endl;
     for (int x = 0; x < resolution; x++) {
         for (int y = 0; y < resolution; y++) {
             canvas.getPixel(startX + x, startY + y) = resized_.getPixel(x, y);
         }
     }
+    std::cout << "After nested for loop" << std::endl;
+    std::cout << "After body of paste()" << std::endl;
 }
 
 

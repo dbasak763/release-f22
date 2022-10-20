@@ -61,16 +61,13 @@ KDTree<Dim>::KDTree(const vector<Point<Dim>>& newPoints)
 template <int Dim>
 KDTree<Dim>::KDTree(const KDTree<Dim>& other) {
    size = other->size;
-   assign(other->root);
+   assign(root, other->root);
 }
 
 template <int Dim>
 const KDTree<Dim>& KDTree<Dim>::operator=(const KDTree<Dim>& rhs) {
-  /**
-   * @todo Implement this function!
-   */
    size = rhs->size;
-   assign(rhs->root);
+   assign(root, rhs->root);
 
    return *this;
 }
@@ -198,17 +195,16 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query, int dim, KD
 }
 
 template <int Dim>
-void KDTree<Dim>::assign(KDTreeNode* currRoot) {
+void KDTree<Dim>::assign(KDTreeNode*& currRoot, KDTreeNode*& otherRoot) {
   if (currRoot == NULL) return;
-  for (int i = 0; i < Dim; i++) {
-     *root->point[i] = *currRoot->point[i];
-  }
-  *root->left = assign(*currRoot->left);
-  *root->right = assign(*currRoot->right);
+  currRoot = new KDTreeNode(otherRoot->point);
+
+  currRoot->left = assign(currRoot->left, otherRoot->left);
+  currRoot->right = assign(currRoot->right, otherRoot->right);
 }
 
 template <int Dim>
-void KDTree<Dim>::deletion(KDTreeNode* currRoot) {
+void KDTree<Dim>::deletion(KDTreeNode*& currRoot) {
   if (currRoot == NULL) return;
   KDTreeNode* left_ = currRoot->left;
   KDTreeNode* right_ = currRoot->right;

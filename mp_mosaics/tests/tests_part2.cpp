@@ -69,15 +69,21 @@ TEST_CASE("Creates a basic MosaicCanvas (gridtest)", "[weight=5][part=2]") {
   tileList.push_back(TileImage(c));
 
   // Draw the mosaic!
+  std::cout << "Before drawing mosaic" << std::endl;
   MosaicCanvas* canvas = mapTiles(source, tileList);
   REQUIRE( canvas != NULL );
+  
+  std::cout << "Check if canvas is null" << std::endl;
 
   PNG actual = canvas->drawMosaic(10);
+  std::cout << "After drawing mosaic" << std::endl;
   PNG expected;  expected.readFromFile("../tests/gridtest-expected.png");
 
   // Save and check for correctness
   actual.writeToFile("gridtest-actual.png");
   INFO("Saved `actual` as gridtest-actual.png.");
+
+  std::cout << "Actual written to file" << std::endl;
 
   REQUIRE( actual == expected );
   delete canvas; canvas = NULL;
@@ -106,10 +112,12 @@ TEST_CASE("Creates a basic MosaicCanvas with pitch black (uofi-bw)", "[weight=5]
   tileList.push_back(TileImage(e));
 
   // Draw the mosaic!
+  std::cout << "Before drawing mosaic" << std::endl;
   MosaicCanvas* canvas = mapTiles(source, tileList);
   REQUIRE( canvas != NULL );
 
   PNG actual = canvas->drawMosaic(10);
+  std::cout << "After drawing mosaic" << std::endl;
   PNG expected;  expected.readFromFile("../tests/uofi-bw-expected.png");
 
   // Save and check for correctness

@@ -266,8 +266,8 @@ class KDTree
      Point<Dim> select(vector<Point<Dim>>& list, int left, int right, int k, int dim);
      void BuildTree(vector<Point<Dim>>& newPoints, int dim, int left, int right, KDTreeNode *& currRoot);
      Point<Dim> findNearestNeighbor(const Point<Dim>& query, int currd, KDTreeNode * currRoot) const;
-     void assign(KDTreeNode* currRoot);
-     void deletion(KDTreeNode* currRoot);
+     void assign(KDTreeNode*& currRoot, KDTreeNode*& otherRoot);
+     void deletion(KDTreeNode *& currRoot);
 
 };
 
