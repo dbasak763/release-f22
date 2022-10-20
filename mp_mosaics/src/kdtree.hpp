@@ -5,6 +5,7 @@
 
 #include <utility>
 #include <algorithm>
+#include <math.h>
 
 using namespace std;
 
@@ -88,17 +89,18 @@ Point<Dim> KDTree<Dim>::findNearestNeighbor(const Point<Dim>& query) const
 }
 
 template <int Dim>
-Point<Dim> KDTree<Dim>::getMedian(vector<Point<Dim>>& newPoints) {
+Point<Dim> KDTree<Dim>::getMedian(vector<Point<Dim>> newPoints) {
   return newPoints[(newPoints.size() - 1) / 2];
 }
 
 template <int Dim>
-int KDTree<Dim>::partition(vector<Point<Dim>>& list, int left, int right, int pivotIndex) {
+int KDTree<Dim>::partition(vector<Point<Dim>>& list, int left, int right, int pivotIndex, int dim) {
   Point<Dim> pivotValue = list[pivotIndex];
   swap(list[pivotIndex], list[right]);
   int storeIndex = left;
   for (int i = left; i < right; i++) {
-    if (list[i] < pivotValue) {
+    bool smaller = smallerDimVal(list[i], pivotValue, dim);
+    if (smaller) {
       swap(list[storeIndex], list[i]);
       storeIndex++;
     }
@@ -108,13 +110,15 @@ int KDTree<Dim>::partition(vector<Point<Dim>>& list, int left, int right, int pi
 } //exactly matching
 
 template <int Dim>
-Point<Dim> KDTree<Dim>::select(vector<Point<Dim>>& list, int left, int right, int k) {
+Point<Dim> KDTree<Dim>::select(vector<Point<Dim>>& list, int left, int right, int k, int dim) {
+  int pivotIndex = k;
   while (true) {
     if (left == right) {
       return list[left];
     }
     //std::cout << "Before Partition" << std::endl;
-    int pivotIndex = partition(list, left, right, k); //not sure if works properly but compiles
+    pivotIndex = (left + right) / 2;
+    pivotIndex = partition(list, left, right, pivotIndex, dim); //not sure if works properly but compiles
     //std::cout << "After Partition" << std::endl;
     if (k == pivotIndex) {
       //std::cout << "Select outputs a point" << std::endl;
@@ -133,11 +137,11 @@ void KDTree<Dim>::BuildTree(vector<Point<Dim>>& newPoints, int dim, int left, in
   if (left <= right) {
     int mid = (left + right) / 2;
     //std::cout << "Before Select" << std::endl;
-    const Point<Dim> &point = select(newPoints, left, right, mid);
+    const Point<Dim> &point = select(newPoints, left, right, mid, dim);
     //std::cout << "Hi" << std::endl;
     currRoot = new KDTreeNode(point); 
     //std::cout << "After Select" << std::endl;
-    //std::cout << "CurrRoot = " << currRoot->point << std::endl;
+    std::cout << "CurrRoot = " << currRoot->point << std::endl;
     BuildTree(newPoints, (dim + 1) % Dim, left, mid - 1, currRoot->left);
     BuildTree(newPoints, (dim + 1) % Dim, mid + 1, right, currRoot->right);
   }
