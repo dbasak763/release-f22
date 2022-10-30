@@ -22,6 +22,20 @@
 using namespace std;
 using namespace util;
 
+template <typename V>
+void helpTestHeapifyDown(const vector<V> & vals)
+{
+    heap<V> _heap;
+    for(size_t i = 0; i < vals.size(); ++i)
+        _heap.push(vals[i]);
+
+    vector<V> sorted = vals;
+    sort(sorted.begin(), sorted.end());
+
+    for(size_t i = 0; i < sorted.size(); i++)
+        if(sorted[i] == _heap.pop()) std::cout << "True" << std::endl;
+}
+
 void testConstructor(int count);
 void testPop(int count);
 void testPush(int count);
@@ -45,6 +59,20 @@ void printAfter(int value, std::string operation = "remove")
 
 int main(int argc, const char** argv)
 {
+    //vector<int> vals = {6, 7, 8};
+    //helpTestHeapifyDown(vals);
+
+    vector<int> vals = {3, 2, 1};
+	heap<int> myHeap(vals);
+	vector<int> test;
+	myHeap.getElems(test);
+    for (unsigned i = 0; i < test.size(); i++) {
+        std::cout << test[i] << std::endl;
+    }
+	vector<int> expected = {1, 2, 3};
+	bool matches = (test == expected);
+	std::cout << (matches == true) << std::endl;
+    
     // Set up Colored Output (if 'color' parameter passed)
     bool is_colored
         = (argc > 1 && tolower(argv[1][0]) == 'c') && isatty(STDOUT_FILENO);
