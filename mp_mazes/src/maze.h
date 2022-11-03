@@ -5,12 +5,14 @@
 #include <vector>
 #include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
+#include "dsets.h"
 
 using namespace cs225;
 
 struct Tile {
     int x_index, y_index; //point
     int wall_dir[4] = {1, 1, 1, 1};
+    std::vector<int> walls = {0, 1, 2, 3};
     // dir = 0 represents a rightward step (+1 to the x coordinate)
     // dir = 1 represents a downward step (+1 to the y coordinate)
     // dir = 2 represents a leftward step (-1 to the x coordinate)
@@ -26,8 +28,12 @@ class SquareMaze {
     private:
         std::vector<std::vector<Tile>> board; //a 2D - representation of the board (of square maze)
         std::vector<Tile> solPath; //starts at tile(0, 0) , ends at a bottom-most tile of board
+        //std::vector<std::vector<int>> wallsAtTiles_;
         int width_;
         int height_;
+        DisjointSets d;
+        void deleteTile(int x, int y, int dir);
+        bool outofBounce(int x, int y, int dir);
     public:
         SquareMaze();
         void makeMaze(int width, int height);

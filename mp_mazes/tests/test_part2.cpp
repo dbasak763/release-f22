@@ -152,7 +152,9 @@ void advancePosition(int * x, int * y, int dir)
 TEST_CASE("testMakeSmallMaze", "[weight=10][part2]")
 {
     SquareMaze maze;
+    std::cout << "Hi" << std::endl;
     maze.makeMaze(2, 2);
+    std::cout << "Hi" << std::endl;
     assert_maze_tree(maze, 2, 2);
 }
 
