@@ -26,7 +26,8 @@ class SquareMaze {
     private:
         std::vector<std::vector<Tile>> board; //a 2D - representation of the board (of square maze)
         std::vector<Tile> solPath; //starts at tile(0, 0) , ends at a bottom-most tile of board
-
+        int width_;
+        int height_;
     public:
         SquareMaze();
         void makeMaze(int width, int height);
