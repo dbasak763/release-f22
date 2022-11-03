@@ -8,13 +8,24 @@
 
 using namespace cs225;
 
-//using namespace std;
+struct Tile {
+    int x_index, y_index; //point
+    int wall_dir[4] = {1, 1, 1, 1};
+    // dir = 0 represents a rightward step (+1 to the x coordinate)
+    // dir = 1 represents a downward step (+1 to the y coordinate)
+    // dir = 2 represents a leftward step (-1 to the x coordinate)
+    // dir = 3 represents an upward step (-1 to the y coordinate)
+    //walls(could be located) on each side
+};
 
+//using namespace std;
+//Each SquareMaze object represents a randomly-generated square maze and its solution.
 class SquareMaze {
 
 
     private:
-
+        std::vector<std::vector<Tile>> board; //a 2D - representation of the board (of square maze)
+        std::vector<Tile> solutionPath; //starts at tile(0, 0) , ends at a bottom-most tile of board
 
     public:
         SquareMaze();
