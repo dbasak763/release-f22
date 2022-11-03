@@ -2,10 +2,28 @@
 #include "maze.h"
 
 SquareMaze::SquareMaze() {
-
+    //can leave this empty
 }
 
 void SquareMaze::makeMaze(int width, int height) {
+    //if object represents a maze already, clear all existing data
+    if (!board.empty() || !solPath.empty()) {
+        solPath.clear();
+        for (unsigned i = 0; i < board.size(); i++) {
+            board[i].clear();
+        }
+        board.clear();
+    }
+    for (int i = 0; i < height; i++) { //row is y_index
+        std::vector<Tile> vec;
+        for (int j = 0; j < width; j++) { //col is x_index
+            Tile *t = new Tile();
+            t->x_index = j;
+            t->y_index = i;
+            vec.push_back(*t);
+        }
+        board.push_back(vec);
+    }
 
 }
 
