@@ -20,13 +20,13 @@ bool SquareMaze::outofBounce(int x, int y, int dir) {
 
 void SquareMaze::makeMaze(int width, int height) {
     //if object represents a maze already, clear all existing data
-    // if (!board.empty() || !solPath.empty()) {
-    //     solPath.clear();
-    //     for (unsigned i = 0; i < board.size(); i++) {
-    //         board[i].clear();
-    //     }
-    //     board.clear();
-    // }
+    if (!board.empty() || !solPath.empty()) {
+        solPath.clear();
+        for (unsigned i = 0; i < board.size(); i++) {
+            board[i].clear();
+        }
+        board.clear();
+    }
 
     width_ = width;
     height_ = height;
@@ -66,15 +66,16 @@ void SquareMaze::makeMaze(int width, int height) {
             
         }
         
-
     }
-    d.print();
+    //d.print();
+    /*
     for (int i = 0; i < height_; i++) {
         for (int j = 0; j < width_; j++) {
-            std::cout << "(" << board[i][j].wall_dir[0] << "," << board[i][j].wall_dir[1] << ") ";
+            //std::cout << "(" << board[i][j].wall_dir[0] << "," << board[i][j].wall_dir[1] << ") ";
         }
-        std::cout << std::endl;
+        //std::cout << std::endl;
     }
+    */
     //need to add randomly deleting walls part such that no cycle appears in our graph(we have a tree), until no more edges can be deleted
 
 }
@@ -95,7 +96,7 @@ bool SquareMaze::canTravel(int x, int y, int dir) const {
 }
 
 void SquareMaze::setWall(int x, int y, int dir, bool exists) {
-    Tile t = board[y][x];
+    Tile &t = board[y][x];
     if (exists) {
         t.wall_dir[dir] = 1;
     }
@@ -113,11 +114,11 @@ PNG* SquareMaze::drawMaze() const {
     
     PNG* png = new PNG(width_ * 10 + 1, height_ * 10 + 1);
     for (int col = 0; col < width_ * 10 + 1; col++) { //topmost row
-        HSLAPixel pixel = png->getPixel(0, col);
+        HSLAPixel &pixel = png->getPixel(0, col);
         pixel = HSLAPixel(0, 0, 0, 1);
     }
     for (int row = 10; row < height_ * 10 + 1; row++) { //leftmost col
-        HSLAPixel pixel = png->getPixel(row, 0);
+        HSLAPixel &pixel = png->getPixel(row, 0);
         pixel = HSLAPixel(0, 0, 0, 1);
     }
     for (int i = 0; i < height_; i++) {
@@ -125,16 +126,16 @@ PNG* SquareMaze::drawMaze() const {
             Tile t = board[i][j];
             int x_coord = t.x_index;
             int y_coord = t.y_index;
-
+            
             if (t.wall_dir[0] == 1) { //right wall exists
                 for (int k = 0; k <= 10; k++) {
-                    HSLAPixel pixel = png->getPixel((x_coord + 1) * 10, y_coord * 10 + k);
+                    HSLAPixel &pixel = png->getPixel((y_coord + 1) * 10, x_coord * 10 + k);
                     pixel = HSLAPixel(0, 0, 0, 1);
                 }
             }
             if (t.wall_dir[1] == 1) { //bottom wall exists
                 for (int k = 0; k <= 10; k++) {
-                    HSLAPixel pixel = png->getPixel(x_coord * 10 + k, (y_coord + 1) * 10);
+                    HSLAPixel &pixel = png->getPixel(y_coord * 10 + k, (x_coord + 1) * 10);
                     pixel = HSLAPixel(0, 0, 0, 1);
                 }
             }
@@ -147,5 +148,7 @@ PNG* SquareMaze::drawMaze() const {
 }
 
 PNG* SquareMaze::drawMazeWithSolution() {
-    return NULL;
+    PNG* maze_ = drawMaze();
+    std::vector<int> solP = solveMaze();
+    return maze_;
 }
