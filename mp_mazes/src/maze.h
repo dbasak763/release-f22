@@ -11,8 +11,8 @@ using namespace cs225;
 
 struct Tile {
     int x_index, y_index; //point
-    int wall_dir[4] = {1, 1, 1, 1};
-    std::vector<int> walls = {0, 1, 2, 3};
+    int wall_dir[2] = {1, 1}; //right and bottom
+    //std::vector<int> walls = {0, 1, 2, 3};
     // dir = 0 represents a rightward step (+1 to the x coordinate)
     // dir = 1 represents a downward step (+1 to the y coordinate)
     // dir = 2 represents a leftward step (-1 to the x coordinate)
@@ -32,7 +32,7 @@ class SquareMaze {
         int width_;
         int height_;
         DisjointSets d;
-        void deleteTile(int x, int y, int dir);
+        void deleteWall(int x, int y, int dir);
         bool outofBounce(int x, int y, int dir);
     public:
         SquareMaze();

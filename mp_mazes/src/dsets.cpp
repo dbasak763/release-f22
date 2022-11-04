@@ -49,3 +49,12 @@ int DisjointSets::size(int elem) {
     int root = find(elem);
     return -par[root];
 }
+
+void DisjointSets::print() {
+    
+    for (unsigned i = 0; i < par.size(); i++) {
+        std::cout << par[i] << " ";
+    }
+    std::cout << std::endl;
+    
+}

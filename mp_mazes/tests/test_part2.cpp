@@ -99,6 +99,9 @@ void assert_maze_tree(SquareMaze & maze, int width, int height)
     pair<int, int> checks = assert_maze_helper(maze, width, height);
     int components = checks.first;
     int calls = checks.second;
+    std::cout << "Calls: " << calls << std::endl;
+    std::cout << "Components: " << components << std::endl;
+    std::cout << "Diff:" << (calls + components) - (width * height * 2) << std::endl;
     if (calls + components != width * height * 2)
         FAIL("Maze has a cycle");
     if (components != 1)
@@ -352,3 +355,4 @@ TEST_CASE("testDrawSolutionLarge", "[weight=10][part2][timeout=30000]")
     REQUIRE(*actualOutput == solnImage);
     delete actualOutput;
 }
+

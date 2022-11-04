@@ -21,5 +21,6 @@ class DisjointSets {
         int find(int elem);
         void setunion(int a, int b);
         int size(int elem);
+        void print();
 
 };
