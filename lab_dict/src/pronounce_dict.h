@@ -12,6 +12,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <algorithm>
 
 /**
  * PronounceDict class. Provides an interface for finding the pronunciation

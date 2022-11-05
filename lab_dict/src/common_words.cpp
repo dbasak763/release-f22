@@ -52,6 +52,7 @@ void CommonWords::init_file_word_maps(const vector<string>& filenames)
             file_word_maps[i][word]++;
         }
     }
+    /*
     for (size_t i = 0; i < file_word_maps.size(); i++) {
         map<string, unsigned int> m = file_word_maps[i];
         map<string, unsigned int>::iterator it;
@@ -60,6 +61,7 @@ void CommonWords::init_file_word_maps(const vector<string>& filenames)
         }
         
     }
+    */
 }
 
 void CommonWords::init_common()
