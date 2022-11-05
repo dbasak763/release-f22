@@ -266,7 +266,7 @@ PNG* SquareMaze::drawMazeWithSolution() {
     }
     for (int k = 1; k <= 9; k++) {
         HSLAPixel &pixel = maze_->getPixel(y_Dest * 10 + k, (x_Dest + 1) * 10);
-        pixel = HSLAPixel(0, 0, 0, 0);
+        pixel = HSLAPixel(0, 0, 1, 1);
     }
     return maze_;
 }
