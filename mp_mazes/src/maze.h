@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 #include <vector>
+#include <utility>
+#include <queue>
+#include <stack>
 #include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
 #include "dsets.h"
@@ -27,7 +30,8 @@ class SquareMaze {
 
     private:
         std::vector<std::vector<Tile>> board; //a 2D - representation of the board (of square maze)
-        std::vector<Tile> solPath; //starts at tile(0, 0) , ends at a bottom-most tile of board
+        std::queue<std::pair<std::pair<Tile, int>, std::string>> queue;
+        std::vector<std::vector<bool>> visited; //should have similar dimensions as board
         //std::vector<std::vector<int>> wallsAtTiles_;
         int width_;
         int height_;

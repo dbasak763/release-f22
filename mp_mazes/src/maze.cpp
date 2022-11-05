@@ -20,8 +20,7 @@ bool SquareMaze::outofBounce(int x, int y, int dir) {
 
 void SquareMaze::makeMaze(int width, int height) {
     //if object represents a maze already, clear all existing data
-    if (!board.empty() || !solPath.empty()) {
-        solPath.clear();
+    if (!board.empty()) {
         for (unsigned i = 0; i < board.size(); i++) {
             board[i].clear();
         }
@@ -31,15 +30,20 @@ void SquareMaze::makeMaze(int width, int height) {
     width_ = width;
     height_ = height;
 
+
+
     for (int i = 0; i < height; i++) { //row is y_index
         std::vector<Tile> vec;
+        std::vector<bool> visitedRow;
         for (int j = 0; j < width; j++) { //col is x_index
             Tile t = Tile();
             t.x_index = i;
             t.y_index = j;
             vec.push_back(t);
+            visitedRow.push_back(false);
         }
         board.push_back(vec);
+        visited.push_back(visitedRow);
     }
 
     d.addelements(width_ * height_);
@@ -83,8 +87,10 @@ void SquareMaze::makeMaze(int width, int height) {
 bool SquareMaze::canTravel(int x, int y, int dir) const {
     Tile t = board[y][x];
     if (dir == 0) { //right
+        if (x == (width_ - 1)) return false;
         return (t.wall_dir[0] == 0); //no wall present, so can traverse
     } else if (dir == 1) { //down
+        if (y == (height_ - 1)) return false;
         return (t.wall_dir[1] == 0); //no wall present, so can traverse
     } else if (dir == 2) {
         if (x == 0) return false;
@@ -106,7 +112,83 @@ void SquareMaze::setWall(int x, int y, int dir, bool exists) {
 }
 
 std::vector<int> SquareMaze::solveMaze() {
-    return std::vector<int>();
+    int longestPath = 0;
+    std::vector<int> finalDirections;
+    for (int col = 0; col < width_; col++) {
+        //visited.resize(width_ * height_, false);
+        for (int i = 0; i < height_; i++) {
+            for (int j = 0; j < width_; j++) {
+                visited[i][j] = false;
+            }
+        }
+        int distOfPath = 0;
+        //std::vector<int> directions;
+        Tile startingTile = board[height_ - 1][col];
+        //perform a bfs
+        queue.push(std::make_pair(std::make_pair(startingTile, 0), ""));
+
+        std::string fullReversePath = "";
+        
+        while (!queue.empty()) {
+            Tile currTile = queue.front().first.first;
+            int distFromStartingTile = queue.front().first.second;
+            std::string currPath = queue.front().second;
+
+            //std::cout << "Visited tile: ( " << currTile.x_index << ", " << currTile.y_index << " )" << std::endl;
+            //std::cout << "Dist From Starting Tile: " << distFromStartingTile << std::endl;
+            //std::cout << "Current Path : " << currPath << std::endl;
+
+            visited[currTile.x_index][currTile.y_index] = true;
+            
+            if (currTile.x_index == 0 && currTile.y_index == 0) { //if we reached origin
+                distOfPath = distFromStartingTile;
+                fullReversePath = currPath;
+                break;
+            }
+            queue.pop();
+
+            while (!queue.empty() && visited[queue.front().first.first.x_index][queue.front().first.first.y_index]) {
+                queue.pop();
+            }
+
+            if (canTravel(currTile.y_index, currTile.x_index, 0) && !visited[currTile.x_index][currTile.y_index + 1]) { //if rightneighbor can be visited
+                Tile rightTile = board[currTile.x_index][currTile.y_index + 1];
+                queue.push(std::make_pair(std::make_pair(rightTile, distFromStartingTile + 1), currPath + "0"));
+            }
+            if (canTravel(currTile.y_index, currTile.x_index, 1) && !visited[currTile.x_index + 1][currTile.y_index]) { //if downneighbor can be visited
+                Tile downTile = board[currTile.x_index + 1][currTile.y_index];
+                queue.push(std::make_pair(std::make_pair(downTile, distFromStartingTile + 1), currPath + "1"));
+            }
+            if (canTravel(currTile.y_index, currTile.x_index, 2) && !visited[currTile.x_index][currTile.y_index - 1]) { //if leftneighbor can be visited
+                Tile leftTile = board[currTile.x_index][currTile.y_index - 1];
+                queue.push(std::make_pair(std::make_pair(leftTile, distFromStartingTile + 1), currPath + "2"));
+            }
+            if (canTravel(currTile.y_index, currTile.x_index, 3) && !visited[currTile.x_index - 1][currTile.y_index]) { //if upneighbor can be visited
+                Tile upTile = board[currTile.x_index - 1][currTile.y_index];
+                queue.push(std::make_pair(std::make_pair(upTile, distFromStartingTile + 1), currPath + "3"));
+            }
+        }
+        while (!queue.empty()) queue.pop();
+        if (distOfPath > longestPath) {
+            finalDirections.clear();
+            longestPath = distOfPath;
+            for (int i = fullReversePath.length() - 1; i >= 0; i--) {
+                char c = fullReversePath[i];
+                int dir;
+                if (c == '0') {
+                    dir = 2;
+                } else if (c == '1') {
+                    dir = 3;
+                } else if (c == '2') {
+                    dir = 0;
+                } else {
+                    dir = 1;
+                }
+                finalDirections.push_back(dir);
+            }
+        }
+    }
+    return finalDirections;
 }
 
 
