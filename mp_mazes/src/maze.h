@@ -36,6 +36,7 @@ class SquareMaze {
         int width_;
         int height_;
         DisjointSets d;
+        int x_Dest, y_Dest;
         void deleteWall(int x, int y, int dir);
         bool outofBounce(int x, int y, int dir);
     public:

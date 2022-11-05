@@ -170,6 +170,8 @@ std::vector<int> SquareMaze::solveMaze() {
         }
         while (!queue.empty()) queue.pop();
         if (distOfPath > longestPath) {
+            x_Dest = startingTile.x_index;
+            y_Dest = startingTile.y_index;
             finalDirections.clear();
             longestPath = distOfPath;
             for (int i = fullReversePath.length() - 1; i >= 0; i--) {
@@ -231,6 +233,40 @@ PNG* SquareMaze::drawMaze() const {
 
 PNG* SquareMaze::drawMazeWithSolution() {
     PNG* maze_ = drawMaze();
-    std::vector<int> solP = solveMaze();
+    std::vector<int> solVector = solveMaze();
+    int x_pixel = 5;
+    int y_pixel = 5;
+    for (unsigned i = 0; i < solVector.size(); i++) {
+        int dir = solVector[i];
+        if (dir == 0) { //right
+            for (int offset = 0; offset <= 10; offset++) {
+                HSLAPixel &pixel = maze_->getPixel(x_pixel + offset, y_pixel);
+                pixel = HSLAPixel(0, 1, 0.5, 1);
+            }
+            x_pixel += 10;
+        } else if (dir == 1) { //down
+            for (int offset = 0; offset <= 10; offset++) {
+                HSLAPixel &pixel = maze_->getPixel(x_pixel, y_pixel + offset);
+                pixel = HSLAPixel(0, 1, 0.5, 1);
+            }
+            y_pixel += 10;
+        } else if (dir == 2) { //left
+            for (int offset = 0; offset <= 10; offset++) {
+                HSLAPixel &pixel = maze_->getPixel(x_pixel - offset, y_pixel);
+                pixel = HSLAPixel(0, 1, 0.5, 1);
+            }
+            x_pixel -= 10;
+        } else { //up
+            for (int offset = 0; offset <= 10; offset++) {
+                HSLAPixel &pixel = maze_->getPixel(x_pixel, y_pixel - offset);
+                pixel = HSLAPixel(0, 1, 0.5, 1);
+            }
+            y_pixel -= 10;
+        }
+    }
+    for (int k = 1; k <= 9; k++) {
+        HSLAPixel &pixel = maze_->getPixel(y_Dest * 10 + k, (x_Dest + 1) * 10);
+        pixel = HSLAPixel(0, 0, 0, 0);
+    }
     return maze_;
 }

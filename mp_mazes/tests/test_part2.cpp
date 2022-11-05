@@ -330,7 +330,7 @@ TEST_CASE("testDrawMazeLarge", "[weight=10][part2][timeout=30000]")
     REQUIRE(*actualOutput == solnImage);
     delete actualOutput;
 }
-/*
+
 TEST_CASE("testDrawSolutionMed", "[weight=10][part2]")
 {
     PNG solnImage = READ_SOLUTION_PNG("testDrawSolutionMed", 50, 50);
@@ -356,4 +356,4 @@ TEST_CASE("testDrawSolutionLarge", "[weight=10][part2][timeout=30000]")
     REQUIRE(*actualOutput == solnImage);
     delete actualOutput;
 }
-*/
+
