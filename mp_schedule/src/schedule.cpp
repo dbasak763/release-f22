@@ -52,9 +52,48 @@ V2D file_to_V2D(const std::string & filename){
  * @param cv A 2D vector of strings where each row is a course ID followed by the students in the course
  * @param student A 2D vector of strings where each row is a student ID followed by the courses they are taking
  */
+ //std::vector<std::vector<std::string>> is V2D
 V2D clean(const V2D & cv, const V2D & student){
     // YOUR CODE HERE
-    return V2D();
+   
+    
+    //need a mapping from student to which courses they are taking
+    std::map<std::string, std::vector<std::string>> map; 
+    for (unsigned s = 0; s < student.size(); s++) {
+        std::vector<std::string> courses_;
+        for (unsigned i = 1; i < student[s].size(); i++) {
+            courses_.push_back(student[s][i]);
+        }
+        map.insert({student[s][0], courses_});
+    }
+    V2D valid_course_roster = V2D(cv.size());
+    //for all courses, check if all students within that course are valid or not, if they are not valid, 
+    //remove from the course roster 
+    //iterate through courses
+    for (unsigned course = 0; course < cv.size(); course++) {
+        std::string course_id = cv[course][0];
+        valid_course_roster[course].push_back(course_id);
+        //iterate through students within the course
+        for (unsigned i = 1; i < cv[course].size(); i++) {
+            std::string student_ = cv[course][i];
+            std::vector<std::string> v = map[student_];
+            //if a student within a course maps to a course, then it is valid
+            //add to valid_course_roster list
+            if (std::find(v.begin(), v.end(), course_id) != v.end()) {
+                valid_course_roster[course].push_back(student_);
+            }
+        }  
+    }
+    //else, move on to next student
+    //at the end, check if courses are empty, and remove them
+    for (unsigned course = 0; course < valid_course_roster.size(); course++) {
+        if (valid_course_roster[course].size() == 1) {
+            valid_course_roster.erase(valid_course_roster.begin() + course);
+            course--;
+
+        }
+    }
+    return valid_course_roster;
 
 }
 
