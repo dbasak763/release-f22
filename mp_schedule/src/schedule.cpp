@@ -140,7 +140,7 @@ V2D schedule(const V2D &courses, const std::vector<std::string> &timeslots){
     print(g.adj_);
     std::cout << "Hi2" << std::endl;
     V2D valid_schedule = V2D();
-
+    
     valid_schedule.push_back({"-1"});
     return valid_schedule;
 }
