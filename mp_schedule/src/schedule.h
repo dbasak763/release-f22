@@ -54,3 +54,17 @@ V2D clean(const V2D & cv, const V2D & sv);
  * @return A 2D vector which each row is a timeslot with all the courses scheduled for that time
  */
 V2D schedule(const V2D &courses, const std::vector<std::string> &timeslots);
+
+class Graph { 
+    public:
+        std::vector<std::vector<int>> adj_; //in the order that they are listed
+        std::vector<std::string> courses_;
+        std::map<std::string, int> map_; //want to know which number vertex a string course corresponds to
+        Graph();
+        ~Graph();
+        void addCourse(const std::string &course);
+        void addEdge(const std::string &course1, const std::string &course2);
+};
+
+bool hasIntersectionElems(const std::vector<std::string> &v1, const std::vector<std::string> &v2);
+void print(std::vector<std::vector<int>> &adj);

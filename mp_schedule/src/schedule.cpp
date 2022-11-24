@@ -113,7 +113,90 @@ V2D clean(const V2D & cv, const V2D & student){
  * @param courses A 2D vector of strings where each row is a course ID followed by the students in the course
  * @param timeslots A vector of strings giving the total number of unique timeslots
  */
+  //std::vector<std::vector<std::string>> is V2D
 V2D schedule(const V2D &courses, const std::vector<std::string> &timeslots){
     // Your code here!
-    return V2D();
+    
+    Graph g = Graph();
+    std::cout << "Hi" << std::endl;
+    for (unsigned i = 0; i < courses.size(); i++) {
+        g.addCourse(courses[i][0]);
+    }
+    std::cout << "Hi1" << std::endl;
+    for (unsigned i = 0; i < g.courses_.size() - 1; i++) {
+        std::string course_one = g.courses_[i];
+        std::vector<std::string> vect1 = courses[i];
+        vect1.erase(vect1.begin());
+        for (unsigned j = i+1; j < g.courses_.size(); j++) {
+            std::string course_two = g.courses_[j];
+            // draw undirected and unweighted edges between vertices if they have at least one student in common
+            std::vector<std::string> vect2 = courses[j];
+            vect2.erase(vect2.begin());
+            if (hasIntersectionElems(vect1, vect2)) {
+                g.addEdge(course_one, course_two);
+            }
+        }
+    }
+    print(g.adj_);
+    std::cout << "Hi2" << std::endl;
+    V2D valid_schedule = V2D();
+
+    valid_schedule.push_back({"-1"});
+    return valid_schedule;
+}
+
+Graph::Graph() {
+    //nothing needs to be done here
+}
+
+Graph::~Graph() {
+    for (unsigned i = 0; i < adj_.size(); i++) {
+        adj_[i].clear();
+    }
+    adj_.clear();
+    courses_.clear();
+    map_.clear();
+}
+
+void Graph::addCourse(const std::string &course) {
+    std::cout << "Hi3" << std::endl;
+    map_.insert({course, map_.size()});
+    courses_.push_back(course);
+    std::cout << "Hi4" << std::endl;
+    for (unsigned i = 0; i < (adj_.size()); i++) {
+        adj_[i].push_back(0);
+    }
+    std::cout << "Hi5" << std::endl;
+    std::vector<int> v;
+    for (unsigned i = 0; i < (adj_.size() + 1); i++) {
+        v.push_back(0);
+    }
+    adj_.push_back(v);
+    std::cout << "Hi6" << std::endl;
+}
+//assume that these two courses already exist as vertices
+void Graph::addEdge(const std::string &course1, const std::string &course2) {
+    int vertex_i = map_[course1];
+    int vertex_j = map_[course2];
+    adj_[vertex_i][vertex_j] = adj_[vertex_j][vertex_i] = 1;
+}
+
+bool hasIntersectionElems(const std::vector<std::string> &v1, const std::vector<std::string> &v2) {
+    for (const std::string &s1 : v1) {
+        for (const std::string &s2 : v2) {
+            if (s1 == s2) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void print(std::vector<std::vector<int>> &adj) {
+    for (unsigned i = 0; i < adj.size(); i++) {
+        for (unsigned j = 0; j < adj[i].size(); j++) {
+            std::cout << adj[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 }

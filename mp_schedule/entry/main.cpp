@@ -7,9 +7,10 @@ int main() {
     //Graph myGraph("rosterList.txt", "studentList.txt");
 
     //V2D roster = file_to_V2D("../rosterList.txt");
+    
     V2D roster = file_to_V2D("../tests/data/c5_s10_3_roster_errors.csv");
 
-    
+    /*
     for (int i = 0; i < (int) roster.size(); ++i){
         std::cout << "{ ";
         for(int j = 0; j < (int) roster[i].size()-1; ++j){
@@ -17,7 +18,7 @@ int main() {
         }
         std::cout << roster[i][roster[i].size()-1] << "}, \\" << std::endl;
     }
-    
+    */
 
     //V2D student = file_to_V2D("../studentList.txt");
     V2D student = file_to_V2D("../tests/data/c5_s10_3_students_errors.csv");
