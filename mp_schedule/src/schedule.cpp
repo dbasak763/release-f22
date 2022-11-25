@@ -140,13 +140,39 @@ V2D schedule(const V2D &courses, const std::vector<std::string> &timeslots){
     print(g.adj_);
     std::cout << "Hi2" << std::endl;
     V2D valid_schedule = V2D();
-    
-    valid_schedule.push_back({"-1"});
+    unsigned minColors = g.vertices;
+    int minVertex = -1;
+    for (int i = 0; i < g.vertices; i++) {
+        unsigned colors = g.greedyColoring1(i) + 1;
+        if (minColors > colors) {
+            minColors = colors;
+            minVertex = i;
+        }
+    }//we don't have enough time slots to schedule the exams properly without conflicts, so just return invalid
+    if (minColors > timeslots.size()) {
+        valid_schedule.push_back({"-1"});
+        return valid_schedule;
+    }
+    //else
+    for (unsigned i = 0; i < minColors; i++) {
+        valid_schedule.push_back({timeslots[i]});
+    }
+    std::vector<int> assignedColors = g.greedyColoring2(minVertex);
+    for (unsigned i = 0; i < assignedColors.size(); i++) {
+        std::string timeslot = timeslots[assignedColors[i]];
+        for (unsigned j = 0; j < minColors; j++) {
+            if (timeslot == timeslots[j]) {
+                valid_schedule[j].push_back(g.courses_[i]);
+            }
+        }
+    }
     return valid_schedule;
+    
 }
 
 Graph::Graph() {
     //nothing needs to be done here
+    vertices = 0;
 }
 
 Graph::~Graph() {
@@ -159,6 +185,7 @@ Graph::~Graph() {
 }
 
 void Graph::addCourse(const std::string &course) {
+    vertices++;
     std::cout << "Hi3" << std::endl;
     map_.insert({course, map_.size()});
     courses_.push_back(course);
@@ -179,6 +206,120 @@ void Graph::addEdge(const std::string &course1, const std::string &course2) {
     int vertex_i = map_[course1];
     int vertex_j = map_[course2];
     adj_[vertex_i][vertex_j] = adj_[vertex_j][vertex_i] = 1;
+}
+//using a greedy coloring heuristic to solve the problem
+int Graph::greedyColoring1(int startVertex) {
+    std::vector<int> assignedColors;
+    for (int i = 0; i < vertices; i++) {
+        assignedColors.push_back(0);
+    }
+    assignedColors[startVertex] = 0; //this is our start vertex,
+    //first color we assign to
+    for (int i = 0; i < vertices; i++) {
+        if (i != startVertex) {
+            assignedColors[i] = -1; //all colors except for 
+            //startVertex are unassigned
+        }
+    }
+    //keeps track of which colors are still available
+    //assume that all vertices have different colors, in worst case
+    std::vector<bool> availableColors;
+    for (int i = 0; i < vertices; i++) {
+        availableColors.push_back(true);
+    }
+
+    for (int i = 0; i < vertices; i++) {
+        if (i != startVertex) {
+            for (unsigned j = 0; j < adj_[i].size(); j++) {
+                int entry = adj_[i][j];
+                //if j is adjacent vertex to i
+                if (entry == 1) {
+                    if (assignedColors[j] != -1) {
+                        availableColors[assignedColors[j]] = false;
+                    }
+                }
+            }
+            for (int j = 0; j < vertices; j++) {
+                if (availableColors[j] == true) {
+                    assignedColors[i] = j;
+                    break;
+                }
+            }
+            for (unsigned j = 0; j < adj_[i].size(); j++) {
+                int entry = adj_[i][j];
+                //if j is adjacent vertex to i
+                if (entry == 1) {
+                    if (assignedColors[j] != -1) {
+                        availableColors[assignedColors[j]] = true;
+                    }
+                }
+            }
+            
+        }
+    }
+    for (int i = vertices - 1; i >= 0; i--) {
+        if (availableColors[i] == false) {
+            return i;
+        }
+    }
+    return -1;
+
+}
+
+std::vector<int> Graph::greedyColoring2(int startVertex) {
+    std::vector<int> assignedColors;
+    for (int i = 0; i < vertices; i++) {
+        assignedColors.push_back(0);
+    }
+    assignedColors[startVertex] = 0; //this is our start vertex,
+    //first color we assign to
+    for (int i = 0; i < vertices; i++) {
+        if (i != startVertex) {
+            assignedColors[i] = -1; //all colors except for 
+            //startVertex are unassigned
+        }
+    }
+    //keeps track of which colors are still available
+    //assume that all vertices have different colors, in worst case
+    std::vector<bool> availableColors;
+    for (int i = 0; i < vertices; i++) {
+        availableColors.push_back(true);
+    }
+
+    for (int i = 0; i < vertices; i++) {
+        if (i != startVertex) {
+            for (unsigned j = 0; j < adj_[i].size(); j++) {
+                int entry = adj_[i][j];
+                //if j is adjacent vertex to i
+                if (entry == 1) {
+                    if (assignedColors[j] != -1) {
+                        availableColors[assignedColors[j]] = false;
+                    }
+                }
+            }
+            for (int j = 0; j < vertices; j++) {
+                if (availableColors[j] == true) {
+                    assignedColors[i] = j;
+                    break;
+                }
+            }
+            for (unsigned j = 0; j < adj_[i].size(); j++) {
+                int entry = adj_[i][j];
+                //if j is adjacent vertex to i
+                if (entry == 1) {
+                    if (assignedColors[j] != -1) {
+                        availableColors[assignedColors[j]] = true; //resetting the availableColor values
+                    }
+                }
+            }
+            
+        }
+    }
+    std::vector<int> output;
+    for (unsigned i = 0; i < assignedColors.size(); i++) {
+        output.push_back(assignedColors[i]);
+    }
+    return output;
 }
 
 bool hasIntersectionElems(const std::vector<std::string> &v1, const std::vector<std::string> &v2) {

@@ -60,10 +60,13 @@ class Graph {
         std::vector<std::vector<int>> adj_; //in the order that they are listed
         std::vector<std::string> courses_;
         std::map<std::string, int> map_; //want to know which number vertex a string course corresponds to
+        int vertices;
         Graph();
         ~Graph();
         void addCourse(const std::string &course);
         void addEdge(const std::string &course1, const std::string &course2);
+        int greedyColoring1(int startVertex); //returns minimum number of colors required to color graph
+        std::vector<int> greedyColoring2(int startVertex); //returns valid schedule
 };
 
 bool hasIntersectionElems(const std::vector<std::string> &v1, const std::vector<std::string> &v2);
