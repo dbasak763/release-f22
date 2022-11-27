@@ -83,7 +83,6 @@ void LPHashTable<K, V>::insert(K const& key, V const& value)
     double ratio = (double)elems / size;
     if (ratio >= 0.7) {
         resizeTable();
-        std::cout << "new size: " << size << std::endl;
     }
     size_t original_hash_index = hashes::hash(key, size);
     size_t hash_index = original_hash_index;

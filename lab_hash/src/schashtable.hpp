@@ -71,9 +71,11 @@ void SCHashTable<K, V>::remove(K const& key)
      */
     unsigned int i = hashes::hash(key, size);
     for (it = table[i].begin(); it != table[i].end(); it++) {
-        table[i].erase(it);
-        --elems;
-        break;
+        if (it -> first == key) {
+            table[i].erase(it);
+            --elems;
+            break;
+        } 
     }
 }
 
