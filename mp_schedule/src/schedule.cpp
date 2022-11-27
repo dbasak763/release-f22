@@ -144,11 +144,15 @@ V2D schedule(const V2D &courses, const std::vector<std::string> &timeslots){
     int minVertex = -1;
     for (int i = 0; i < g.vertices; i++) {
         unsigned colors = g.greedyColoring1(i) + 1;
+        std::cout << "Colors: " << colors << std::endl;
         if (minColors > colors) {
             minColors = colors;
             minVertex = i;
         }
     }//we don't have enough time slots to schedule the exams properly without conflicts, so just return invalid
+    if (minVertex == -1) minVertex = 0;
+    std::cout << "Minimum number of colors: " << minColors << std::endl;
+    std::cout << "Minimum vertex: " << minVertex << std::endl;
     if (minColors > timeslots.size()) {
         valid_schedule.push_back({"-1"});
         return valid_schedule;
@@ -258,7 +262,7 @@ int Graph::greedyColoring1(int startVertex) {
         }
     }
     for (int i = vertices - 1; i >= 0; i--) {
-        if (availableColors[i] == false) {
+        if (availableColors[i] == true) {
             return i;
         }
     }

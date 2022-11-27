@@ -50,7 +50,7 @@ int main() {
     timeSlots.push_back("0");
     timeSlots.push_back("1");
     timeSlots.push_back("2");
-    //timeSlots.push_back("3");
+    timeSlots.push_back("3");
     //Graph(out, timeSlots);
 
     V2D outSched = schedule(out, timeSlots);
@@ -65,4 +65,19 @@ int main() {
         std::cout << outSched[i][outSched[i].size()-1] << "}, \\" << std::endl;
     }
     std::cout << "}" << std::endl;
+
+    */
+
+    const V2D roster = {{"CS577", "JydY", "MnWd", "tnkL"},\
+     {"CS591", "gpDS", "94Ol", "tnkL"}, \
+     {"CS386", "SjC0", "EYge", "Nvu1"}, \
+     {"CS500", "MnWd", "uAcT", "EYge"}, \
+     {"CS395", "gpDS", "EYge", "MnWd"}
+     };
+
+    std::vector<std::string> timeslots = {"9AM", "11AM", "1PM", "3PM"};
+
+    V2D out = schedule(roster, timeslots);
+
+    verifySchedule(roster, out, 4);
 }
