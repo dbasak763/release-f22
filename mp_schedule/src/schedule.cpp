@@ -118,11 +118,10 @@ V2D schedule(const V2D &courses, const std::vector<std::string> &timeslots){
     // Your code here!
     
     Graph g = Graph();
-    std::cout << "Hi" << std::endl;
     for (unsigned i = 0; i < courses.size(); i++) {
         g.addCourse(courses[i][0]);
     }
-    std::cout << "Hi1" << std::endl;
+
     for (unsigned i = 0; i < g.courses_.size() - 1; i++) {
         std::string course_one = g.courses_[i];
         std::vector<std::string> vect1 = courses[i];
@@ -158,7 +157,7 @@ V2D schedule(const V2D &courses, const std::vector<std::string> &timeslots){
         return valid_schedule;
     }
     //else
-    for (unsigned i = 0; i < minColors; i++) {
+    for (unsigned i = 0; i < timeslots.size(); i++) {
         valid_schedule.push_back({timeslots[i]});
     }
     std::vector<int> assignedColors = g.greedyColoring2(minVertex);
@@ -190,20 +189,20 @@ Graph::~Graph() {
 
 void Graph::addCourse(const std::string &course) {
     vertices++;
-    std::cout << "Hi3" << std::endl;
+    //std::cout << "Hi3" << std::endl;
     map_.insert({course, map_.size()});
     courses_.push_back(course);
-    std::cout << "Hi4" << std::endl;
+    //std::cout << "Hi4" << std::endl;
     for (unsigned i = 0; i < (adj_.size()); i++) {
         adj_[i].push_back(0);
     }
-    std::cout << "Hi5" << std::endl;
+    //std::cout << "Hi5" << std::endl;
     std::vector<int> v;
     for (unsigned i = 0; i < (adj_.size() + 1); i++) {
         v.push_back(0);
     }
     adj_.push_back(v);
-    std::cout << "Hi6" << std::endl;
+    //std::cout << "Hi6" << std::endl;
 }
 //assume that these two courses already exist as vertices
 void Graph::addEdge(const std::string &course1, const std::string &course2) {
@@ -261,12 +260,13 @@ int Graph::greedyColoring1(int startVertex) {
             
         }
     }
-    for (int i = vertices - 1; i >= 0; i--) {
-        if (availableColors[i] == true) {
-            return i;
+    int maxColor = -1;
+    for (int i = 0; i < vertices; i++) {
+        if (assignedColors[i] > maxColor) {
+            maxColor = assignedColors[i];
         }
     }
-    return -1;
+    return maxColor;
 
 }
 

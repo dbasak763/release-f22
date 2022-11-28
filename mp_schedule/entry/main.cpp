@@ -66,8 +66,8 @@ int main() {
     }
     std::cout << "}" << std::endl;
 
-    */
-
+    
+    /*
     const V2D roster = {{"CS577", "JydY", "MnWd", "tnkL"},\
      {"CS591", "gpDS", "94Ol", "tnkL"}, \
      {"CS386", "SjC0", "EYge", "Nvu1"}, \
@@ -80,4 +80,5 @@ int main() {
     V2D out = schedule(roster, timeslots);
 
     verifySchedule(roster, out, 4);
+    */
 }
